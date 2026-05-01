@@ -11,13 +11,13 @@ export const Footer = () => {
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <div className="flex items-center gap-2.5">
-              <span className="grid h-10 w-10 place-items-center bg-primary text-white font-display font-extrabold text-lg">
-                W
-              </span>
-              <span className="font-display text-lg font-extrabold leading-none">
-                WIETEK<span className="block text-[10px] font-bold tracking-[0.25em] text-primary mt-1">GERÜSTBAU</span>
-              </span>
+            <div className="flex items-center">
+              <img
+                src={ASSETS.logoWhite}
+                alt="Wietek Gerüstbau Logo"
+                className="h-12 w-auto"
+                loading="lazy"
+              />
             </div>
             <p className="mt-5 text-sm text-white/70 leading-relaxed">
               Familiengeführter Gerüstbau aus {COMPANY.city}-{COMPANY.district}. Sicher, pünktlich
