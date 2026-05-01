@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Menu, Phone, X } from "lucide-react";
-import { COMPANY, NAV } from "@/lib/site";
+import { ASSETS, COMPANY, NAV } from "@/lib/site";
 
 export const Header = () => {
   const [open, setOpen] = useState(false);
