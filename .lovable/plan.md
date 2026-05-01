@@ -1,30 +1,12 @@
-Ich werde den Hero-H1 gezielt so korrigieren, dass er auf Desktop genau in die gewünschte Breite gezogen wird und nicht mehr unnötig untereinander fällt.
+Headline im Hero größer machen, ohne dass die zweite Zeile umbricht.
 
 Plan
-1. Die aktuelle Ursache entfernen
-- Den zusätzlichen harten Zeilenumbruch nach „pünktlich,“ entfernen.
-- Den Zeilenumbruch nach „Hamburg –“ beibehalten, damit die 2-Zeilen-Struktur fest bleibt.
-
-2. Den H1 horizontal mehr Platz geben
-- Die H1-Breite im Hero vergrößern, damit die zweite Zeile genug Raum bekommt.
-- Falls nötig auch den direkten Hero-Textcontainer etwas breiter machen, weil der H1 aktuell zusätzlich in einem bereits begrenzten Wrapper sitzt.
-
-3. Schriftgröße so abstimmen, dass die gewünschte 2-Zeilen-Aufteilung stabil ist
-- Die bestehende clamp-Größe fein justieren, damit Desktop nicht zu groß bleibt.
-- Ziel:
-  - Zeile 1: „Gerüstbau in Hamburg –“
-  - Zeile 2: „sicher, pünktlich, ab 24 Std. einsatzbereit.“
-
-4. Nichts anderes ändern
-- Keine Änderungen an Subline, Buttons, Bild, Abständen anderer Elemente oder restlichem Hero-Layout.
+1. In `src/components/sections/Hero.tsx` nur die Schriftgröße des H1 erhöhen.
+2. Container-Breite (`lg:max-w-[72%]`) und der einzelne `<br />` nach „Hamburg –“ bleiben unverändert, damit weiterhin genau 2 Zeilen erzeugt werden.
+3. Größe so wählen, dass die längere Zeile „sicher, pünktlich, ab 24 Std. einsatzbereit.“ noch sicher in eine Zeile passt.
 
 Technische Details
-- Datei: `src/components/sections/Hero.tsx`
-- Wahrscheinliche Hauptursache aktuell:
-  - äußerer Textcontainer: `lg:max-w-[55%]`
-  - H1 zusätzlich: `max-w-[75%]`
-  - plus 2 harte `<br />`
-- Dadurch wird der verfügbare Platz für die Headline stark reduziert und der Text fällt zu früh in viele Zeilen.
-- Umsetzung daher mit exakt einem `<br />` nach „Hamburg –“ und breiterem nutzbaren Raum für den H1.
-
-Wenn du das freigibst, setze ich es direkt so um.
+- Aktuell: `fontSize: 'clamp(1.875rem, 2.6vw, 2.625rem)'`
+- Neu: `fontSize: 'clamp(2rem, 3.05vw, 3.25rem)'`
+- Anschließend Screenshot-Check bei 1366px und 1920px, ob Zeile 2 wirklich nicht umbricht. Falls doch, Wert leicht reduzieren (z. B. `2.9vw / 3rem`).
+- Sonst keine Änderungen.
