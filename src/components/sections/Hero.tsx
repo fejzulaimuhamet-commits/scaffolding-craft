@@ -80,7 +80,7 @@ export const Hero = () => {
               sicher, pünktlich,
             </span>
             <br />
-            <span className="text-signal">ab 24 Std. einsatzbereit.</span>
+            <span className="text-white">ab 24 Std. einsatzbereit.</span>
           </h1>
 
           {/* Subline */}
