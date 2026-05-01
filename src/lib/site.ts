@@ -24,7 +24,8 @@ export const COMPANY = {
 
 const IMG = "https://wietek-geruestbau.de/assets/img";
 export const ASSETS = {
-  logo: `${IMG}/home-logo.png`,
+  logo: `${IMG}/Wietek-Logo.png`,
+  logoWhite: `${IMG}/Wietek-Logo-White.png`,
   logoBg: `${IMG}/Wietek-Logo-Background.png`,
   hero: `${IMG}/project-images-slideshow/1.webp`,
   // 1..59 Slideshow-Bilder vorhanden
