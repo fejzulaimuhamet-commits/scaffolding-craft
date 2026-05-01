@@ -70,10 +70,10 @@ export const RequestWizard = () => {
       2: ["name", "phone", "email", "consent"],
     };
     const ok = await form.trigger(fields[step]);
-    if (ok) setStep((s) => Math.min(3, (s + 1) as 0 | 1 | 2 | 3));
+    if (ok) setStep((s) => (Math.min(3, s + 1) as 0 | 1 | 2 | 3));
   };
 
-  const prev = () => setStep((s) => Math.max(0, (s - 1) as 0 | 1 | 2 | 3));
+  const prev = () => setStep((s) => (Math.max(0, s - 1) as 0 | 1 | 2 | 3));
 
   const onSubmit = async (data: FormData) => {
     setSubmitting(true);
