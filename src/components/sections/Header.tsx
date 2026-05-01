@@ -1,0 +1,116 @@
+import { useEffect, useState } from "react";
+import { Menu, Phone, X } from "lucide-react";
+import { COMPANY, NAV } from "@/lib/site";
+
+export const Header = () => {
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  return (
+    <header
+      className={`fixed inset-x-0 top-0 z-40 transition-all duration-300 ${
+        scrolled
+          ? "bg-white/95 backdrop-blur shadow-[0_4px_20px_-12px_rgba(15,23,42,0.25)]"
+          : "bg-white/0"
+      }`}
+    >
+      {/* Top utility bar – desktop only */}
+      <div
+        className={`hidden lg:block bg-steel text-white text-xs transition-all duration-300 ${
+          scrolled ? "h-0 overflow-hidden opacity-0" : "h-9 opacity-100"
+        }`}
+      >
+        <div className="container-w h-9 flex items-center justify-between">
+          <span className="opacity-80">
+            {COMPANY.street}, {COMPANY.zip} {COMPANY.city}-{COMPANY.district}
+          </span>
+          <span className="flex items-center gap-5 opacity-90">
+            <span>{COMPANY.hours}</span>
+            <a href={`tel:${COMPANY.phonePrimary}`} className="hover:text-signal flex items-center gap-1.5">
+              <Phone className="h-3.5 w-3.5" /> {COMPANY.phonePrimaryDisplay}
+            </a>
+          </span>
+        </div>
+      </div>
+
+      <div className="container-w">
+        <div className="flex h-16 lg:h-20 items-center justify-between">
+          <a href="#top" className="flex items-center gap-2.5">
+            <span className="grid h-10 w-10 place-items-center bg-primary text-white font-display font-extrabold text-lg shadow-[0_4px_0_-1px_hsl(var(--steel-deep))]">
+              W
+            </span>
+            <span className="font-display text-lg font-extrabold leading-none text-steel">
+              WIETEK<span className="block text-[10px] font-bold tracking-[0.25em] text-primary mt-1">GERÜSTBAU</span>
+            </span>
+          </a>
+
+          <nav className="hidden lg:flex items-center gap-8">
+            {NAV.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="font-display text-sm font-semibold text-steel hover:text-primary transition-colors"
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
+
+          <div className="flex items-center gap-3">
+            <a
+              href={`tel:${COMPANY.phonePrimary}`}
+              className="hidden md:inline-flex items-center gap-2 text-sm font-semibold text-steel hover:text-primary"
+            >
+              <Phone className="h-4 w-4" /> {COMPANY.phonePrimaryDisplay}
+            </a>
+            <a href="#anfrage" className="hidden sm:inline-flex btn-primary !py-2.5 !px-4 text-xs">
+              Gerüst anfragen
+            </a>
+            <button
+              type="button"
+              onClick={() => setOpen((v) => !v)}
+              className="lg:hidden grid h-11 w-11 place-items-center bg-steel text-white"
+              aria-label="Menü öffnen"
+            >
+              {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile menu */}
+      {open && (
+        <div className="lg:hidden bg-white border-t border-border animate-fade-in">
+          <nav className="container-w py-5 flex flex-col gap-1">
+            {NAV.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                onClick={() => setOpen(false)}
+                className="py-3 px-2 font-display font-semibold text-steel border-b border-border/60"
+              >
+                {item.label}
+              </a>
+            ))}
+            <a
+              href={`tel:${COMPANY.phonePrimary}`}
+              className="mt-3 inline-flex items-center gap-2 text-steel font-semibold"
+            >
+              <Phone className="h-4 w-4 text-primary" /> {COMPANY.phonePrimaryDisplay}
+            </a>
+            <a href="#anfrage" onClick={() => setOpen(false)} className="btn-primary mt-4 w-full">
+              Gerüst anfragen
+            </a>
+          </nav>
+        </div>
+      )}
+    </header>
+  );
+};
