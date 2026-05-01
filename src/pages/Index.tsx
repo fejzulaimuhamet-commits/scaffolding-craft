@@ -1,16 +1,43 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { Seo } from "@/components/Seo";
+import { Header } from "@/components/sections/Header";
+import { Hero } from "@/components/sections/Hero";
+import { Stats } from "@/components/sections/Stats";
+import { Services } from "@/components/sections/Services";
+import { Process } from "@/components/sections/Process";
+import { Projects } from "@/components/sections/Projects";
+import { About } from "@/components/sections/About";
+import { Industries } from "@/components/sections/Industries";
+import { Testimonials } from "@/components/sections/Testimonials";
+import { FAQ } from "@/components/sections/FAQ";
+import { ServiceArea } from "@/components/sections/ServiceArea";
+import { RequestWizard } from "@/components/sections/RequestWizard";
+import { Contact } from "@/components/sections/Contact";
+import { Footer } from "@/components/sections/Footer";
+import { FloatingButtons } from "@/components/sections/FloatingButtons";
 
-// IMPORTANT: Fully REPLACE this with your own code
-const PlaceholderIndex = () => {
-  // PLACEHOLDER: Replace this entire return statement with the user's app.
-  // The inline background color is intentionally not part of the design system.
+const Index = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center" style={{ backgroundColor: '#fcfbf8' }}>
-      <img data-lovable-blank-page-placeholder="REMOVE_THIS" src="/placeholder.svg" alt="Your app will live here!" />
+    <div className="min-h-screen bg-background pb-14 sm:pb-0">
+      <Seo />
+      <Header />
+      <main>
+        <Hero />
+        <Stats />
+        <Services />
+        <Process />
+        <Projects />
+        <About />
+        <Industries />
+        <Testimonials />
+        <FAQ />
+        <ServiceArea />
+        <RequestWizard />
+        <Contact />
+      </main>
+      <Footer />
+      <FloatingButtons />
     </div>
   );
 };
-
-const Index = PlaceholderIndex;
 
 export default Index;
