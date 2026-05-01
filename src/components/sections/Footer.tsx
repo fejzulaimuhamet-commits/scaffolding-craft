@@ -1,5 +1,5 @@
 import { Facebook, Instagram, Mail, MapPin, Phone } from "lucide-react";
-import { COMPANY } from "@/lib/site";
+import { ASSETS, COMPANY } from "@/lib/site";
 
 export const Footer = () => {
   return (
