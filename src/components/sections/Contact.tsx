@@ -1,5 +1,11 @@
-import { Clock, Mail, MapPin, Phone } from "lucide-react";
+import { Clock, ExternalLink, Mail, MapPin, Phone } from "lucide-react";
 import { COMPANY, waLink } from "@/lib/site";
+
+const mapQuery = encodeURIComponent(
+  `${COMPANY.street}, ${COMPANY.zip} ${COMPANY.city}`
+);
+const mapEmbed = `https://maps.google.com/maps?q=${mapQuery}&output=embed`;
+const mapOpen = `https://www.google.com/maps/search/?api=1&query=${mapQuery}`;
 
 export const Contact = () => {
   return (
@@ -52,21 +58,24 @@ export const Contact = () => {
           </div>
 
           <div className="lg:col-span-7">
-            <div className="aspect-[4/3] bg-steel-deep overflow-hidden">
+            <div className="overflow-hidden rounded-xl shadow-[0_20px_50px_-20px_rgba(15,23,42,0.35)] border border-border bg-white">
               <iframe
-                title="Standort Wietek Gerüstbau Hamburg"
-                src="https://www.openstreetmap.org/export/embed.html?bbox=10.18,53.48,10.24,53.51&layer=mapnik&marker=53.4936,10.2086"
-                className="h-full w-full"
+                title={`${COMPANY.name} – Standort auf Google Maps`}
+                src={mapEmbed}
+                className="block w-full h-[300px] lg:h-[450px] border-0"
                 loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
               />
             </div>
             <a
-              href={COMPANY.mapsUrl}
+              href={mapOpen}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-4 inline-flex items-center gap-2 text-sm font-display font-bold uppercase tracking-wider text-primary hover:underline"
             >
-              <MapPin className="h-4 w-4" /> Auf Google Maps öffnen
+              <MapPin className="h-4 w-4" /> In Google Maps öffnen
+              <ExternalLink className="h-3.5 w-3.5" />
             </a>
           </div>
         </div>
