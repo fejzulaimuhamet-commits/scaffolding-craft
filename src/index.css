@@ -2,104 +2,214 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* ==========================================================================
+   Wietek Gerüstbau – Design System
+   Farbpalette in HSL:
+   - Primär  Wietek-Rot      #D7263D  -> hsl(353 71% 50%)
+   - Dark    Stahl-Anthrazit #1F2937  -> hsl(217 33% 17%)
+   - Body    Beton-Grau      #4B5563  -> hsl(217 19% 35%)
+   - Muted   Putz-Hellgrau   #F4F4F2  -> hsl(60 8% 95%)
+   - Signal  Sicherheits-Gelb #F5C518 -> hsl(48 91% 53%)
+   ========================================================================== */
 
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 217 33% 17%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 217 33% 17%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 217 33% 17%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 353 71% 50%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 60 8% 95%;
+    --muted-foreground: 217 19% 35%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 48 91% 53%;
+    --accent-foreground: 217 33% 17%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 217 15% 88%;
+    --input: 217 15% 88%;
+    --ring: 353 71% 50%;
 
-    --radius: 0.5rem;
+    --radius: 0.375rem;
+
+    /* Marken-Tokens */
+    --steel: 217 33% 17%;
+    --steel-deep: 217 40% 11%;
+    --concrete: 217 19% 35%;
+    --plaster: 60 8% 95%;
+    --signal: 48 91% 53%;
+    --whatsapp: 142 70% 49%;
 
     --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-foreground: 217 33% 17%;
+    --sidebar-primary: 353 71% 50%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-accent: 60 8% 95%;
+    --sidebar-accent-foreground: 217 33% 17%;
+    --sidebar-border: 217 15% 88%;
+    --sidebar-ring: 353 71% 50%;
   }
-}
 
-@layer base {
   * {
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    font-family: "Inter", system-ui, sans-serif;
+    font-feature-settings: "ss01", "cv11";
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Manrope", "Inter", system-ui, sans-serif;
+    @apply tracking-tight text-steel;
+  }
+}
+
+@layer components {
+  .eyebrow {
+    @apply inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.2em] text-primary;
+    font-family: "Manrope", sans-serif;
+  }
+  .eyebrow::before {
+    content: "";
+    @apply block h-[2px] w-8 bg-primary;
+  }
+
+  .container-w {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-6 lg:px-10;
+  }
+
+  .hand-underline {
+    @apply relative inline-block;
+  }
+  .hand-underline::after {
+    content: "";
+    position: absolute;
+    left: -2%;
+    bottom: -0.18em;
+    width: 104%;
+    height: 0.5em;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12' preserveAspectRatio='none'><path d='M2 8 C 40 2, 80 12, 120 6 S 195 4, 198 8' stroke='%23D7263D' stroke-width='3' fill='none' stroke-linecap='round'/></svg>");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    pointer-events: none;
+  }
+
+  .ruler-divider {
+    height: 14px;
+    background-image: repeating-linear-gradient(
+      to right,
+      hsl(var(--steel)) 0 1px,
+      transparent 1px 12px
+    );
+    background-position: 0 100%;
+    background-size: 100% 8px;
+    background-repeat: no-repeat;
+    border-bottom: 2px solid hsl(var(--steel));
+  }
+
+  .polaroid {
+    @apply bg-white p-3 pb-10 shadow-[0_18px_40px_-20px_rgba(15,23,42,0.35)] transition-transform duration-300;
+    transform: rotate(-1.2deg);
+  }
+  .polaroid:hover {
+    transform: rotate(0deg) scale(1.02);
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-sm bg-primary px-6 py-3.5 text-sm font-bold uppercase tracking-wider text-primary-foreground transition-all duration-200 hover:translate-y-[2px] active:translate-y-[6px];
+    font-family: "Manrope", sans-serif;
+    box-shadow: 0 8px 0 -2px hsl(var(--steel-deep));
+  }
+  .btn-primary:hover {
+    box-shadow: 0 4px 0 -2px hsl(var(--steel-deep));
+  }
+  .btn-primary:active {
+    box-shadow: none;
+  }
+
+  .btn-ghost-dark {
+    @apply inline-flex items-center justify-center gap-2 rounded-sm border-2 border-steel px-6 py-3 text-sm font-bold uppercase tracking-wider text-steel transition-colors hover:bg-steel hover:text-white;
+    font-family: "Manrope", sans-serif;
+  }
+
+  .btn-ghost-light {
+    @apply inline-flex items-center justify-center gap-2 rounded-sm border-2 px-6 py-3 text-sm font-bold uppercase tracking-wider transition-colors;
+    font-family: "Manrope", sans-serif;
+    border-color: hsl(0 0% 100% / 0.7);
+    color: hsl(0 0% 100%);
+  }
+  .btn-ghost-light:hover {
+    background-color: hsl(0 0% 100%);
+    color: hsl(var(--steel));
+  }
+
+  .bg-blueprint {
+    background-color: hsl(var(--steel-deep));
+    background-image:
+      linear-gradient(hsla(0, 0%, 100%, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, hsla(0, 0%, 100%, 0.04) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  .hazard-stripe {
+    background-image: repeating-linear-gradient(
+      135deg,
+      hsl(var(--signal)) 0 14px,
+      hsl(var(--steel-deep)) 14px 28px
+    );
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: "Manrope", "Inter", system-ui, sans-serif;
+  }
+  .font-body {
+    font-family: "Inter", system-ui, sans-serif;
+  }
+  .text-steel {
+    color: hsl(var(--steel));
+  }
+  .bg-steel {
+    background-color: hsl(var(--steel));
+  }
+  .bg-steel-deep {
+    background-color: hsl(var(--steel-deep));
+  }
+  .text-concrete {
+    color: hsl(var(--concrete));
+  }
+  .bg-plaster {
+    background-color: hsl(var(--plaster));
+  }
+  .border-steel {
+    border-color: hsl(var(--steel));
+  }
+  .text-signal {
+    color: hsl(var(--signal));
+  }
+  .bg-signal {
+    background-color: hsl(var(--signal));
+  }
+  .bg-whatsapp {
+    background-color: hsl(var(--whatsapp));
   }
 }
