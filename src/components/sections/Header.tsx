@@ -42,13 +42,13 @@ export const Header = () => {
 
       <div className="container-w">
         <div className="flex h-16 lg:h-20 items-center justify-between">
-          <a href="#top" className="flex items-center gap-2.5">
-            <span className="grid h-10 w-10 place-items-center bg-primary text-white font-display font-extrabold text-lg shadow-[0_4px_0_-1px_hsl(var(--steel-deep))]">
-              W
-            </span>
-            <span className="font-display text-lg font-extrabold leading-none text-white">
-              WIETEK<span className="block text-[10px] font-bold tracking-[0.25em] text-primary mt-1">GERÜSTBAU</span>
-            </span>
+          <a href="#top" className="flex items-center" aria-label="Wietek Gerüstbau – Startseite">
+            <img
+              src={ASSETS.logoWhite}
+              alt="Wietek Gerüstbau Logo"
+              className="h-10 lg:h-12 w-auto"
+              loading="eager"
+            />
           </a>
 
           <nav className="hidden lg:flex items-center gap-8">
