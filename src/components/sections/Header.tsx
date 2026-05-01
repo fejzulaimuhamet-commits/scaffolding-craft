@@ -17,23 +17,23 @@ export const Header = () => {
     <header
       className={`fixed inset-x-0 top-0 z-40 transition-all duration-300 ${
         scrolled
-          ? "bg-white/95 backdrop-blur shadow-[0_4px_20px_-12px_rgba(15,23,42,0.25)]"
-          : "bg-white/0"
+          ? "bg-steel shadow-[0_4px_20px_-12px_rgba(0,0,0,0.5)]"
+          : "bg-steel/90 backdrop-blur-sm"
       }`}
     >
       {/* Top utility bar – desktop only */}
       <div
-        className={`hidden lg:block bg-steel text-white text-xs transition-all duration-300 ${
+        className={`hidden lg:block bg-steel-deep text-white text-xs transition-all duration-300 ${
           scrolled ? "h-0 overflow-hidden opacity-0" : "h-9 opacity-100"
         }`}
       >
         <div className="container-w h-9 flex items-center justify-between">
-          <span className="opacity-80">
+          <span className="opacity-70">
             {COMPANY.street}, {COMPANY.zip} {COMPANY.city}-{COMPANY.district}
           </span>
           <span className="flex items-center gap-5 opacity-90">
             <span>{COMPANY.hours}</span>
-            <a href={`tel:${COMPANY.phonePrimary}`} className="hover:text-signal flex items-center gap-1.5">
+            <a href={`tel:${COMPANY.phonePrimary}`} className="hover:text-primary flex items-center gap-1.5">
               <Phone className="h-3.5 w-3.5" /> {COMPANY.phonePrimaryDisplay}
             </a>
           </span>
@@ -46,7 +46,7 @@ export const Header = () => {
             <span className="grid h-10 w-10 place-items-center bg-primary text-white font-display font-extrabold text-lg shadow-[0_4px_0_-1px_hsl(var(--steel-deep))]">
               W
             </span>
-            <span className="font-display text-lg font-extrabold leading-none text-steel">
+            <span className="font-display text-lg font-extrabold leading-none text-white">
               WIETEK<span className="block text-[10px] font-bold tracking-[0.25em] text-primary mt-1">GERÜSTBAU</span>
             </span>
           </a>
@@ -56,7 +56,7 @@ export const Header = () => {
               <a
                 key={item.href}
                 href={item.href}
-                className="font-display text-sm font-semibold text-steel hover:text-primary transition-colors"
+                className="font-display text-sm font-medium text-white hover:text-primary transition-colors"
               >
                 {item.label}
               </a>
@@ -66,7 +66,7 @@ export const Header = () => {
           <div className="flex items-center gap-3">
             <a
               href={`tel:${COMPANY.phonePrimary}`}
-              className="hidden md:inline-flex items-center gap-2 text-sm font-semibold text-steel hover:text-primary"
+              className="hidden md:inline-flex items-center gap-2 text-sm font-semibold text-white hover:text-primary transition-colors"
             >
               <Phone className="h-4 w-4" /> {COMPANY.phonePrimaryDisplay}
             </a>
@@ -76,7 +76,7 @@ export const Header = () => {
             <button
               type="button"
               onClick={() => setOpen((v) => !v)}
-              className="lg:hidden grid h-11 w-11 place-items-center bg-steel text-white"
+              className="lg:hidden grid h-11 w-11 place-items-center bg-primary text-white"
               aria-label="Menü öffnen"
             >
               {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
