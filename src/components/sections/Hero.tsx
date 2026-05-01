@@ -73,8 +73,7 @@ export const Hero = () => {
 
           {/* H1 */}
           <h1
-            className="mt-6 font-display font-extrabold text-white leading-tight tracking-tight w-full text-4xl"
-            style={{ fontSize: 'clamp(1.5rem, 5vw, 3.25rem)' }}
+            className="mt-6 font-display font-extrabold text-white leading-tight tracking-tight w-full text-4xl lg:text-[3.25rem]"
           >
             Gerüstbau in{" "}
             <span className="hand-underline-light text-white">Hamburg</span>
