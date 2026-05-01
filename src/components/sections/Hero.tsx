@@ -61,7 +61,7 @@ export const Hero = () => {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          className="w-full lg:max-w-[55%]"
+          className="w-full lg:max-w-[72%]"
         >
           {/* Badge */}
           <div className="inline-flex items-center gap-2 rounded-full bg-signal px-4 py-2 text-xs sm:text-sm font-bold text-steel-deep shadow-lg">
@@ -73,16 +73,14 @@ export const Hero = () => {
 
           {/* H1 */}
           <h1
-            className="mt-6 font-display font-extrabold text-white leading-tight tracking-tight max-w-[75%]"
-            style={{ fontSize: 'clamp(2.5rem, 4vw, 3.5rem)' }}
+            className="mt-6 font-display font-extrabold text-white leading-tight tracking-tight w-full"
+            style={{ fontSize: 'clamp(1.875rem, 2.6vw, 2.625rem)' }}
           >
             Gerüstbau in{" "}
             <span className="hand-underline-light text-white">Hamburg</span>
             {" –"}
             <br />
-            <span className="text-white/95">sicher, pünktlich,</span>
-            <br />
-            <span className="text-white">ab 24 Std. einsatzbereit.</span>
+            <span className="text-white/95">sicher, pünktlich, ab 24 Std. einsatzbereit.</span>
           </h1>
 
           {/* Subline */}
