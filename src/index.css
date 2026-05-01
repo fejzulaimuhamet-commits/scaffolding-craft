@@ -112,6 +112,22 @@
     pointer-events: none;
   }
 
+  .hand-underline-light {
+    @apply relative inline-block;
+  }
+  .hand-underline-light::after {
+    content: "";
+    position: absolute;
+    left: -3%;
+    bottom: -0.16em;
+    width: 106%;
+    height: 0.55em;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12' preserveAspectRatio='none'><path d='M2 8 C 40 2, 80 12, 120 6 S 195 4, 198 8' stroke='%23D7263D' stroke-width='4' fill='none' stroke-linecap='round'/></svg>");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    pointer-events: none;
+  }
+
   .ruler-divider {
     height: 14px;
     background-image: repeating-linear-gradient(
