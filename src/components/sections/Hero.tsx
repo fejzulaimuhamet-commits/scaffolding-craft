@@ -72,11 +72,13 @@ export const Hero = () => {
           </div>
 
           {/* H1 */}
-          <h1 className="mt-6 font-display font-extrabold text-white text-[2rem] sm:text-5xl lg:text-6xl leading-tight tracking-tight max-w-[65%]">
+          <h1 className="mt-6 font-display font-extrabold text-white text-[2rem] sm:text-5xl lg:text-6xl leading-tight tracking-tight max-w-[70%]">
             Gerüstbau in{" "}
             <span className="hand-underline-light text-white">Hamburg</span>
-            {" – "}
-            <span className="text-white/95">sicher, pünktlich, </span>
+            {" –"}
+            <br />
+            <span className="text-white/95">sicher, pünktlich,</span>
+            <br />
             <span className="text-white">ab 24 Std. einsatzbereit.</span>
           </h1>
 
