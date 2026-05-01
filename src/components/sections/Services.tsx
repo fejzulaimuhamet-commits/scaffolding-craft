@@ -1,43 +1,126 @@
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { ASSETS } from "@/lib/site";
 
-const services = [
+type Service = {
+  tag: string;
+  title: string;
+  desc: string;
+  img: string;
+};
+
+const services: Service[] = [
   {
+    tag: "Fassade",
     title: "Fassadengerüste",
     desc: "Sichere und flexible Gerüste für Wohn-, Gewerbe- und Industriegebäude – individuell an Struktur und Höhe angepasst.",
     img: ASSETS.slide(1),
   },
   {
+    tag: "Innen",
     title: "Innengerüste",
-    desc: "Kompakte, anpassbare Lösungen für Renovierungen, Maler-, Elektro- und Deckenarbeiten im Innenbereich.",
+    desc: "Kompakte Lösungen für Renovierungen, Maler- und Deckenarbeiten im Innenbereich.",
     img: ASSETS.slide(8),
   },
   {
+    tag: "Aufstieg",
     title: "Treppentürme",
-    desc: "Stabile Aufstiegslösungen für komplexe Baustellen – schnell montiert, sicher begehbar.",
+    desc: "Stabile Aufstiegslösungen für komplexe Baustellen – schnell montiert.",
     img: ASSETS.slide(22),
   },
   {
+    tag: "Dachschutz",
     title: "Dachfanggerüste",
     desc: "Sicherer Auffangschutz für Dachdecker- und Sanierungsarbeiten – nach DGUV-Vorgaben.",
     img: ASSETS.slide(15),
   },
   {
+    tag: "Sicherheit",
     title: "Schutznetze & Geländer",
-    desc: "Montage von Schutzgeländern, Netzen und weiteren Sicherheitsvorrichtungen für Ihre Baustelle.",
+    desc: "Montage von Schutzgeländern, Netzen und Sicherheitsvorrichtungen für Ihre Baustelle.",
     img: ASSETS.slide(28),
   },
   {
+    tag: "Wetter",
     title: "Wetterschutzdach",
-    desc: "Trockene Baustelle bei jeder Witterung – Wetterschutzdächer für termintreue Arbeiten.",
+    desc: "Trockene Baustelle bei jeder Witterung – für termintreue Arbeiten.",
     img: ASSETS.slide(40),
   },
 ];
 
+const Card = ({
+  service,
+  className = "",
+  size = "md",
+}: {
+  service: Service;
+  className?: string;
+  size?: "sm" | "md" | "lg";
+}) => {
+  const titleSize =
+    size === "lg"
+      ? "text-3xl sm:text-4xl lg:text-5xl"
+      : size === "sm"
+      ? "text-lg sm:text-xl"
+      : "text-xl sm:text-2xl";
+
+  return (
+    <motion.a
+      href="#anfrage"
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.5 }}
+      className={`group relative block overflow-hidden bg-steel-deep ${className}`}
+    >
+      {/* Foto */}
+      <img
+        src={service.img}
+        alt={`${service.title} – Wietek Gerüstbau Hamburg`}
+        loading="lazy"
+        className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+      />
+
+      {/* Dunkler Gradient unten */}
+      <div
+        aria-hidden
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(180deg, hsl(217 40% 8% / 0) 30%, hsl(217 40% 8% / 0.55) 65%, hsl(217 40% 8% / 0.92) 100%)",
+        }}
+      />
+
+      {/* Tag oben links */}
+      <div className="absolute top-4 left-4 z-10 bg-primary text-white px-3 py-1 text-[10px] font-display font-extrabold uppercase tracking-[0.18em] shadow-md">
+        {service.tag}
+      </div>
+
+      {/* Roter Hover-Balken unten */}
+      <div className="absolute left-0 right-0 bottom-0 h-1 bg-primary scale-x-0 origin-left transition-transform duration-500 group-hover:scale-x-100 z-10" />
+
+      {/* Content */}
+      <div className="relative z-10 h-full flex flex-col justify-end p-5 sm:p-7">
+        <h3 className={`font-display font-bold text-white leading-tight ${titleSize}`}>
+          {service.title}
+        </h3>
+        {size !== "sm" && (
+          <p className="mt-2 text-sm text-white/80 leading-relaxed max-w-md line-clamp-2">
+            {service.desc}
+          </p>
+        )}
+        <div className="mt-3 flex items-center gap-2 text-xs font-display font-bold uppercase tracking-[0.2em] text-white/90 transition-all duration-300 opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0">
+          Mehr erfahren
+          <ArrowRight className="h-3.5 w-3.5 text-primary" />
+        </div>
+      </div>
+    </motion.a>
+  );
+};
+
 export const Services = () => {
   return (
-    <section id="leistungen" className="py-20 lg:py-28 bg-white">
+    <section id="leistungen" className="pt-24 lg:pt-32 pb-20 lg:pb-28 bg-white">
       <div className="container-w">
         <div className="grid lg:grid-cols-12 gap-8 items-end mb-12 lg:mb-16">
           <div className="lg:col-span-7">
@@ -55,40 +138,22 @@ export const Services = () => {
           </div>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
-          {services.map((s, i) => (
-            <motion.a
-              key={s.title}
-              href="#anfrage"
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.5, delay: i * 0.05 }}
-              className="group relative overflow-hidden bg-plaster border border-border hover:border-primary transition-colors"
-            >
-              <div className="aspect-[4/3] overflow-hidden">
-                <img
-                  src={s.img}
-                  alt={`${s.title} – Wietek Gerüstbau Hamburg`}
-                  loading="lazy"
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-              </div>
-              <div className="p-6">
-                <div className="flex items-start justify-between gap-3">
-                  <h3 className="font-display font-extrabold text-xl text-steel group-hover:text-primary transition-colors">
-                    {s.title}
-                  </h3>
-                  <ArrowUpRight className="h-6 w-6 text-steel group-hover:text-primary group-hover:rotate-12 transition-all shrink-0" />
-                </div>
-                <p className="mt-3 text-sm text-concrete leading-relaxed">{s.desc}</p>
-                <div className="mt-5 inline-flex items-center gap-2 text-xs font-display font-bold uppercase tracking-wider text-primary">
-                  Anfrage stellen
-                  <span className="block h-px w-6 bg-primary group-hover:w-12 transition-all" />
-                </div>
-              </div>
-            </motion.a>
-          ))}
+        {/* Reihe 1: Hero-Karte links 60%, 2 gestapelte rechts 40% */}
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-3 mb-3">
+          <div className="lg:col-span-3">
+            <Card service={services[0]} size="lg" className="h-[420px] sm:h-[520px] lg:h-[620px]" />
+          </div>
+          <div className="lg:col-span-2 grid grid-cols-1 gap-3">
+            <Card service={services[1]} size="md" className="h-[260px] lg:h-[305px]" />
+            <Card service={services[2]} size="md" className="h-[260px] lg:h-[305px]" />
+          </div>
+        </div>
+
+        {/* Reihe 2: 3 gleichbreite Karten, mittlere etwas höher */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 items-end">
+          <Card service={services[3]} size="md" className="h-[320px] lg:h-[380px]" />
+          <Card service={services[4]} size="md" className="h-[360px] lg:h-[440px]" />
+          <Card service={services[5]} size="md" className="h-[320px] lg:h-[380px]" />
         </div>
       </div>
     </section>
