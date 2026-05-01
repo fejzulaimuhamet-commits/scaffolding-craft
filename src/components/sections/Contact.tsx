@@ -1,5 +1,11 @@
-import { Clock, Mail, MapPin, Phone } from "lucide-react";
+import { Clock, ExternalLink, Mail, MapPin, Phone } from "lucide-react";
 import { COMPANY, waLink } from "@/lib/site";
+
+const mapQuery = encodeURIComponent(
+  `${COMPANY.street}, ${COMPANY.zip} ${COMPANY.city}`
+);
+const mapEmbed = `https://maps.google.com/maps?q=${mapQuery}&output=embed`;
+const mapOpen = `https://www.google.com/maps/search/?api=1&query=${mapQuery}`;
 
 export const Contact = () => {
   return (
