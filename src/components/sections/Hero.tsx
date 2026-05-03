@@ -79,7 +79,7 @@ export const Hero = () => {
             <span className="hand-underline-light text-white">Hamburg</span>
             {" –"}
             <br />
-            <span className="text-white/95">sicher, pünktlich, ab 24 Std. einsatzbereit.</span>
+            <span className="text-white/95">sicher, pünktlich,<br />ab 24 Std. einsatzbereit.</span>
           </h1>
 
           {/* Subline */}
