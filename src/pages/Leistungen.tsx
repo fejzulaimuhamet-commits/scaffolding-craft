@@ -102,26 +102,8 @@ const services: Service[] = [
   },
 ];
 
-const LeistungenHero = () => (
-  <section className="bg-steel-deep py-16 lg:py-24">
-    <div className="container-w">
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        <span className="eyebrow">Unsere Leistungen</span>
-        <h1 className="mt-5 font-display font-extrabold text-white text-4xl sm:text-5xl lg:text-6xl leading-tight">
-          Gerüstlösungen für jeden Einsatz
-        </h1>
-        <p className="mt-6 max-w-2xl text-lg text-white/75 leading-relaxed">
-          Von der privaten Fassade bis zum Industrieprojekt – wir liefern das passende
-          Gerüst für Ihr Vorhaben.
-        </p>
-      </motion.div>
-    </div>
-  </section>
-);
+// Hero ersetzt durch wiederverwendbare PageHero-Komponente
+
 
 const ServiceRow = ({ service, index }: { service: Service; index: number }) => {
   const reverse = index % 2 === 1;
