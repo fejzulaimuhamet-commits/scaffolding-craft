@@ -362,46 +362,6 @@
     animation: count-reveal 0.9s var(--ease-premium) both;
   }
 
-  /* Custom cursor — hide native on pointer devices */
-  @media (hover: hover) and (pointer: fine) {
-    body.has-custom-cursor,
-    body.has-custom-cursor * {
-      cursor: none !important;
-    }
-  }
-  .lov-cursor-dot {
-    position: fixed;
-    top: 0; left: 0;
-    width: 8px; height: 8px;
-    border-radius: 9999px;
-    background: hsl(var(--primary));
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: width 0.25s var(--ease-premium), height 0.25s var(--ease-premium), background 0.25s var(--ease-premium);
-    mix-blend-mode: normal;
-  }
-  .lov-cursor-ring {
-    position: fixed;
-    top: 0; left: 0;
-    width: 36px; height: 36px;
-    border-radius: 9999px;
-    border: 1.5px solid hsla(353, 71%, 50%, 0.55);
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%) scale(0.6);
-    opacity: 0;
-    transition: width 0.3s var(--ease-premium), height 0.3s var(--ease-premium),
-                opacity 0.3s var(--ease-premium), transform 0.3s var(--ease-premium);
-  }
-  .lov-cursor-active .lov-cursor-dot {
-    width: 12px; height: 12px;
-  }
-  .lov-cursor-active .lov-cursor-ring {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-  }
-
   /* Reduced motion */
   @media (prefers-reduced-motion: reduce) {
     *,
@@ -411,10 +371,6 @@
       animation-iteration-count: 1 !important;
       transition-duration: 0.001ms !important;
     }
-    .lov-cursor-dot,
-    .lov-cursor-ring { display: none !important; }
-    body.has-custom-cursor,
-    body.has-custom-cursor * { cursor: auto !important; }
   }
 
   .font-display {
