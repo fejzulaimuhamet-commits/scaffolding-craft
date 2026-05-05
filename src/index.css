@@ -362,6 +362,82 @@
     animation: count-reveal 0.9s var(--ease-premium) both;
   }
 
+  /* Glassmorphism */
+  .glass-light {
+    background-color: hsla(0, 0%, 100%, 0.12);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    border: 1px solid hsla(0, 0%, 100%, 0.18);
+  }
+  .glass-dark {
+    background-color: hsla(217, 33%, 17%, 0.45);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    border: 1px solid hsla(0, 0%, 100%, 0.08);
+  }
+
+  /* Gradient text */
+  .text-gradient-red {
+    background: linear-gradient(120deg, hsl(353 71% 55%), hsl(353 80% 35%));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* 3D Tilt support — JS sets --rx / --ry */
+  .tilt-3d {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    transition: transform 0.4s var(--ease-premium);
+    will-change: transform;
+  }
+  .tilt-3d-inner {
+    transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+    transition: transform 0.25s var(--ease-premium);
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+
+  /* Image clip-path reveal */
+  @keyframes clip-reveal {
+    0%   { clip-path: inset(0 100% 0 0); }
+    100% { clip-path: inset(0 0 0 0); }
+  }
+  .clip-reveal {
+    clip-path: inset(0 100% 0 0);
+  }
+  .clip-reveal.in-view {
+    animation: clip-reveal 0.8s var(--ease-premium) forwards;
+  }
+
+  /* Page transition wrapper */
+  @keyframes page-in {
+    0%   { opacity: 0; transform: translateY(6px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  .page-transition {
+    animation: page-in 0.35s var(--ease-premium) both;
+  }
+
+  /* Footer grain */
+  .footer-grain {
+    position: relative;
+    background-color: hsl(217 40% 8%);
+  }
+  .footer-grain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      radial-gradient(hsla(0, 0%, 100%, 0.05) 1px, transparent 1px),
+      radial-gradient(hsla(0, 0%, 100%, 0.03) 1px, transparent 1px);
+    background-size: 3px 3px, 7px 7px;
+    background-position: 0 0, 1px 2px;
+    opacity: 0.5;
+    mix-blend-mode: overlay;
+  }
+
   /* Reduced motion */
   @media (prefers-reduced-motion: reduce) {
     *,
