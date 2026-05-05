@@ -276,7 +276,13 @@ const Leistungen = () => (
         content="Fassadengerüst, Innengerüst, Treppenturm, Dachfanggerüst, Schutznetze und Wetterschutz – Wietek Gerüstbau aus Hamburg liefert die passende Lösung."
       />
     </Helmet>
-    <LeistungenHero />
+    <PageHero
+      eyebrow="Unsere Leistungen"
+      title="Gerüstlösungen für jeden Einsatz"
+      subtitle="Von der privaten Fassade bis zum Industrieprojekt – wir liefern das passende Gerüst für Ihr Vorhaben."
+      backgroundImage={ASSETS.slide(1)}
+      breadcrumb="Leistungen"
+    />
     {services.map((s, i) => (
       <ServiceRow key={s.title} service={s} index={i} />
     ))}
