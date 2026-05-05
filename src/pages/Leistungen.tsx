@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { ArrowRight, Check, Zap, ShieldCheck, Users } from "lucide-react";
 import { PageLayout } from "@/components/PageLayout";
+import { PageHero } from "@/components/shared/PageHero";
 import { ASSETS } from "@/lib/site";
 
 type Service = {
@@ -101,26 +102,8 @@ const services: Service[] = [
   },
 ];
 
-const LeistungenHero = () => (
-  <section className="bg-steel-deep py-16 lg:py-24">
-    <div className="container-w">
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        <span className="eyebrow">Unsere Leistungen</span>
-        <h1 className="mt-5 font-display font-extrabold text-white text-4xl sm:text-5xl lg:text-6xl leading-tight">
-          Gerüstlösungen für jeden Einsatz
-        </h1>
-        <p className="mt-6 max-w-2xl text-lg text-white/75 leading-relaxed">
-          Von der privaten Fassade bis zum Industrieprojekt – wir liefern das passende
-          Gerüst für Ihr Vorhaben.
-        </p>
-      </motion.div>
-    </div>
-  </section>
-);
+// Hero ersetzt durch wiederverwendbare PageHero-Komponente
+
 
 const ServiceRow = ({ service, index }: { service: Service; index: number }) => {
   const reverse = index % 2 === 1;
@@ -293,7 +276,13 @@ const Leistungen = () => (
         content="Fassadengerüst, Innengerüst, Treppenturm, Dachfanggerüst, Schutznetze und Wetterschutz – Wietek Gerüstbau aus Hamburg liefert die passende Lösung."
       />
     </Helmet>
-    <LeistungenHero />
+    <PageHero
+      eyebrow="Unsere Leistungen"
+      title="Gerüstlösungen für jeden Einsatz"
+      subtitle="Von der privaten Fassade bis zum Industrieprojekt – wir liefern das passende Gerüst für Ihr Vorhaben."
+      backgroundImage={ASSETS.slide(1)}
+      breadcrumb="Leistungen"
+    />
     {services.map((s, i) => (
       <ServiceRow key={s.title} service={s} index={i} />
     ))}
