@@ -1,14 +1,15 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { ArrowRight, Zap, ShieldCheck, Users } from "lucide-react";
+import { ArrowRight, Check, Zap, ShieldCheck, Users } from "lucide-react";
 import { PageLayout } from "@/components/PageLayout";
 import { ASSETS } from "@/lib/site";
 
 type Service = {
   tag: string;
   title: string;
-  desc: string;
+  intro: string;
+  bullets: string[];
   img: string;
   to: string;
 };
@@ -16,116 +17,89 @@ type Service = {
 const services: Service[] = [
   {
     tag: "Fassade",
-    title: "Fassadengerüst",
-    desc: "Für Sanierung, Neubau & Malerarbeiten",
+    title: "Fassadengerüste",
+    intro:
+      "Sichere und flexible Arbeitsgerüste für Wohn-, Gewerbe- und Industriegebäude. Wir planen, liefern, montieren und demontieren – passgenau für Ihr Bauvorhaben.",
+    bullets: [
+      "Sanierung, Neubau und Malerarbeiten",
+      "Belastungsklassen 3–6 nach DIN EN 12811",
+      "Inklusive Schutznetzen und Bordbrettern",
+      "Statik und Aufbauplan auf Wunsch",
+    ],
     img: ASSETS.slide(1),
     to: "/leistungen/fassadengeruest",
   },
   {
     tag: "Innen",
-    title: "Innengerüst",
-    desc: "Sicher & flexibel für Innenräume",
+    title: "Innengerüste",
+    intro:
+      "Kompakte und stabile Lösungen für Renovierungen, Maler-, Decken- und Trockenbauarbeiten in Innenräumen – auch bei begrenzten Platzverhältnissen.",
+    bullets: [
+      "Rollgerüste und feste Innengerüste",
+      "Schonend für Böden und Wände",
+      "Schneller Auf- und Abbau",
+      "Auch für hohe Räume und Hallen",
+    ],
     img: ASSETS.slide(8),
     to: "/leistungen/innengeruest",
   },
   {
     tag: "Aufstieg",
-    title: "Treppenturm",
-    desc: "Sicherer Zugang auf jeder Baustelle",
+    title: "Treppentürme",
+    intro:
+      "Sichere und bequeme Aufstiegslösungen für Baustellen, Veranstaltungen oder als Fluchtweg – schnell montiert, normgerecht und stabil.",
+    bullets: [
+      "Hohe Tragfähigkeit für viel Personenverkehr",
+      "Mit Handlauf und Knieleiste",
+      "Auch als Notausgang einsetzbar",
+      "Beliebige Höhen realisierbar",
+    ],
     img: ASSETS.slide(22),
     to: "/leistungen/treppenturm",
   },
   {
     tag: "Dachschutz",
-    title: "Dachfanggerüst",
-    desc: "Schutz bei Dacharbeiten aller Art",
+    title: "Dachfanggerüste",
+    intro:
+      "Sicherer Auffangschutz für Dachdecker-, Sanierungs- und Klempnerarbeiten – konform mit DGUV Information 201-011 und der Arbeitsstättenverordnung.",
+    bullets: [
+      "Schutz bei Arbeiten über 3 m Absturzhöhe",
+      "Mit Schutzwand und Bordbrett",
+      "Statisch geprüfte Verankerung",
+      "Auch für Steildächer geeignet",
+    ],
     img: ASSETS.slide(15),
     to: "/leistungen/dachfanggeruest",
   },
   {
     tag: "Sicherheit",
     title: "Schutznetze & Geländer",
-    desc: "Absturzsicherung nach DGUV",
+    intro:
+      "Absturzsicherung nach DGUV: Schutzgeländer, Auffangnetze und temporäre Sicherheitsvorrichtungen – einzeln oder in Kombination mit unseren Gerüsten.",
+    bullets: [
+      "Seitenschutzgeländer aus Stahl",
+      "Auffang- und Schutznetze",
+      "Schnelle Montage am Bestand",
+      "Vermietung oder Komplett-Service",
+    ],
     img: ASSETS.slide(28),
     to: "/leistungen/schutznetze-gelaender",
   },
   {
     tag: "Wetter",
-    title: "Wetterschutz",
-    desc: "Arbeiten bei jedem Wetter",
+    title: "Wetterschutzdach",
+    intro:
+      "Trockene Baustelle bei jeder Witterung. Mit unserem Wetterschutzdach arbeiten Ihre Gewerke termintreu – unabhängig von Regen, Schnee oder Wind.",
+    bullets: [
+      "Freie Spannweiten bis 30 m",
+      "Lichtdurchlässige Planen",
+      "Kombinierbar mit Fassadengerüst",
+      "Schutz für Dachstuhl & Sanierung",
+    ],
     img: ASSETS.slide(40),
     to: "/leistungen/wetterschutz",
   },
 ];
-
-const ServiceCard = ({
-  service,
-  className = "",
-  size = "md",
-}: {
-  service: Service;
-  className?: string;
-  size?: "sm" | "md" | "lg";
-}) => {
-  const titleSize =
-    size === "lg"
-      ? "text-3xl sm:text-4xl lg:text-5xl"
-      : size === "sm"
-      ? "text-lg sm:text-xl"
-      : "text-xl sm:text-2xl";
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.5 }}
-      className={className}
-    >
-      <Link
-        to={service.to}
-        className="group relative block h-full w-full overflow-hidden bg-steel-deep"
-      >
-        <img
-          src={service.img}
-          alt={`${service.title} – Wietek Gerüstbau Hamburg`}
-          loading="lazy"
-          className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-        />
-
-        <div
-          aria-hidden
-          className="absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(180deg, hsl(217 40% 8% / 0) 30%, hsl(217 40% 8% / 0.55) 65%, hsl(217 40% 8% / 0.92) 100%)",
-          }}
-        />
-
-        <div className="absolute top-4 left-4 z-10 bg-primary text-white px-3 py-1 text-[10px] font-display font-extrabold uppercase tracking-[0.18em] shadow-md">
-          {service.tag}
-        </div>
-
-        <div className="absolute left-0 right-0 bottom-0 h-1 bg-primary scale-x-0 origin-left transition-transform duration-500 group-hover:scale-x-100 z-10" />
-
-        <div className="relative z-10 h-full flex flex-col justify-end p-5 sm:p-7">
-          <h3 className={`font-display font-bold text-white leading-tight ${titleSize}`}>
-            {service.title}
-          </h3>
-          {size !== "sm" && (
-            <p className="mt-2 text-sm text-white/80 leading-relaxed max-w-md line-clamp-2">
-              {service.desc}
-            </p>
-          )}
-          <div className="mt-3 flex items-center gap-2 text-xs font-display font-bold uppercase tracking-[0.2em] text-white/90 transition-all duration-300 opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0">
-            Mehr erfahren
-            <ArrowRight className="h-3.5 w-3.5 text-primary" />
-          </div>
-        </div>
-      </Link>
-    </motion.div>
-  );
-};
 
 const LeistungenHero = () => (
   <section className="bg-steel-deep py-16 lg:py-24">
@@ -148,37 +122,84 @@ const LeistungenHero = () => (
   </section>
 );
 
-const ServicesGrid = () => (
-  <section className="bg-white py-20 lg:py-28">
-    <div className="container-w">
-      <div className="mb-12 lg:mb-16 max-w-3xl">
-        <span className="eyebrow">Übersicht</span>
-        <h2 className="mt-4 font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-steel leading-tight">
-          Sechs Leistungen – ein Anspruch:{" "}
-          <span className="hand-underline">Sicherheit & Termintreue.</span>
-        </h2>
-      </div>
+const ServiceRow = ({ service, index }: { service: Service; index: number }) => {
+  const reverse = index % 2 === 1;
+  const bgAlt = index % 2 === 1;
 
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-3 mb-3">
-        <ServiceCard
-          service={services[0]}
-          size="lg"
-          className="lg:col-span-3 h-[420px] sm:h-[520px] lg:h-[620px]"
-        />
-        <div className="lg:col-span-2 grid grid-cols-1 gap-3">
-          <ServiceCard service={services[1]} size="md" className="h-[260px] lg:h-[305px]" />
-          <ServiceCard service={services[2]} size="md" className="h-[260px] lg:h-[305px]" />
+  return (
+    <section className={bgAlt ? "bg-muted" : "bg-white"}>
+      <div className="container-w py-16 lg:py-24">
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+          {/* Bild */}
+          <motion.div
+            initial={{ opacity: 0, x: reverse ? 40 : -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6 }}
+            className={`lg:col-span-6 ${reverse ? "lg:order-2" : ""}`}
+          >
+            <div className="relative overflow-hidden bg-steel-deep h-[320px] sm:h-[420px] lg:h-[500px] group">
+              <img
+                src={service.img}
+                alt={`${service.title} – Wietek Gerüstbau Hamburg`}
+                loading="lazy"
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute top-4 left-4 z-10 bg-primary text-white px-3 py-1 text-[10px] font-display font-extrabold uppercase tracking-[0.18em] shadow-md">
+                {service.tag}
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Text */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="lg:col-span-6"
+          >
+            <span className="eyebrow">{service.tag}</span>
+            <h2 className="mt-4 font-display font-extrabold text-steel text-3xl sm:text-4xl lg:text-5xl leading-tight">
+              {service.title}
+            </h2>
+            <p className="mt-5 text-concrete leading-relaxed text-base lg:text-lg">
+              {service.intro}
+            </p>
+
+            <ul className="mt-6 space-y-3">
+              {service.bullets.map((b) => (
+                <li key={b} className="flex items-start gap-3">
+                  <span className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center bg-primary/10">
+                    <Check className="h-3.5 w-3.5 text-primary" />
+                  </span>
+                  <span className="text-steel text-sm sm:text-base">{b}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link
+                to="/kontakt"
+                className="inline-flex items-center gap-2 bg-primary text-white hover:bg-primary/90 px-6 py-3 font-display font-bold uppercase tracking-[0.2em] text-xs transition-colors"
+              >
+                Jetzt anfragen
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link
+                to={service.to}
+                className="inline-flex items-center gap-2 border-2 border-steel text-steel hover:bg-steel hover:text-white px-6 py-3 font-display font-bold uppercase tracking-[0.2em] text-xs transition-colors"
+              >
+                Mehr erfahren
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </motion.div>
         </div>
       </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 items-end">
-        <ServiceCard service={services[3]} size="md" className="h-[320px] lg:h-[380px]" />
-        <ServiceCard service={services[4]} size="md" className="h-[360px] lg:h-[440px]" />
-        <ServiceCard service={services[5]} size="md" className="h-[320px] lg:h-[380px]" />
-      </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 const reasons = [
   {
@@ -194,7 +215,7 @@ const reasons = [
   {
     icon: Users,
     title: "Familiengeführt",
-    desc: "Inhabergeführtes Familienunternehmen aus Hamburg-Bergedorf seit 2014.",
+    desc: "Inhabergeführtes Familienunternehmen aus Hamburg-Bergedorf.",
   },
 ];
 
@@ -273,7 +294,9 @@ const Leistungen = () => (
       />
     </Helmet>
     <LeistungenHero />
-    <ServicesGrid />
+    {services.map((s, i) => (
+      <ServiceRow key={s.title} service={s} index={i} />
+    ))}
     <WarumWietek />
     <CTASection />
   </PageLayout>

@@ -1,96 +1,67 @@
-# Plan: /leistungen Seite ausbauen
+# Plan: /leistungen umbauen — Leistungen als abwechselnde Text-/Bild-Reihen
 
-Die Startseite bleibt 100% unverändert. Es wird ausschließlich `src/pages/Leistungen.tsx` neu aufgebaut, plus eine kleine Helper-Komponente.
+Statt des asymmetrischen 6-Karten-Grids bekommt jede Leistung einen eigenen großen Abschnitt mit Foto links/rechts (alternierend), Erklärtext, Stichpunkten und zwei Buttons („Jetzt anfragen" + „Mehr erfahren"). Hero, Warum-Wietek- und CTA-Sektion bleiben erhalten. Startseite bleibt unangetastet.
 
-## Dateien
+## Datei
 
-### 1. `src/pages/Leistungen.tsx` (komplett neu schreiben)
-Ersetzt die jetzige Placeholder-Version. Struktur:
+`src/pages/Leistungen.tsx` — vollständig neu schreiben.
 
-```tsx
-<PageLayout>
-  <Helmet><title>Leistungen | Wietek Gerüstbau</title></Helmet>
-  <LeistungenHero />
-  <ServicesGrid />
-  <WarumWietek />
-  <CTASection />
-</PageLayout>
+## Aufbau
+
+```
+LeistungenHero        (Anthrazit, wie bisher)
+ServiceRow × 6        (alternierend Bild links/rechts, Hintergrund weiß / muted)
+WarumWietek           (wie bisher)
+CTASection            (wie bisher)
 ```
 
-Alle Sektionen werden in derselben Datei als lokale Komponenten definiert (kompakt, eine Page-Datei).
+## ServiceRow Komponente
 
-### 2. Inhalte der Sektionen
+12-Spalten-Grid auf `lg`:
 
-**LeistungenHero**
-- `<section>` mit Anthrazit-Hintergrund (`bg-steel-deep`), `pt-16 lg:pt-24 pb-12 lg:pb-16` (klein, da `PageLayout` schon `pt-24 lg:pt-32` für Header-Abstand setzt — Hero bekommt zusätzlich eigenes Top-Padding zur Atmung).
-- `container-w`
-- Eyebrow „UNSERE LEISTUNGEN" in Rot (`<span class="eyebrow">`, da Hintergrund dunkel: `eyebrow` Farbe ist bereits `text-primary` ✓)
-- H1: „Gerüstlösungen für jeden Einsatz" — `font-display font-extrabold text-white text-4xl sm:text-5xl lg:text-6xl leading-tight`
-- Subtext: „Von der privaten Fassade bis zum Industrieprojekt – wir liefern das passende Gerüst für Ihr Vorhaben." — `text-white/75 text-lg max-w-2xl mt-6`
-- Keine CTAs, kein Foto.
-- Framer Motion `initial={{opacity:0,y:24}} whileInView={{opacity:1,y:0}}` auf den Inhalts-Container.
+- Bild (`lg:col-span-6`, `h-[320px] sm:h-[420px] lg:h-[500px]`)
+  - Foto absolut, leichte Hover-Skalierung
+  - Roter Tag oben links (z. B. „FASSADE", „INNEN" …)
+  - **Keine kleinen Thumbnails** darunter (explizit ausgeschlossen)
+- Text (`lg:col-span-6`)
+  - Eyebrow (rot, gleicher Tag)
+  - H2 — Titel der Leistung (`text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold text-steel`)
+  - Intro-Absatz (3–4 Zeilen, Beton-Grau)
+  - Bullet-Liste mit `Check`-Icon im roten Quadrat (4 Bullets pro Leistung, fachlich passend)
+  - Button-Reihe:
+    - **Jetzt anfragen** → `/kontakt` (rot, gefüllt)
+    - **Mehr erfahren** → jeweilige Unterseite (Outline, Steel)
 
-**ServicesGrid**
-- Section mit `bg-white py-20 lg:py-28`.
-- Wiederverwendung des **gleichen Card-Stils** wie `src/components/sections/Services.tsx`:
-  - Foto absolut, Gradient unten, roter Tag oben links, roter Hover-Balken unten, Hover-Skalierung, „Mehr erfahren"-Pfeil am Ende.
-- Statt `<motion.a href="#anfrage">` wird ein `<Link to={...}>` von `react-router-dom` verwendet (über `motion(Link)` oder `motion.div` mit Link-Wrapper). Wir nutzen `motion.div` mit innerem `<Link>` um Typing-Komplexität zu vermeiden.
-- Daten-Array (lokal in der Datei):
-  ```ts
-  const services = [
-    { tag: "Fassade",    title: "Fassadengerüst",          desc: "Für Sanierung, Neubau & Malerarbeiten",    img: ASSETS.slide(1),  to: "/leistungen/fassadengeruest" },
-    { tag: "Innen",      title: "Innengerüst",             desc: "Sicher & flexibel für Innenräume",          img: ASSETS.slide(8),  to: "/leistungen/innengeruest" },
-    { tag: "Aufstieg",   title: "Treppenturm",             desc: "Sicherer Zugang auf jeder Baustelle",       img: ASSETS.slide(22), to: "/leistungen/treppenturm" },
-    { tag: "Dachschutz", title: "Dachfanggerüst",          desc: "Schutz bei Dacharbeiten aller Art",         img: ASSETS.slide(15), to: "/leistungen/dachfanggeruest" },
-    { tag: "Sicherheit", title: "Schutznetze & Geländer",  desc: "Absturzsicherung nach DGUV",                img: ASSETS.slide(28), to: "/leistungen/schutznetze-gelaender" },
-    { tag: "Wetter",     title: "Wetterschutz",            desc: "Arbeiten bei jedem Wetter",                 img: ASSETS.slide(40), to: "/leistungen/wetterschutz" },
-  ];
-  ```
-- Asymmetrisches Layout — exakt wie `Services.tsx`:
-  - Reihe 1: Karte 1 hero links (`lg:col-span-3 h-[420px] sm:h-[520px] lg:h-[620px]`, `size="lg"`), rechts (`lg:col-span-2`) gestapelt Karten 2 & 3 (`h-[260px] lg:h-[305px]`).
-  - Reihe 2: 3 gleichbreite Karten 4/5/6, mittlere etwas höher (`h-[320px] lg:h-[380px]` außen, `h-[360px] lg:h-[440px]` mitte).
-- Section-Überschrift oben (analog Startseite, optional kurz):
-  - Eyebrow „Übersicht"
-  - H2 „Sechs Leistungen – ein Anspruch: Sicherheit & Termintreue."
+Reihenfolge alterniert via `index % 2`:
+- gerade: Bild links, Text rechts, Hintergrund `bg-white`
+- ungerade: Bild rechts, Text links, Hintergrund `bg-muted` (für visuelle Trennung)
 
-**WarumWietek**
-- `<section className="bg-steel-deep py-20 lg:py-28">`.
-- `container-w`
-- Eyebrow „Warum Wietek" (rot, auf dunkel ✓)
-- H2 weiß: „Drei Versprechen, die wir halten."
-- 3-Spalten-Grid (`grid sm:grid-cols-3 gap-8 lg:gap-12 mt-12`):
-  1. Icon `Zap` — Titel „Schnell" — Text „Aufbau in 24–72 Stunden nach Auftrag."
-  2. Icon `ShieldCheck` — Titel „Versichert" — Text „Vollständig haftpflicht- & betriebsversichert, DGUV-geprüft."
-  3. Icon `Users` — Titel „Familiengeführt" — Text „Inhabergeführtes Familienunternehmen aus Hamburg-Bergedorf seit 2014."
-- Icons rot (`text-primary h-10 w-10`), Titel weiß `font-display font-bold text-2xl`, Text `text-white/75`.
-- Framer-Motion fade-in pro Spalte mit Stagger-Delay.
+Framer-Motion: Bild slidet von links/rechts ein, Text fadet von unten ein.
 
-**CTASection**
-- `<section className="bg-primary py-16 lg:py-20">`.
-- Zentrierter `container-w` Inhalt:
-  - H2 weiß `text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold`: „Welches Gerüst brauchen Sie?"
-  - Untertext weiß/85: „Wir beraten Sie unverbindlich und erstellen Ihr Festpreis-Angebot."
-  - Button: `<Link to="/kontakt">` — weißer Hintergrund, roter Text, Hover invert: `bg-white text-primary hover:bg-steel hover:text-white px-8 py-4 font-display font-bold uppercase tracking-[0.2em] text-sm inline-flex items-center gap-2 transition-colors`
-  - Pfeil-Icon `ArrowRight`.
-- Framer-Motion fade-in.
+## Inhalte (alle 6 Leistungen)
 
-### 3. Imports in `Leistungen.tsx`
-```
-import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
-import { ArrowRight, Zap, ShieldCheck, Users } from "lucide-react";
-import { PageLayout } from "@/components/PageLayout";
-import { ASSETS } from "@/lib/site";
-```
+Jede Leistung erhält Tag, Titel, Intro-Text, 4 Bullets, Bild und Link auf Unterseite. Inhalte sind fachlich auf Wietek/Gerüstbau zugeschnitten:
 
-## Verhalten / Konsistenz
-- `PageLayout` bringt Header, Footer, FloatingButtons, ScrollToTop ist global aktiv → Seitenwechsel scrollt nach oben ✓.
-- Kein neuer Route-Eintrag nötig, Route `/leistungen` zeigt bereits auf `Leistungen.tsx`.
-- Mobile-First: alle Grids stacken auf < `sm`/`lg` korrekt (gleiches Pattern wie Startseite-Services).
-- Framer Motion `whileInView` mit `viewport={{ once: true, amount: 0.2 }}`.
+| Leistung | Bullets (Beispiel) |
+|---|---|
+| Fassadengerüste | Sanierung/Neubau/Maler, Klassen 3–6 nach DIN EN 12811, Schutznetze inkl., Statik auf Wunsch |
+| Innengerüste | Roll-/Festgerüste, schonend für Boden+Wand, schneller Aufbau, auch hohe Hallen |
+| Treppentürme | hohe Tragfähigkeit, Handlauf+Knieleiste, auch als Notausgang, beliebige Höhen |
+| Dachfanggerüste | Schutz >3 m, Schutzwand+Bordbrett, geprüfte Verankerung, auch Steildächer |
+| Schutznetze & Geländer | Seitenschutz Stahl, Auffangnetze, Montage am Bestand, Vermietung/Komplett-Service |
+| Wetterschutzdach | Spannweiten bis 30 m, lichtdurchlässige Planen, kombinierbar Fassadengerüst, Dachstuhl/Sanierung |
+
+Bilder weiterhin aus `ASSETS.slide(n)` (1, 8, 22, 15, 28, 40).
+
+## Beibehalten
+
+- LeistungenHero (Anthrazit, Eyebrow rot, H1, Subtext, keine CTAs, kein Foto)
+- WarumWietek (3 Spalten Schnell/Versichert/Familiengeführt auf Anthrazit)
+- CTASection (rot, „Welches Gerüst brauchen Sie?" + Button → /kontakt)
+- Helmet `<title>` + Meta-Description
 
 ## Nicht angefasst
-- `src/pages/Index.tsx` und alle Komponenten unter `src/components/sections/*`.
-- Header, Footer, NavLink, Routing-Setup.
-- Die 6 Unterseiten unter `src/pages/leistungen/*` bleiben Platzhalter (separater Folge-Auftrag).
+
+- Startseite (`Index.tsx`, `src/components/sections/*`)
+- Header, Footer, Routing
+- Unterseiten unter `src/pages/leistungen/*` (bleiben Platzhalter)
