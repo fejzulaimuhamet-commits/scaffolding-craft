@@ -260,7 +260,7 @@ export const Header = () => {
             >
               <Phone className="h-4 w-4" /> {COMPANY.phonePrimaryDisplay}
             </a>
-            <Link to="/anfrage" className="hidden sm:inline-flex btn-primary !py-2.5 !px-4 text-xs">
+            <Link to="/anfrage" className="hidden sm:inline-flex btn-primary cta-pulse !py-2.5 !px-4 text-xs">
               Gerüst anfragen
             </Link>
             <button
