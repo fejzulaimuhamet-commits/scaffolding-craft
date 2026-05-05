@@ -1,4 +1,5 @@
-import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
+// Generic image source from Sanity (image asset reference object)
+export type SanityImageSource = Record<string, unknown>;
 
 export type SanitySlug = { current: string };
 export type SanityImage = SanityImageSource & { alt?: string };
