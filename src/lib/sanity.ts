@@ -7,16 +7,15 @@ export const SANITY_PROJECT_ID =
   (import.meta.env.VITE_SANITY_PROJECT_ID as string) || "d683vf4r";
 export const SANITY_DATASET =
   (import.meta.env.VITE_SANITY_DATASET as string) || "production";
-const SANITY_TOKEN = import.meta.env.SANITY_TOKEN as string | undefined;
-
 export const sanityClient: SanityClient = createClient({
   projectId: SANITY_PROJECT_ID,
   dataset: SANITY_DATASET,
   apiVersion: "2024-01-01",
-  useCdn: !SANITY_TOKEN,
-  token: SANITY_TOKEN,
+  useCdn: true,
   perspective: "published",
 });
+
+export const client = sanityClient;
 
 const builder = imageUrlBuilder(sanityClient);
 
