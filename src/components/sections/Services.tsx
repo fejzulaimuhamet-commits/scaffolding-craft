@@ -14,37 +14,37 @@ const services: Service[] = [
     tag: "Fassade",
     title: "Fassadengerüste",
     desc: "Sichere und flexible Gerüste für Wohn-, Gewerbe- und Industriegebäude – individuell an Struktur und Höhe angepasst.",
-    img: ASSETS.slide(1),
+    img: ASSETS.placeholder.fassade,
   },
   {
     tag: "Innen",
     title: "Innengerüste",
     desc: "Kompakte Lösungen für Renovierungen, Maler- und Deckenarbeiten im Innenbereich.",
-    img: ASSETS.slide(8),
+    img: ASSETS.placeholder.innen,
   },
   {
     tag: "Aufstieg",
     title: "Treppentürme",
     desc: "Stabile Aufstiegslösungen für komplexe Baustellen – schnell montiert.",
-    img: ASSETS.slide(22),
+    img: ASSETS.placeholder.treppe,
   },
   {
     tag: "Dachschutz",
     title: "Dachfanggerüste",
     desc: "Sicherer Auffangschutz für Dachdecker- und Sanierungsarbeiten – nach DGUV-Vorgaben.",
-    img: ASSETS.slide(15),
+    img: ASSETS.placeholder.dach,
   },
   {
     tag: "Sicherheit",
     title: "Schutznetze & Geländer",
     desc: "Montage von Schutzgeländern, Netzen und Sicherheitsvorrichtungen für Ihre Baustelle.",
-    img: ASSETS.slide(28),
+    img: ASSETS.placeholder.schutz,
   },
   {
     tag: "Wetter",
     title: "Wetterschutzdach",
     desc: "Trockene Baustelle bei jeder Witterung – für termintreue Arbeiten.",
-    img: ASSETS.slide(40),
+    img: ASSETS.placeholder.wetter,
   },
 ];
 

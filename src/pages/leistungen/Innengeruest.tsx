@@ -13,7 +13,7 @@ const Page = () => (
       title: "Innengerüst & Raumgerüst in Hamburg – flexibel & sicher",
       subtitle:
         "Stabile Arbeitsplattformen für Hallen, Kirchen, Treppenhäuser und große Innenräume – schonend für Böden und Bestand.",
-      backgroundImage: ASSETS.slide(8),
+      backgroundImage: ASSETS.placeholder.innen,
       breadcrumb: "Innengerüst",
     }}
     intro={{
@@ -23,7 +23,7 @@ const Page = () => (
         "Decken streichen, Stuck restaurieren, Lüftungstechnik installieren oder Beleuchtung montieren – sobald in großen Innenräumen gearbeitet wird, braucht es ein verlässliches Innengerüst. Wietek Gerüstbau plant und montiert Raumgerüste für Industriehallen, Kirchen, Theater, Treppenhäuser und Lagerhallen in Hamburg und ganz Norddeutschland.",
         "Wir achten auf bodenschonende Aufbauten, kurze Rüstzeiten und freie Bewegungsflächen – auch bei laufendem Betrieb.",
       ],
-      image: ASSETS.slide(9),
+      image: ASSETS.placeholder.innen,
       imageAlt: "Innengerüst in einer Halle – Wietek Gerüstbau Hamburg",
     }}
     audiences={{

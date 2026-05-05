@@ -13,7 +13,7 @@ const Page = () => (
       title: "Fassadengerüst in Hamburg – schnell, sicher & zum Festpreis",
       subtitle:
         "Vom Einfamilienhaus bis zum Gewerbebau: Wir planen, liefern und montieren Ihr Fassadengerüst termingerecht und nach DIN EN 12811.",
-      backgroundImage: ASSETS.slide(1),
+      backgroundImage: ASSETS.placeholder.fassade,
       breadcrumb: "Fassadengerüst",
     }}
     intro={{
@@ -23,7 +23,7 @@ const Page = () => (
         "Seit 2014 stellt Wietek Gerüstbau Fassadengerüste in Hamburg und im gesamten norddeutschen Raum auf. Ob Sanierung, Neubau oder Anstrich – wir liefern die statisch geprüfte Lösung, die Ihre Baustelle schneller, sicherer und planbarer macht.",
         "Unsere Kunden sind Hausbesitzer, Hausverwaltungen, Maler-, Dachdecker- und Bauunternehmen aus Hamburg-Bergedorf, Harburg, Altona und dem Umland. Wir sprechen Handwerker-Sprache, halten Termine und liefern Festpreise – ohne Überraschungen.",
       ],
-      image: ASSETS.slide(2),
+      image: ASSETS.placeholder.fassade,
       imageAlt: "Fassadengerüst Hamburg an Mehrfamilienhaus – Wietek Gerüstbau",
     }}
     scope={{
