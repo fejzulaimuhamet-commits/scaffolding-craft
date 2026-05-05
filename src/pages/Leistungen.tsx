@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { ArrowRight, Check, Zap, ShieldCheck, Users } from "lucide-react";
 import { PageLayout } from "@/components/PageLayout";
+import { PageHero } from "@/components/shared/PageHero";
 import { ASSETS } from "@/lib/site";
 
 type Service = {
