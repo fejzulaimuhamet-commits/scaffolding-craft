@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { Menu, Phone, X } from "lucide-react";
+import { NavLink } from "@/components/NavLink";
 import { ASSETS, COMPANY, NAV } from "@/lib/site";
 
 export const Header = () => {
@@ -42,24 +44,26 @@ export const Header = () => {
 
       <div className="container-w">
         <div className="flex h-16 lg:h-20 items-center justify-between">
-          <a href="#top" className="flex items-center" aria-label="Wietek Gerüstbau – Startseite">
+          <Link to="/" className="flex items-center" aria-label="Wietek Gerüstbau – Startseite">
             <img
               src={ASSETS.logoWhite}
               alt="Wietek Gerüstbau Logo"
               className="h-10 lg:h-12 w-auto"
               loading="eager"
             />
-          </a>
+          </Link>
 
           <nav className="hidden lg:flex items-center gap-8">
             {NAV.map((item) => (
-              <a
+              <NavLink
                 key={item.href}
-                href={item.href}
+                to={item.href}
+                end={item.href === "/"}
                 className="font-display text-sm font-medium text-white hover:text-primary transition-colors"
+                activeClassName="!text-primary"
               >
                 {item.label}
-              </a>
+              </NavLink>
             ))}
           </nav>
 
@@ -70,9 +74,9 @@ export const Header = () => {
             >
               <Phone className="h-4 w-4" /> {COMPANY.phonePrimaryDisplay}
             </a>
-            <a href="#anfrage" className="hidden sm:inline-flex btn-primary !py-2.5 !px-4 text-xs">
+            <Link to="/kontakt" className="hidden sm:inline-flex btn-primary !py-2.5 !px-4 text-xs">
               Gerüst anfragen
-            </a>
+            </Link>
             <button
               type="button"
               onClick={() => setOpen((v) => !v)}
@@ -90,14 +94,16 @@ export const Header = () => {
         <div className="lg:hidden bg-white border-t border-border animate-fade-in">
           <nav className="container-w py-5 flex flex-col gap-1">
             {NAV.map((item) => (
-              <a
+              <NavLink
                 key={item.href}
-                href={item.href}
+                to={item.href}
+                end={item.href === "/"}
                 onClick={() => setOpen(false)}
                 className="py-3 px-2 font-display font-semibold text-steel border-b border-border/60"
+                activeClassName="!text-primary"
               >
                 {item.label}
-              </a>
+              </NavLink>
             ))}
             <a
               href={`tel:${COMPANY.phonePrimary}`}
@@ -105,9 +111,9 @@ export const Header = () => {
             >
               <Phone className="h-4 w-4 text-primary" /> {COMPANY.phonePrimaryDisplay}
             </a>
-            <a href="#anfrage" onClick={() => setOpen(false)} className="btn-primary mt-4 w-full">
+            <Link to="/kontakt" onClick={() => setOpen(false)} className="btn-primary mt-4 w-full text-center">
               Gerüst anfragen
-            </a>
+            </Link>
           </nav>
         </div>
       )}
