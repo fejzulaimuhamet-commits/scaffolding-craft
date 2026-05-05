@@ -102,15 +102,16 @@ export const Header = () => {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-40 transition-all duration-300 ${
+      className={`fixed inset-x-0 top-0 z-40 transition-all duration-500 ${
         scrolled
-          ? "bg-steel shadow-[0_4px_20px_-12px_rgba(0,0,0,0.5)]"
+          ? "bg-steel/95 backdrop-blur-md shadow-[0_4px_24px_-12px_rgba(0,0,0,0.6)]"
           : "bg-steel/90 backdrop-blur-sm"
       }`}
+      style={{ transitionTimingFunction: "cubic-bezier(0.16,1,0.3,1)" }}
     >
       {/* Top utility bar – desktop only */}
       <div
-        className={`hidden lg:block bg-steel-deep text-white text-xs transition-all duration-300 ${
+        className={`hidden lg:block bg-steel-deep text-white text-xs transition-all duration-500 ${
           scrolled ? "h-0 overflow-hidden opacity-0" : "h-9 opacity-100"
         }`}
       >
@@ -131,12 +132,19 @@ export const Header = () => {
       </div>
 
       <div className="container-w">
-        <div className="flex h-16 lg:h-20 items-center justify-between">
+        <div
+          className={`flex items-center justify-between transition-all duration-500 ${
+            scrolled ? "h-14 lg:h-16" : "h-16 lg:h-20"
+          }`}
+          style={{ transitionTimingFunction: "cubic-bezier(0.16,1,0.3,1)" }}
+        >
           <Link to="/" className="flex items-center" aria-label="Wietek Gerüstbau – Startseite">
             <img
               src={ASSETS.logoWhite}
               alt="Wietek Gerüstbau Logo"
-              className="h-10 lg:h-12 w-auto"
+              className={`w-auto transition-all duration-500 ${
+                scrolled ? "h-8 lg:h-9" : "h-10 lg:h-12"
+              }`}
               loading="eager"
             />
           </Link>
@@ -236,7 +244,7 @@ export const Header = () => {
                   key={item.href}
                   to={item.href}
                   end={item.href === "/"}
-                  className="font-display text-sm font-medium text-white hover:text-primary transition-colors"
+                  className="nav-underline font-display text-sm font-medium text-white hover:text-primary transition-colors"
                   activeClassName="!text-primary"
                 >
                   {item.label}

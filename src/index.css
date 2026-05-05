@@ -150,12 +150,27 @@
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-sm bg-primary px-6 py-3.5 text-sm font-bold uppercase tracking-wider text-primary-foreground transition-all duration-200 hover:translate-y-[2px] active:translate-y-[6px];
+    @apply relative overflow-hidden inline-flex items-center justify-center gap-2 rounded-sm bg-primary px-6 py-3.5 text-sm font-bold uppercase tracking-wider text-primary-foreground active:translate-y-[6px];
     font-family: "Manrope", sans-serif;
     box-shadow: 0 8px 0 -2px hsl(var(--steel-deep));
+    transition: transform 0.4s var(--ease-premium), box-shadow 0.4s var(--ease-premium);
+    isolation: isolate;
+  }
+  .btn-primary::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: hsla(0, 0%, 0%, 0.18);
+    transform: translateX(-101%);
+    transition: transform 0.55s var(--ease-premium);
+    z-index: -1;
   }
   .btn-primary:hover {
-    box-shadow: 0 4px 0 -2px hsl(var(--steel-deep));
+    transform: scale(1.03) translateY(2px);
+    box-shadow: 0 4px 0 -2px hsl(var(--steel-deep)), 0 14px 30px -14px hsla(217, 33%, 17%, 0.55);
+  }
+  .btn-primary:hover::before {
+    transform: translateX(0);
   }
   .btn-primary:active {
     box-shadow: none;
