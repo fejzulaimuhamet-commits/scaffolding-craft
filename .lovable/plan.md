@@ -1,101 +1,96 @@
-## Ziel
+# Plan: /leistungen Seite ausbauen
 
-Single-Page-Site auf Multi-Page mit React Router umbauen. Startseite bleibt 100% unverändert. Alle anderen Routen erhalten Platzhalter-Seiten ("Coming Soon") mit identischem Header und Footer.
+Die Startseite bleibt 100% unverändert. Es wird ausschließlich `src/pages/Leistungen.tsx` neu aufgebaut, plus eine kleine Helper-Komponente.
 
-## Routing-Struktur (in `src/App.tsx`)
+## Dateien
 
-```
-/                                  → Index (unverändert)
-/leistungen                        → Leistungen (Platzhalter)
-/leistungen/fassadengeruest        → Platzhalter
-/leistungen/innengeruest           → Platzhalter
-/leistungen/treppenturm            → Platzhalter
-/leistungen/dachfanggeruest        → Platzhalter
-/leistungen/schutznetze-gelaender  → Platzhalter
-/leistungen/wetterschutz           → Platzhalter
-/projekte                          → Platzhalter
-/ueber-uns                         → Platzhalter
-/karriere                          → Platzhalter
-/kontakt                           → Platzhalter
-*                                  → NotFound (existiert bereits)
-```
+### 1. `src/pages/Leistungen.tsx` (komplett neu schreiben)
+Ersetzt die jetzige Placeholder-Version. Struktur:
 
-## Neue / geänderte Dateien
-
-### 1. `src/lib/site.ts` – NAV anpassen
-NAV-Einträge bekommen echte Pfade statt Anker:
-- Startseite → `/`
-- Leistungen → `/leistungen`
-- Projekte → `/projekte`
-- Über uns → `/ueber-uns`
-- Karriere → `/karriere`
-- Kontakt → `/kontakt`
-
-(Damit Header automatisch korrekt verlinkt – Startseite-Anker bleiben funktional, da Startseite unverändert.)
-
-### 2. `src/components/sections/Header.tsx` – Links umstellen
-- `<a href>` für Nav-Items, Logo und "Gerüst anfragen" durch React Router `<Link>` bzw. `NavLink` ersetzen.
-- Logo → `/`
-- "Gerüst anfragen" Button (Desktop + Mobile-Menü) → `/kontakt`
-- Nav-Items via `NavLink` mit `activeClassName="text-primary"` (Wietek-Rot) – die bestehende `src/components/NavLink.tsx` Wrapper-Komponente passt dafür perfekt.
-- Telefon-Links (`tel:`) bleiben `<a>`.
-- Mobile-Menü-Items ebenfalls `NavLink`, `setOpen(false)` bleibt.
-
-### 3. `src/App.tsx` – Routen ergänzen
-Alle oben gelisteten Routen registrieren. Catch-all `*` bleibt unten. Innerhalb `<BrowserRouter>` zusätzlich eine `<ScrollToTop />`-Komponente einfügen, die bei Pfadwechsel `window.scrollTo(0,0)` ausführt.
-
-### 4. `src/components/ScrollToTop.tsx` – NEU
-Hook-Komponente mit `useLocation` + `useEffect` für Scroll-Reset bei Routenwechsel.
-
-### 5. `src/components/PageLayout.tsx` – NEU
-Wiederverwendbares Layout für alle Platzhalter-Seiten:
-- Renders `<Header />`, `<main>{children}</main>`, `<Footer />`, `<FloatingButtons />`
-- Container mit `pt-32` o.ä. damit Inhalt unter dem Fixed-Header startet
-- Gleiche Wrapper-Struktur wie `pages/Index.tsx` (inkl. `pb-14 sm:pb-0`)
-
-### 6. `src/components/ComingSoon.tsx` – NEU
-Kurzer Hero-artiger Bereich:
-- H1 mit Seitentitel (Prop `title`)
-- Subline "Diese Seite ist in Arbeit und bald verfügbar."
-- CTA-Buttons: "Zur Startseite" (`/`) und "Kontakt aufnehmen" (`/kontakt`)
-- Im bestehenden Design (Stahl-Hintergrund / Container-Klassen wie restliche Sections)
-
-### 7. Platzhalter-Pages – NEU in `src/pages/`
-Eine kompakte Datei pro Route, jeweils:
 ```tsx
 <PageLayout>
-  <Helmet><title>{seitentitel} | Wietek Gerüstbau</title></Helmet>
-  <ComingSoon title="..." />
+  <Helmet><title>Leistungen | Wietek Gerüstbau</title></Helmet>
+  <LeistungenHero />
+  <ServicesGrid />
+  <WarumWietek />
+  <CTASection />
 </PageLayout>
 ```
 
-Dateien:
-- `Leistungen.tsx`
-- `leistungen/Fassadengeruest.tsx`
-- `leistungen/Innengeruest.tsx`
-- `leistungen/Treppenturm.tsx`
-- `leistungen/Dachfanggeruest.tsx`
-- `leistungen/SchutznetzeGelaender.tsx`
-- `leistungen/Wetterschutz.tsx`
-- `Projekte.tsx`
-- `UeberUns.tsx`
-- `Karriere.tsx`
-- `Kontakt.tsx`
+Alle Sektionen werden in derselben Datei als lokale Komponenten definiert (kompakt, eine Page-Datei).
 
-### 8. `src/pages/NotFound.tsx`
-Bekommt `<Helmet><title>404 | Wietek Gerüstbau</title></Helmet>`. Sonst unverändert.
+### 2. Inhalte der Sektionen
 
-### 9. `src/components/Seo.tsx`
-Bleibt unverändert (wird weiter nur in der Startseite verwendet, damit dort nichts kippt). Platzhalter-Seiten setzen ihren eigenen `<title>` via `react-helmet-async`.
+**LeistungenHero**
+- `<section>` mit Anthrazit-Hintergrund (`bg-steel-deep`), `pt-16 lg:pt-24 pb-12 lg:pb-16` (klein, da `PageLayout` schon `pt-24 lg:pt-32` für Header-Abstand setzt — Hero bekommt zusätzlich eigenes Top-Padding zur Atmung).
+- `container-w`
+- Eyebrow „UNSERE LEISTUNGEN" in Rot (`<span class="eyebrow">`, da Hintergrund dunkel: `eyebrow` Farbe ist bereits `text-primary` ✓)
+- H1: „Gerüstlösungen für jeden Einsatz" — `font-display font-extrabold text-white text-4xl sm:text-5xl lg:text-6xl leading-tight`
+- Subtext: „Von der privaten Fassade bis zum Industrieprojekt – wir liefern das passende Gerüst für Ihr Vorhaben." — `text-white/75 text-lg max-w-2xl mt-6`
+- Keine CTAs, kein Foto.
+- Framer Motion `initial={{opacity:0,y:24}} whileInView={{opacity:1,y:0}}` auf den Inhalts-Container.
 
-## Verhalten
+**ServicesGrid**
+- Section mit `bg-white py-20 lg:py-28`.
+- Wiederverwendung des **gleichen Card-Stils** wie `src/components/sections/Services.tsx`:
+  - Foto absolut, Gradient unten, roter Tag oben links, roter Hover-Balken unten, Hover-Skalierung, „Mehr erfahren"-Pfeil am Ende.
+- Statt `<motion.a href="#anfrage">` wird ein `<Link to={...}>` von `react-router-dom` verwendet (über `motion(Link)` oder `motion.div` mit Link-Wrapper). Wir nutzen `motion.div` mit innerem `<Link>` um Typing-Komplexität zu vermeiden.
+- Daten-Array (lokal in der Datei):
+  ```ts
+  const services = [
+    { tag: "Fassade",    title: "Fassadengerüst",          desc: "Für Sanierung, Neubau & Malerarbeiten",    img: ASSETS.slide(1),  to: "/leistungen/fassadengeruest" },
+    { tag: "Innen",      title: "Innengerüst",             desc: "Sicher & flexibel für Innenräume",          img: ASSETS.slide(8),  to: "/leistungen/innengeruest" },
+    { tag: "Aufstieg",   title: "Treppenturm",             desc: "Sicherer Zugang auf jeder Baustelle",       img: ASSETS.slide(22), to: "/leistungen/treppenturm" },
+    { tag: "Dachschutz", title: "Dachfanggerüst",          desc: "Schutz bei Dacharbeiten aller Art",         img: ASSETS.slide(15), to: "/leistungen/dachfanggeruest" },
+    { tag: "Sicherheit", title: "Schutznetze & Geländer",  desc: "Absturzsicherung nach DGUV",                img: ASSETS.slide(28), to: "/leistungen/schutznetze-gelaender" },
+    { tag: "Wetter",     title: "Wetterschutz",            desc: "Arbeiten bei jedem Wetter",                 img: ASSETS.slide(40), to: "/leistungen/wetterschutz" },
+  ];
+  ```
+- Asymmetrisches Layout — exakt wie `Services.tsx`:
+  - Reihe 1: Karte 1 hero links (`lg:col-span-3 h-[420px] sm:h-[520px] lg:h-[620px]`, `size="lg"`), rechts (`lg:col-span-2`) gestapelt Karten 2 & 3 (`h-[260px] lg:h-[305px]`).
+  - Reihe 2: 3 gleichbreite Karten 4/5/6, mittlere etwas höher (`h-[320px] lg:h-[380px]` außen, `h-[360px] lg:h-[440px]` mitte).
+- Section-Überschrift oben (analog Startseite, optional kurz):
+  - Eyebrow „Übersicht"
+  - H2 „Sechs Leistungen – ein Anspruch: Sicherheit & Termintreue."
 
-- **Scroll-Reset**: `ScrollToTop` in `App.tsx` innerhalb des Routers.
-- **Aktiver Link**: `NavLink` setzt bei Match `text-primary` (Wietek-Rot, bereits Hover-Farbe).
-- **Startseite unverändert**: `pages/Index.tsx`, `Hero.tsx` und alle Section-Komponenten werden NICHT angefasst. Die geänderten NAV-Hrefs greifen nur in der neuen Header-Logik – Anker-Sprünge auf der Startseite werden weiterhin durch die Section-IDs gewährleistet, falls jemand `/#leistungen` aufruft (BrowserRouter + Hash). Da der Header künftig auf `/leistungen` zeigt, navigiert er stattdessen zur neuen Seite – das ist gewünscht.
+**WarumWietek**
+- `<section className="bg-steel-deep py-20 lg:py-28">`.
+- `container-w`
+- Eyebrow „Warum Wietek" (rot, auf dunkel ✓)
+- H2 weiß: „Drei Versprechen, die wir halten."
+- 3-Spalten-Grid (`grid sm:grid-cols-3 gap-8 lg:gap-12 mt-12`):
+  1. Icon `Zap` — Titel „Schnell" — Text „Aufbau in 24–72 Stunden nach Auftrag."
+  2. Icon `ShieldCheck` — Titel „Versichert" — Text „Vollständig haftpflicht- & betriebsversichert, DGUV-geprüft."
+  3. Icon `Users` — Titel „Familiengeführt" — Text „Inhabergeführtes Familienunternehmen aus Hamburg-Bergedorf seit 2014."
+- Icons rot (`text-primary h-10 w-10`), Titel weiß `font-display font-bold text-2xl`, Text `text-white/75`.
+- Framer-Motion fade-in pro Spalte mit Stagger-Delay.
 
-## Technisch
+**CTASection**
+- `<section className="bg-primary py-16 lg:py-20">`.
+- Zentrierter `container-w` Inhalt:
+  - H2 weiß `text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold`: „Welches Gerüst brauchen Sie?"
+  - Untertext weiß/85: „Wir beraten Sie unverbindlich und erstellen Ihr Festpreis-Angebot."
+  - Button: `<Link to="/kontakt">` — weißer Hintergrund, roter Text, Hover invert: `bg-white text-primary hover:bg-steel hover:text-white px-8 py-4 font-display font-bold uppercase tracking-[0.2em] text-sm inline-flex items-center gap-2 transition-colors`
+  - Pfeil-Icon `ArrowRight`.
+- Framer-Motion fade-in.
 
-- Keine neuen Dependencies – `react-router-dom` und `react-helmet-async` sind bereits installiert.
-- Bestehende `NavLink`-Wrapper-Komponente wiederverwenden.
-- Kein Eingriff in `Hero.tsx`, `Stats.tsx`, …, `Footer.tsx`.
+### 3. Imports in `Leistungen.tsx`
+```
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
+import { ArrowRight, Zap, ShieldCheck, Users } from "lucide-react";
+import { PageLayout } from "@/components/PageLayout";
+import { ASSETS } from "@/lib/site";
+```
+
+## Verhalten / Konsistenz
+- `PageLayout` bringt Header, Footer, FloatingButtons, ScrollToTop ist global aktiv → Seitenwechsel scrollt nach oben ✓.
+- Kein neuer Route-Eintrag nötig, Route `/leistungen` zeigt bereits auf `Leistungen.tsx`.
+- Mobile-First: alle Grids stacken auf < `sm`/`lg` korrekt (gleiches Pattern wie Startseite-Services).
+- Framer Motion `whileInView` mit `viewport={{ once: true, amount: 0.2 }}`.
+
+## Nicht angefasst
+- `src/pages/Index.tsx` und alle Komponenten unter `src/components/sections/*`.
+- Header, Footer, NavLink, Routing-Setup.
+- Die 6 Unterseiten unter `src/pages/leistungen/*` bleiben Platzhalter (separater Folge-Auftrag).
