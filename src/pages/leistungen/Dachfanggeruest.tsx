@@ -13,7 +13,7 @@ const Page = () => (
       title: "Dachfanggerüst in Hamburg – Absturzsicherung nach DGUV",
       subtitle:
         "Pflicht bei Arbeiten ab 3 m Absturzhöhe – wir liefern den geprüften Fangschutz für Dachdecker, Zimmerer und Hausbesitzer.",
-      backgroundImage: ASSETS.slide(15),
+      backgroundImage: ASSETS.placeholder.dach,
       breadcrumb: "Dachfanggerüst",
     }}
     intro={{
@@ -23,7 +23,7 @@ const Page = () => (
         "Sobald auf einem geneigten Dach gearbeitet wird, ist ein Dachfanggerüst gesetzlich vorgeschrieben. Es fängt herabfallende Personen sicher auf und schützt zugleich Passanten vor herabfallenden Materialien. Wir bauen DGUV-konforme Dachfanggerüste in Hamburg und Norddeutschland – schnell, sauber und vollversichert.",
         "Ob Steildach oder flach geneigtes Dach, ob Sanierung, Eindeckung oder Reparatur: Wir kennen die Vorgaben und stellen den Fangschutz so auf, dass Ihre Gewerke effizient arbeiten können.",
       ],
-      image: ASSETS.slide(16),
+      image: ASSETS.placeholder.dach,
       imageAlt: "Dachfanggerüst Hamburg an einem Steildach – Wietek Gerüstbau",
     }}
     scope={{

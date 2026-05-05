@@ -13,7 +13,7 @@ const Page = () => (
       title: "Wetterschutzdach & überdachtes Gerüst in Hamburg – ganzjährig bauen",
       subtitle:
         "Lichtdurchlässige Überdachungen mit freier Spannweite bis 30 m – Bauverzug ade.",
-      backgroundImage: ASSETS.slide(40),
+      backgroundImage: ASSETS.placeholder.wetter,
       breadcrumb: "Wetterschutzdach",
     }}
     intro={{
@@ -23,7 +23,7 @@ const Page = () => (
         "Regen, Schnee, Frost – Hamburger Wetter kann ganze Bauzeiten kippen. Mit unserem Wetterschutzdach arbeiten Ihre Gewerke termintreu, unabhängig von der Witterung. Wir kombinieren Fassadengerüst und überdachte Konstruktion zu einer trockenen, beleuchtbaren Arbeitsumgebung.",
         "Ideal für Dachsanierungen, denkmalgeschützte Bauwerke, Fachwerk und alle Projekte, bei denen Material und Mitarbeiter geschützt werden müssen.",
       ],
-      image: ASSETS.slide(41),
+      image: ASSETS.placeholder.wetter,
       imageAlt: "Wetterschutzdach Hamburg – Gerüst mit Überdachung von Wietek Gerüstbau",
     }}
     scope={{

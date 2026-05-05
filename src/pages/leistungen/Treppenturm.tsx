@@ -13,7 +13,7 @@ const Page = () => (
       title: "Treppenturm & Gerüstturm in Hamburg – sicherer Zugang auf jeder Baustelle",
       subtitle:
         "Bequemer Aufstieg, hohe Tragfähigkeit, normgerecht nach DIN EN 12811 – auch als Notausgang oder Fluchtweg.",
-      backgroundImage: ASSETS.slide(22),
+      backgroundImage: ASSETS.placeholder.treppe,
       breadcrumb: "Treppenturm",
     }}
     intro={{
@@ -23,7 +23,7 @@ const Page = () => (
         "Ein Treppenturm ist eine freistehende Gerüstkonstruktion mit integrierter Treppe – die sicherste und komfortabelste Art, Höhen auf Baustellen zu überwinden. Im Gegensatz zu Leitern erlaubt er Material­transport, hohen Personenverkehr und ist auch für Besucher und Bauherren freigegeben.",
         "Wir liefern Treppentürme für Neubau, Sanierung, Veranstaltungen und Industrieanlagen in Hamburg und Norddeutschland – montiert, geprüft und freigegeben.",
       ],
-      image: ASSETS.slide(23),
+      image: ASSETS.placeholder.treppe,
       imageAlt: "Treppenturm Wietek Gerüstbau Hamburg",
     }}
     audiences={{

@@ -27,7 +27,7 @@ const services: Service[] = [
       "Inklusive Schutznetzen und Bordbrettern",
       "Statik und Aufbauplan auf Wunsch",
     ],
-    img: ASSETS.slide(1),
+    img: ASSETS.placeholder.fassade,
     to: "/leistungen/fassadengeruest",
   },
   {
@@ -41,7 +41,7 @@ const services: Service[] = [
       "Schneller Auf- und Abbau",
       "Auch für hohe Räume und Hallen",
     ],
-    img: ASSETS.slide(8),
+    img: ASSETS.placeholder.innen,
     to: "/leistungen/innengeruest",
   },
   {
@@ -55,7 +55,7 @@ const services: Service[] = [
       "Auch als Notausgang einsetzbar",
       "Beliebige Höhen realisierbar",
     ],
-    img: ASSETS.slide(22),
+    img: ASSETS.placeholder.treppe,
     to: "/leistungen/treppenturm",
   },
   {
@@ -69,7 +69,7 @@ const services: Service[] = [
       "Statisch geprüfte Verankerung",
       "Auch für Steildächer geeignet",
     ],
-    img: ASSETS.slide(15),
+    img: ASSETS.placeholder.dach,
     to: "/leistungen/dachfanggeruest",
   },
   {
@@ -83,7 +83,7 @@ const services: Service[] = [
       "Schnelle Montage am Bestand",
       "Vermietung oder Komplett-Service",
     ],
-    img: ASSETS.slide(28),
+    img: ASSETS.placeholder.schutz,
     to: "/leistungen/schutznetze-gelaender",
   },
   {
@@ -97,7 +97,7 @@ const services: Service[] = [
       "Kombinierbar mit Fassadengerüst",
       "Schutz für Dachstuhl & Sanierung",
     ],
-    img: ASSETS.slide(40),
+    img: ASSETS.placeholder.wetter,
     to: "/leistungen/wetterschutz",
   },
 ];
@@ -280,7 +280,7 @@ const Leistungen = () => (
       eyebrow="Unsere Leistungen"
       title="Gerüstlösungen für jeden Einsatz"
       subtitle="Von der privaten Fassade bis zum Industrieprojekt – wir liefern das passende Gerüst für Ihr Vorhaben."
-      backgroundImage={ASSETS.slide(1)}
+      backgroundImage={ASSETS.placeholder.fassade}
       breadcrumb="Leistungen"
     />
     {services.map((s, i) => (

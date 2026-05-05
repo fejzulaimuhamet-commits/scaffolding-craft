@@ -13,7 +13,7 @@ const Page = () => (
       title: "Schutznetze & Sicherheitsgeländer in Hamburg – Absturzsicherung nach Norm",
       subtitle:
         "Auffangnetze nach EN 1263, Sicherheitsgeländer und Dachrandschutz – einzeln oder in Kombination mit Ihrem Gerüst.",
-      backgroundImage: ASSETS.slide(28),
+      backgroundImage: ASSETS.placeholder.schutz,
       breadcrumb: "Schutznetze & Geländer",
     }}
     intro={{
@@ -23,7 +23,7 @@ const Page = () => (
         "Wo Höhe ist, muss Schutz sein. Wir liefern und montieren normgerechte Auffangnetze, temporäre Sicherheitsgeländer und Dachrandschutzsysteme in Hamburg und Norddeutschland – schnell, dokumentiert und vollversichert.",
         "Unsere Schutzsysteme entsprechen den Vorgaben der DGUV und der EN 1263 und sind nach Bedarf auch unabhängig von einem kompletten Gerüstaufbau einsetzbar.",
       ],
-      image: ASSETS.slide(29),
+      image: ASSETS.placeholder.schutz,
       imageAlt: "Schutznetze und Sicherheitsgeländer – Wietek Gerüstbau Hamburg",
     }}
     scope={{
