@@ -19,6 +19,7 @@ import UeberUns from "./pages/UeberUns.tsx";
 import Karriere from "./pages/Karriere.tsx";
 import Kontakt from "./pages/Kontakt.tsx";
 import Anfrage from "./pages/Anfrage.tsx";
+import Studio from "./pages/Studio.tsx";
 
 const queryClient = new QueryClient();
 
@@ -44,6 +45,7 @@ const App = () => (
             <Route path="/karriere" element={<Karriere />} />
             <Route path="/kontakt" element={<Kontakt />} />
             <Route path="/anfrage" element={<Anfrage />} />
+            <Route path="/studio/*" element={<Studio />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

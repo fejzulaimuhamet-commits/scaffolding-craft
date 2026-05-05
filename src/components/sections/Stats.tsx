@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useInViewOnce } from "@/hooks/use-in-view";
+import { useHomepage } from "@/hooks/useSanity";
 
-const stats = [
+const defaultStats = [
   { end: 11, suffix: "+", label: "Jahre Erfahrung" },
   { end: 500, suffix: "+", label: "Abgeschlossene Projekte" },
   { end: 50000, suffix: "+", label: "m² Gerüst gebaut", format: true },
@@ -35,6 +36,12 @@ function Counter({ end, suffix, format }: { end: number; suffix: string; format?
 }
 
 export const Stats = () => {
+  const { data: hp } = useHomepage();
+  const stats = [
+    { end: hp?.counterYears ?? defaultStats[0].end, suffix: "+", label: "Jahre Erfahrung" },
+    { end: hp?.counterProjects ?? defaultStats[1].end, suffix: "+", label: "Abgeschlossene Projekte" },
+    { end: hp?.counterSquareMeters ?? defaultStats[2].end, suffix: "+", label: "m² Gerüst gebaut", format: true },
+  ];
   return (
     <section className="relative bg-blueprint py-14 lg:py-20">
       <div className="container-w">

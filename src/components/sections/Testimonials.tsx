@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
 import { Quote, Star } from "lucide-react";
 import { COMPANY } from "@/lib/site";
+import { useTestimonials } from "@/hooks/useSanity";
 
-const reviews = [
+const fallbackReviews = [
   {
     name: "Stefan H.",
     role: "Bauherr · Bergedorf",
@@ -30,6 +31,16 @@ const reviews = [
 ];
 
 export const Testimonials = () => {
+  const { data: cms, isLoading } = useTestimonials();
+  const reviews =
+    cms && cms.length > 0
+      ? cms.map((t) => ({
+          name: t.name,
+          role: t.city ? `Kunde · ${t.city}` : "Kunde",
+          text: t.text,
+          rating: t.rating ?? 5,
+        }))
+      : fallbackReviews;
   return (
     <section className="py-20 lg:py-28 bg-plaster">
       <div className="container-w">
@@ -56,7 +67,11 @@ export const Testimonials = () => {
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
-          {reviews.map((r, i) => (
+          {isLoading
+            ? Array.from({ length: 4 }).map((_, i) => (
+                <div key={i} className="bg-white p-6 border border-border h-48 animate-pulse" />
+              ))
+            : reviews.map((r, i) => (
             <motion.figure
               key={r.name}
               initial={{ opacity: 0, y: 20 }}
