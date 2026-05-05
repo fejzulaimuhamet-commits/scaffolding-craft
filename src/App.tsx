@@ -20,6 +20,17 @@ import Karriere from "./pages/Karriere.tsx";
 import Kontakt from "./pages/Kontakt.tsx";
 import Anfrage from "./pages/Anfrage.tsx";
 import Studio from "./pages/Studio.tsx";
+import { sanityClient } from "@/lib/sanity";
+
+// Sanity Verbindungstest – lädt alle Dokumente und loggt sie
+sanityClient
+  .fetch(`*[]{ _id, _type, _createdAt }`)
+  .then((docs) => {
+    console.log("[Sanity] ✅ Verbindung OK – Dokumente:", docs.length, docs);
+  })
+  .catch((err) => {
+    console.error("[Sanity] ❌ Verbindung fehlgeschlagen:", err);
+  });
 
 const queryClient = new QueryClient();
 
