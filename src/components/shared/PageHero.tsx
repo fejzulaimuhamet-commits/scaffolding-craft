@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { AnimatedHeading } from "@/components/shared/AnimatedHeading";
 
 interface PageHeroProps {
   title: string;
@@ -46,14 +47,12 @@ export const PageHero = ({
             <span className="hidden sm:block h-px w-8 bg-primary" />
           </motion.div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+          <AnimatedHeading
+            text={title}
+            as="h1"
+            delay={0.1}
             className="mt-5 font-display font-extrabold text-white text-3xl sm:text-4xl lg:text-5xl leading-[1.1] max-w-4xl"
-          >
-            {title}
-          </motion.h1>
+          />
 
           {subtitle && (
             <motion.p
