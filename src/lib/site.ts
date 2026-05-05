@@ -40,12 +40,12 @@ export const ASSETS = {
 };
 
 export const NAV = [
-  { label: "Startseite", href: "#top" },
-  { label: "Leistungen", href: "#leistungen" },
-  { label: "Projekte", href: "#projekte" },
-  { label: "Über uns", href: "#ueber-uns" },
-  { label: "Karriere", href: "#karriere" },
-  { label: "Kontakt", href: "#kontakt" },
+  { label: "Startseite", href: "/" },
+  { label: "Leistungen", href: "/leistungen" },
+  { label: "Projekte", href: "/projekte" },
+  { label: "Über uns", href: "/ueber-uns" },
+  { label: "Karriere", href: "/karriere" },
+  { label: "Kontakt", href: "/kontakt" },
 ];
 
 export const waLink = (msg = "Hallo Wietek-Team, ich interessiere mich für ein Gerüst.") =>
