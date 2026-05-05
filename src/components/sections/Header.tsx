@@ -252,7 +252,7 @@ export const Header = () => {
             >
               <Phone className="h-4 w-4" /> {COMPANY.phonePrimaryDisplay}
             </a>
-            <Link to="/kontakt" className="hidden sm:inline-flex btn-primary !py-2.5 !px-4 text-xs">
+            <Link to="/anfrage" className="hidden sm:inline-flex btn-primary !py-2.5 !px-4 text-xs">
               Gerüst anfragen
             </Link>
             <button
@@ -352,7 +352,7 @@ export const Header = () => {
               <Phone className="h-4 w-4 text-primary" /> {COMPANY.phonePrimaryDisplay}
             </a>
             <Link
-              to="/kontakt"
+              to="/anfrage"
               onClick={() => setOpen(false)}
               className="btn-primary mt-4 w-full text-center"
             >
