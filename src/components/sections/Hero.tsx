@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { ArrowRight, CheckCircle2, Star } from "lucide-react";
 import { ASSETS, COMPANY } from "@/lib/site";
+import { useHomepage } from "@/hooks/useSanity";
+import { imageUrl } from "@/lib/sanity";
 
 const usps = [
   "Aufbau in 24–72 Stunden",
@@ -10,6 +12,11 @@ const usps = [
 ];
 
 export const Hero = () => {
+  const { data: homepage } = useHomepage();
+  const heroImg = imageUrl(homepage?.heroImage, 1920) ?? ASSETS.slide(18);
+  const heroTitle = homepage?.heroTitle;
+  const heroSubtitle = homepage?.heroSubtitle;
+
   return (
     <section
       id="top"
@@ -18,7 +25,7 @@ export const Hero = () => {
     >
       {/* Vollbild-Foto */}
       <img
-        src={ASSETS.slide(18)}
+        src={heroImg}
         alt="Eingerüstetes Wohnhaus in Hamburg von Wietek Gerüstbau"
         loading="eager"
         className="absolute inset-0 h-full w-full object-cover object-center"
@@ -75,18 +82,26 @@ export const Hero = () => {
           <h1
             className="mt-6 font-display font-extrabold text-white leading-tight tracking-tight w-full text-4xl lg:text-[3.75rem] xl:text-[4.25rem] 2xl:text-[4.75rem]"
           >
-            Gerüstbau in{" "}
-            <span className="hand-underline-light text-white">Hamburg</span>
-            {" –"}
-            <br />
-            <span className="text-white/95">sicher, pünktlich,<br />ab 24 Std. einsatzbereit.</span>
+            {heroTitle ?? (
+              <>
+                Gerüstbau in{" "}
+                <span className="hand-underline-light text-white">Hamburg</span>
+                {" –"}
+                <br />
+                <span className="text-white/95">sicher, pünktlich,<br />ab 24 Std. einsatzbereit.</span>
+              </>
+            )}
           </h1>
 
           {/* Subline */}
           <p className="mt-6 max-w-xl text-base sm:text-lg text-white/85 leading-relaxed">
-            Familiengeführter Gerüstbau aus {COMPANY.city}-{COMPANY.district}. Wir liefern,
-            montieren und demontieren Gerüste für Privathaushalte, Handwerker und Industrie –
-            schnell, sauber und mit echtem Wort.
+            {heroSubtitle ?? (
+              <>
+                Familiengeführter Gerüstbau aus {COMPANY.city}-{COMPANY.district}. Wir liefern,
+                montieren und demontieren Gerüste für Privathaushalte, Handwerker und Industrie –
+                schnell, sauber und mit echtem Wort.
+              </>
+            )}
           </p>
 
           {/* USP-Bullets */}
