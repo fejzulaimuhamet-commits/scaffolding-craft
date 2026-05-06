@@ -27,8 +27,13 @@ export const sanityConfig = defineConfig({
       previewUrl: {
         origin: PREVIEW_ORIGIN,
         preview: "/",
+        // Same-origin SPA-Pfad. Das Studio hängt ?sanity-preview-secret=…
+        // an und navigiert den iframe dorthin. bootstrapPreview() in
+        // src/main.tsx validiert den Secret per fetch gegen die
+        // sanity-preview Edge-Function, speichert das Token in
+        // sessionStorage und lädt im Draft-Mode neu.
         previewMode: {
-          enable: PREVIEW_SECRET_ENDPOINT,
+          enable: "/",
         },
       },
     }),
