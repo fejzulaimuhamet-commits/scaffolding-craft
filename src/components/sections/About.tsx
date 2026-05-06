@@ -1,14 +1,21 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Calendar, Hammer, Heart } from "lucide-react";
 import { ASSETS, COMPANY } from "@/lib/site";
+import { useAboutPage } from "@/hooks/useSanity";
 
-const facts = [
-  { icon: Calendar, label: "10+ Jahre" },
-  { icon: Hammer, label: "500+ Projekte" },
-  { icon: Heart, label: "Familiengeführt" },
+const factIcons = [Calendar, Hammer, Heart];
+
+const defaultFacts = [
+  { value: "10+", label: "Jahre" },
+  { value: "500+", label: "Projekte" },
+  { value: "", label: "Familiengeführt" },
 ];
 
 export const About = () => {
+  const { data: about } = useAboutPage();
+  const headline = about?.headline;
+  const intro = about?.intro;
+  const stats = (about?.stats && about.stats.length > 0) ? about.stats : defaultFacts;
   return (
     <section id="ueber-uns" className="relative bg-steel-deep overflow-hidden">
       {/* Diagonaler Divider oben – kommt aus heller Sektion */}
