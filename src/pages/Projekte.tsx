@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { Helmet } from "react-helmet-async";
+import { PageSeo } from "@/components/PageSeo";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, MapPin } from "lucide-react";
@@ -70,14 +70,16 @@ const Page = () => {
 
   return (
     <PageLayout>
-      <Helmet>
-        <title>Referenzen & Projekte | Wietek Gerüstbau Hamburg</title>
-        <meta
-          name="description"
-          content="Über 500 erfolgreich abgeschlossene Gerüstbauprojekte in Hamburg & Norddeutschland. Fassaden, Industrie, Sonderlösungen – alle Referenzen ansehen."
-        />
-        <link rel="canonical" href="https://wietek-geruestbau.de/projekte" />
-      </Helmet>
+      <PageSeo
+        title="Referenzen Gerüstbau Hamburg | Projekte – Wietek Gerüstbau"
+        description="Über 500 abgeschlossene Gerüstbau-Projekte in Hamburg & Norddeutschland: Fassaden-, Innen-, Industrie- und Sondergerüste. Alle Referenzen ansehen."
+        path="/projekte"
+        keywords="Gerüstbau Referenzen Hamburg, Projekte Wietek, Gerüstbau Hamburg Projekte, Fassadengerüst Referenzen"
+        breadcrumbs={[
+          { name: "Startseite", path: "/" },
+          { name: "Projekte", path: "/projekte" },
+        ]}
+      />
 
       <PageHero
         eyebrow="Referenzen"

@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import { PageSeo } from "@/components/PageSeo";
 import { motion } from "framer-motion";
 import { Phone, MessageCircle, Mail, MapPin, Clock, ExternalLink } from "lucide-react";
 import { PageLayout } from "@/components/PageLayout";
@@ -56,15 +56,17 @@ const channels = [
 
 const Page = () => (
   <PageLayout>
-    <Helmet>
-      <title>Kontakt | Wietek Gerüstbau Hamburg – Kostenlos anfragen</title>
-      <meta
-        name="description"
-        content={`Gerüst anfragen in Hamburg. Kostenlose Beratung, schnelle Antwort in 24 Std. Tel: ${COMPANY.phonePrimaryDisplay} | ${COMPANY.street}, ${COMPANY.zip} ${COMPANY.city}-${COMPANY.district}`}
-      />
-      <link rel="canonical" href="https://wietek-geruestbau.de/kontakt" />
-      <script type="application/ld+json">{JSON.stringify(contactSchema)}</script>
-    </Helmet>
+    <PageSeo
+      title="Kontakt Wietek Gerüstbau Hamburg – Anfrage starten"
+      description={`Gerüst anfragen in Hamburg. Kostenlose Beratung, Antwort in 24 Std. Tel: ${COMPANY.phonePrimaryDisplay} | ${COMPANY.street}, ${COMPANY.zip} ${COMPANY.city}-${COMPANY.district}.`}
+      path="/kontakt"
+      keywords="Kontakt Gerüstbau Hamburg, Wietek Gerüstbau Telefon, Gerüst Hamburg anfragen, Gerüstbauer Bergedorf Kontakt"
+      breadcrumbs={[
+        { name: "Startseite", path: "/" },
+        { name: "Kontakt", path: "/kontakt" },
+      ]}
+      jsonLd={[contactSchema]}
+    />
 
     <PageHero
       eyebrow="Kontakt"

@@ -28,6 +28,8 @@ export const Hero = () => {
         src={heroImg}
         alt="Eingerüstetes Wohnhaus in Hamburg von Wietek Gerüstbau"
         loading="eager"
+        fetchPriority="high"
+        decoding="async"
         className="absolute inset-0 h-full w-full object-cover object-center"
       />
 

@@ -25,8 +25,10 @@ export const PageHero = ({
       {/* Background */}
       <img
         src={backgroundImage}
-        alt=""
-        aria-hidden="true"
+        alt={`${title} – Wietek Gerüstbau Hamburg`}
+        loading="eager"
+        fetchPriority="high"
+        decoding="async"
         className="absolute inset-0 h-full w-full object-cover"
       />
       <div className="absolute inset-0 bg-black/55" aria-hidden="true" />
