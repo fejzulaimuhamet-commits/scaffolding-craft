@@ -1,21 +1,18 @@
 import { motion } from "framer-motion";
 import { ArrowRight, CheckCircle2, Star } from "lucide-react";
-import { ASSETS, COMPANY } from "@/lib/site";
+import { ASSETS } from "@/lib/site";
 import { useHomepage } from "@/hooks/useSanity";
 import { imageUrl } from "@/lib/sanity";
-
-const usps = [
-  "Aufbau in 24–72 Stunden",
-  "Familienunternehmen seit 2014",
-  "Vollständig versichert & geprüft",
-  "Festpreis-Garantie ohne Überraschungen",
-];
 
 export const Hero = () => {
   const { data: homepage } = useHomepage();
   const heroImg = imageUrl(homepage?.heroImage, 1920) ?? ASSETS.hero;
+  const heroBadge = homepage?.heroBadge;
   const heroTitle = homepage?.heroTitle;
   const heroSubtitle = homepage?.heroSubtitle;
+  const usps = homepage?.heroUsps ?? [];
+  const ctaPrimary = homepage?.heroCtaPrimary;
+  const ctaSecondary = homepage?.heroCtaSecondary;
 
   return (
     <section
