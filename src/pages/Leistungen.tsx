@@ -275,7 +275,19 @@ const CTASection = () => (
   </section>
 );
 
-const Leistungen = () => (
+const Leistungen = () => {
+  const cms = useServiceMap();
+  const services: Service[] = fallbackServices.map((s) => {
+    const c = cms.get(s.slug);
+    return {
+      ...s,
+      title: c?.title || s.title,
+      intro: c?.description || s.intro,
+      bullets: c?.features?.length ? c.features : s.bullets,
+      img: c?.image || s.img,
+    };
+  });
+  return (
   <PageLayout>
     <Helmet>
       <title>Leistungen | Wietek Gerüstbau Hamburg</title>
@@ -297,6 +309,7 @@ const Leistungen = () => (
     <WarumWietek />
     <CTASection />
   </PageLayout>
-);
+  );
+};
 
 export default Leistungen;
