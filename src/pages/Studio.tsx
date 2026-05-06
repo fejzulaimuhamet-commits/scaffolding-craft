@@ -1,4 +1,5 @@
 import { Suspense, lazy } from "react";
+import { PageSeo } from "@/components/PageSeo";
 
 const StudioInner = lazy(async () => {
   const [{ Studio }, { sanityConfig }] = await Promise.all([
@@ -10,6 +11,7 @@ const StudioInner = lazy(async () => {
 
 const StudioPage = () => (
   <div style={{ height: "100vh", width: "100vw" }}>
+    <PageSeo title="Studio" description="Sanity Studio" path="/studio" noindex />
     <Suspense fallback={<div style={{ padding: 24 }}>Studio wird geladen…</div>}>
       <StudioInner />
     </Suspense>
