@@ -554,6 +554,7 @@ const Page = () => {
       </div>
     </section>
   </PageLayout>
-);
+  );
+};
 
 export default Page;
