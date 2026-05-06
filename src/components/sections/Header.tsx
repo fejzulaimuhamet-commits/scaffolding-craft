@@ -59,8 +59,8 @@ export const Header = () => {
     : DEFAULT_SERVICES;
   const NAV_ITEMS = nav?.navItems && nav.navItems.length > 0 ? nav.navItems : NAV;
   const topBarText = nav?.topBarText ?? `${COMPANY.street}, ${COMPANY.zip} ${COMPANY.city}-${COMPANY.district}`;
-  const megaCtaTitle = nav?.megaCtaTitle ?? "Alle Leistungen ansehen";
-  const megaCtaSubtitle = nav?.megaCtaSubtitle ?? "Übersicht aller Wietek-Gerüstlösungen";
+  const megaCtaTitle = nav?.megaCtaTitle ?? "{megaCtaTitle}";
+  const megaCtaSubtitle = nav?.megaCtaSubtitle ?? "{megaCtaSubtitle}";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -113,7 +113,7 @@ export const Header = () => {
       >
         <div className="container-w h-9 flex items-center justify-between">
           <span className="opacity-70">
-            {COMPANY.street}, {COMPANY.zip} {COMPANY.city}-{COMPANY.district}
+            {topBarText}
           </span>
           <span className="flex items-center gap-5 opacity-90">
             <span>{COMPANY.hours}</span>
@@ -149,7 +149,7 @@ export const Header = () => {
           </Link>
 
           <nav className="hidden lg:flex items-center gap-8">
-            {NAV.map((item) => {
+            {NAV_ITEMS.map((item) => {
               if (item.href === "/leistungen") {
                 const isActive = location.pathname.startsWith("/leistungen");
                 return (
@@ -194,10 +194,10 @@ export const Header = () => {
                             >
                               <div>
                                 <div className="font-display font-extrabold text-sm uppercase tracking-[0.18em]">
-                                  Alle Leistungen ansehen
+                                  {megaCtaTitle}
                                 </div>
                                 <div className="text-xs text-white/80 mt-0.5">
-                                  Übersicht aller Wietek-Gerüstlösungen
+                                  {megaCtaSubtitle}
                                 </div>
                               </div>
                               <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
@@ -278,7 +278,7 @@ export const Header = () => {
       {open && (
         <div className="lg:hidden bg-white border-t border-border animate-fade-in">
           <nav className="container-w py-5 flex flex-col gap-1">
-            {NAV.map((item) => {
+            {NAV_ITEMS.map((item) => {
               if (item.href === "/leistungen") {
                 return (
                   <div key={item.href} className="border-b border-border/60">
@@ -310,7 +310,7 @@ export const Header = () => {
                               onClick={() => setOpen(false)}
                               className="flex items-center justify-between bg-primary text-white px-4 py-3 mb-2 mr-2 rounded-md text-xs font-display font-extrabold uppercase tracking-[0.18em]"
                             >
-                              Alle Leistungen ansehen
+                              {megaCtaTitle}
                               <ArrowRight className="h-4 w-4" />
                             </Link>
                             {SERVICES.map((s) => {
