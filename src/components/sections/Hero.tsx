@@ -13,7 +13,7 @@ const usps = [
 
 export const Hero = () => {
   const { data: homepage } = useHomepage();
-  const heroImg = imageUrl(homepage?.heroImage, 1920) ?? ASSETS.slide(18);
+  const heroImg = imageUrl(homepage?.heroImage, 1920) ?? ASSETS.hero;
   const heroTitle = homepage?.heroTitle;
   const heroSubtitle = homepage?.heroSubtitle;
 
