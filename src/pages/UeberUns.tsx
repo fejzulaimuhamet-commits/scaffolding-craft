@@ -20,6 +20,8 @@ import { PageLayout } from "@/components/PageLayout";
 import { PageHero } from "@/components/shared/PageHero";
 import { useInViewOnce } from "@/hooks/use-in-view";
 import { ASSETS, COMPANY } from "@/lib/site";
+import { useAboutPage } from "@/hooks/useSanity";
+import { imageUrl } from "@/lib/sanity";
 
 const localBusiness = {
   "@context": "https://schema.org",
@@ -157,7 +159,10 @@ function Counter({
   );
 }
 
-const Page = () => (
+const Page = () => {
+  const { data: about } = useAboutPage();
+  const teamImg = imageUrl(about?.teamImage, 1200) || ASSETS.slide(5);
+  return (
   <PageLayout>
     <Helmet>
       <title>Über uns | Wietek Gerüstbau Hamburg – Familienunternehmen seit 2014</title>
@@ -239,7 +244,7 @@ const Page = () => (
             </div>
             <div className="relative z-10 overflow-hidden bg-steel-deep h-[360px] sm:h-[480px] lg:h-[560px] shadow-[0_30px_60px_-30px_rgba(15,23,42,0.55)]">
               <img
-                src={ASSETS.slide(5)}
+                src={teamImg}
                 alt="Wietek Gerüstbau Team auf einer Baustelle in Hamburg"
                 loading="lazy"
                 className="absolute inset-0 h-full w-full object-cover"
@@ -549,6 +554,7 @@ const Page = () => (
       </div>
     </section>
   </PageLayout>
-);
+  );
+};
 
 export default Page;

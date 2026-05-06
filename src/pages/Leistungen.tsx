@@ -5,8 +5,10 @@ import { ArrowRight, Check, Zap, ShieldCheck, Users } from "lucide-react";
 import { PageLayout } from "@/components/PageLayout";
 import { PageHero } from "@/components/shared/PageHero";
 import { ASSETS } from "@/lib/site";
+import { useServiceMap } from "@/hooks/useServiceContent";
 
 type Service = {
+  slug: string;
   tag: string;
   title: string;
   intro: string;
@@ -15,8 +17,9 @@ type Service = {
   to: string;
 };
 
-const services: Service[] = [
+const fallbackServices: Service[] = [
   {
+    slug: "fassadengeruest",
     tag: "Fassade",
     title: "Fassadengerüste",
     intro:
@@ -31,6 +34,7 @@ const services: Service[] = [
     to: "/leistungen/fassadengeruest",
   },
   {
+    slug: "innengeruest",
     tag: "Innen",
     title: "Innengerüste",
     intro:
@@ -45,6 +49,7 @@ const services: Service[] = [
     to: "/leistungen/innengeruest",
   },
   {
+    slug: "treppenturm",
     tag: "Aufstieg",
     title: "Treppentürme",
     intro:
@@ -59,6 +64,7 @@ const services: Service[] = [
     to: "/leistungen/treppenturm",
   },
   {
+    slug: "dachfanggeruest",
     tag: "Dachschutz",
     title: "Dachfanggerüste",
     intro:
@@ -73,6 +79,7 @@ const services: Service[] = [
     to: "/leistungen/dachfanggeruest",
   },
   {
+    slug: "schutznetze-gelaender",
     tag: "Sicherheit",
     title: "Schutznetze & Geländer",
     intro:
@@ -87,6 +94,7 @@ const services: Service[] = [
     to: "/leistungen/schutznetze-gelaender",
   },
   {
+    slug: "wetterschutz",
     tag: "Wetter",
     title: "Wetterschutzdach",
     intro:
@@ -267,7 +275,19 @@ const CTASection = () => (
   </section>
 );
 
-const Leistungen = () => (
+const Leistungen = () => {
+  const cms = useServiceMap();
+  const services: Service[] = fallbackServices.map((s) => {
+    const c = cms.get(s.slug);
+    return {
+      ...s,
+      title: c?.title || s.title,
+      intro: c?.description || s.intro,
+      bullets: c?.features?.length ? c.features : s.bullets,
+      img: c?.image || s.img,
+    };
+  });
+  return (
   <PageLayout>
     <Helmet>
       <title>Leistungen | Wietek Gerüstbau Hamburg</title>
@@ -289,6 +309,7 @@ const Leistungen = () => (
     <WarumWietek />
     <CTASection />
   </PageLayout>
-);
+  );
+};
 
 export default Leistungen;

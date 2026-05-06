@@ -4,6 +4,7 @@ import { ASSETS } from "@/lib/site";
 
 const Page = () => (
   <ServicePage
+    slug="wetterschutz"
     seoTitle="Wetterschutzdach Hamburg | Gerüst mit Überdachung – Wietek"
     seoDescription="Wetterschutzdächer & überdachte Gerüste in Hamburg. Arbeiten bei jedem Wetter – ganzjährig & zuverlässig. Jetzt anfragen!"
     canonical="/leistungen/wetterschutz"

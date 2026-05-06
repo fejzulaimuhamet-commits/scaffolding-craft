@@ -1,46 +1,54 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { ASSETS } from "@/lib/site";
+import { useServiceMap } from "@/hooks/useServiceContent";
 
 type Service = {
+  slug: string;
   tag: string;
   title: string;
   desc: string;
   img: string;
 };
 
-const services: Service[] = [
+const fallback: Service[] = [
   {
+    slug: "fassadengeruest",
     tag: "Fassade",
     title: "Fassadengerüste",
     desc: "Sichere und flexible Gerüste für Wohn-, Gewerbe- und Industriegebäude – individuell an Struktur und Höhe angepasst.",
     img: ASSETS.placeholder.fassade,
   },
   {
+    slug: "innengeruest",
     tag: "Innen",
     title: "Innengerüste",
     desc: "Kompakte Lösungen für Renovierungen, Maler- und Deckenarbeiten im Innenbereich.",
     img: ASSETS.placeholder.innen,
   },
   {
+    slug: "treppenturm",
     tag: "Aufstieg",
     title: "Treppentürme",
     desc: "Stabile Aufstiegslösungen für komplexe Baustellen – schnell montiert.",
     img: ASSETS.placeholder.treppe,
   },
   {
+    slug: "dachfanggeruest",
     tag: "Dachschutz",
     title: "Dachfanggerüste",
     desc: "Sicherer Auffangschutz für Dachdecker- und Sanierungsarbeiten – nach DGUV-Vorgaben.",
     img: ASSETS.placeholder.dach,
   },
   {
+    slug: "schutznetze-gelaender",
     tag: "Sicherheit",
     title: "Schutznetze & Geländer",
     desc: "Montage von Schutzgeländern, Netzen und Sicherheitsvorrichtungen für Ihre Baustelle.",
     img: ASSETS.placeholder.schutz,
   },
   {
+    slug: "wetterschutz",
     tag: "Wetter",
     title: "Wetterschutzdach",
     desc: "Trockene Baustelle bei jeder Witterung – für termintreue Arbeiten.",
@@ -119,6 +127,16 @@ const Card = ({
 };
 
 export const Services = () => {
+  const cms = useServiceMap();
+  const services: Service[] = fallback.map((s) => {
+    const c = cms.get(s.slug);
+    return {
+      ...s,
+      title: c?.title || s.title,
+      desc: c?.description || s.desc,
+      img: c?.image || s.img,
+    };
+  });
   return (
     <section id="leistungen" className="pt-24 lg:pt-32 pb-20 lg:pb-28 bg-white">
       <div className="container-w">
