@@ -25,12 +25,6 @@ export const PageHero = ({
       {/* Background */}
       <img
         src={backgroundImage}
-        srcSet={
-          backgroundImage.includes("res.cloudinary.com")
-            ? [640, 1024, 1600].map((w) => `${backgroundImage.replace(/w_\d+/, `w_${w}`)} ${w}w`).join(", ")
-            : undefined
-        }
-        sizes="100vw"
         alt={`${title} – Wietek Gerüstbau Hamburg`}
         loading="eager"
         fetchPriority="high"
