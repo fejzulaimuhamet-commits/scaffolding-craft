@@ -143,11 +143,14 @@ export const Header = () => {
           <Link to="/" className="flex items-center" aria-label="Wietek Gerüstbau – Startseite">
             <img
               src={ASSETS.logoWhite}
-              alt="Wietek Gerüstbau Logo"
+              alt="Wietek Gerüstbau Logo – Gerüstbau Hamburg"
+              width={160}
+              height={48}
               className={`w-auto transition-all duration-500 ${
                 scrolled ? "h-8 lg:h-9" : "h-10 lg:h-12"
               }`}
               loading="eager"
+              decoding="async"
             />
           </Link>
 

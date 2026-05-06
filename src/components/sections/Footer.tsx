@@ -45,9 +45,12 @@ export const Footer = () => {
             <div className="flex items-center">
               <img
                 src={ASSETS.logoWhite}
-                alt="Wietek Gerüstbau Logo"
+                alt="Wietek Gerüstbau Logo – Gerüstbau Hamburg"
+                width={160}
+                height={48}
                 className="h-12 w-auto"
                 loading="lazy"
+                decoding="async"
               />
             </div>
             <p className="mt-5 text-sm text-white/70 leading-relaxed">
