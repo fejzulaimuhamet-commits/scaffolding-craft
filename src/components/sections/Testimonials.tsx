@@ -32,6 +32,8 @@ const fallbackReviews = [
 
 export const Testimonials = () => {
   const { data: cms, isLoading } = useTestimonials();
+  const { data: hp } = useHomepage();
+  const COMPANY = useCompany();
   const reviews =
     cms && cms.length > 0
       ? cms.map((t) => ({
@@ -41,15 +43,17 @@ export const Testimonials = () => {
           rating: t.rating ?? 5,
         }))
       : fallbackReviews;
+  const eyebrow = hp?.testimonialsEyebrow ?? "Was Kunden sagen";
+  const titleText = hp?.testimonialsTitle ?? `${COMPANY.rating} von 5 Sternen – ehrliche Stimmen aus Hamburg.`;
+  const badge = hp?.testimonialsBadgeText ?? `Basierend auf ${COMPANY.ratingCount}+ Google-Bewertungen`;
   return (
     <section className="py-20 lg:py-28 bg-plaster">
       <div className="container-w">
         <div className="grid lg:grid-cols-12 gap-10 items-end mb-12">
           <div className="lg:col-span-7">
-            <span className="eyebrow">Was Kunden sagen</span>
+            <span className="eyebrow">{eyebrow}</span>
             <h2 className="mt-4 font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-steel leading-tight">
-              <span className="hand-underline">{COMPANY.rating}</span> von 5 Sternen –
-              <br className="hidden sm:block" /> ehrliche Stimmen aus Hamburg.
+              {titleText}
             </h2>
           </div>
           <div className="lg:col-span-5">
@@ -59,9 +63,7 @@ export const Testimonials = () => {
                   <Star key={i} className="h-5 w-5 fill-signal text-signal" />
                 ))}
               </div>
-              <span className="text-sm font-semibold text-steel">
-                Basierend auf {COMPANY.ratingCount}+ Google-Bewertungen
-              </span>
+              <span className="text-sm font-semibold text-steel">{badge}</span>
             </div>
           </div>
         </div>
