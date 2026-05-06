@@ -1,39 +1,66 @@
-## Ziel
+## Root cause
 
-Edit-Panel öffnet sich beim Klick im Studio, Refresh in der Presentation-View bleibt stabil, Overlays erscheinen.
+`src/sanity/config.ts` hardcodes the preview origin to `https://scaffolding-craft.lovable.app`. That hostname only resolves if the project has actually been **published** (Publish → Update). If the project is unpublished — or the publish was reverted — DNS for `scaffolding-craft.lovable.app` returns NXDOMAIN, which is exactly the "DNS error / not found" white screen you're seeing inside the Sanity Presentation iframe.
 
-## Ursachen (kurz)
+The always-available URL for this project is the preview deployment:
 
-1. `enableVisualEditing()` wurde global in `main.tsx` aufgerufen — ohne History-Adapter, außerhalb des React-Trees. Die Presentation-Comlink-Verbindung kann ohne Router-Sync keine Edit-Klicks an das Studio melden, und beim Iframe-Refresh entsteht eine Reload-Schleife.
-2. `bootstrapPreview()` ruft bei jedem Aufruf mit `?sanity-preview-secret=…` neu `fetch + reload` auf — auch wenn schon ein Token im sessionStorage liegt → White Screen / Loop.
-3. Stega-Marker werden in `Services.tsx` durch das `c?.title || s.title` Pattern verworfen, sobald der CMS-Wert leer ist (was zumindest die Robustheit beeinträchtigt — funktional ok, wird im selben Schritt sauber gemacht).
+```
+https://id-preview--e106eeef-8ae8-469b-b64d-dae180e6aade.lovable.app
+```
 
-## Änderungen
+That URL is live right now regardless of publish state, and it's what the Presentation tool should be pointing at for day-to-day editing.
 
-### 1. NEU `src/components/SanityVisualEditing.tsx`
+## The exact correct URL to use
 
-React-Komponente, die nur im Iframe rendert. Lazy-importiert `VisualEditing` aus `@sanity/visual-editing/react` und versorgt es mit einem React-Router-`HistoryAdapter` (subscribe → ref-callback, update → `useNavigate`). Bei Routenwechseln wird der Studio-Side via Callback informiert.
+Inside `wietek-geruestbau.sanity.studio` → **Presentation** tool, the address bar must show:
 
-### 2. `src/App.tsx`
+```
+https://id-preview--e106eeef-8ae8-469b-b64d-dae180e6aade.lovable.app/?sanity-preview-secret=…&sanity-preview-perspective=…
+```
 
-`<SanityVisualEditing />` direkt unter `<BrowserRouter>` einhängen — dadurch bekommt der Adapter `useNavigate`/`useLocation`.
+(The `?sanity-preview-…` params are appended automatically by Studio.)
 
-### 3. `src/main.tsx`
+## Fix plan
 
-`enableVisualEditing()` Aufruf entfernen (wird durch die React-Komponente ersetzt). `bootstrapPreview()`:
-- Wenn schon Token in sessionStorage → nur Query-Params strippen, **kein** fetch, **kein** reload.
-- Sonst wie bisher: validieren, Token speichern, Params strippen, **einmaliger** Reload.
+### 1. `src/sanity/config.ts` — switch preview origin to the preview deployment
 
-### 4. `src/components/sections/Services.tsx`
+Replace the hardcoded `PREVIEW_ORIGIN` with logic that:
 
-Fallback-Logik so, dass Stega-Strings erhalten bleiben: nur fallbacken, wenn das CMS-Feld `undefined`/leer ist (statt `||`, das auch falsy Stega-Strings ersetzen würde — defensiv, da Stega-Strings idR truthy sind, aber sauberer).
+- Prefers `import.meta.env.VITE_PREVIEW_ORIGIN` if set (escape hatch).
+- Otherwise defaults to the stable Lovable preview URL:
+  `https://id-preview--e106eeef-8ae8-469b-b64d-dae180e6aade.lovable.app`
 
-## Hinweis Folgesession (kein Code in dieser Runde)
+Reasoning: the preview URL is always live; the published URL is not guaranteed to exist.
 
-Die meisten Sektionen (Hero, About, Stats, Process, Footer) sind hardcodiert und daher **nicht** per Klick editierbar. Visual Editing greift nur dort, wo Texte direkt aus Sanity-Queries (mit aktivem Stega) gerendert werden. Aktuell sind das: Service-Karten-Titel/Beschreibung. Nächster Schritt wäre die Migration der weiteren Sektionen auf Sanity-Schemas, die wir bereits angelegt haben (`homepage`, `about`, `settings`).
+### 2. CORS for the new origin
 
-## Erwartet danach
+The preview URL must be added as an allowed CORS origin in Sanity (project `wietek`). I'll do this automatically via the Sanity MCP `add_cors_origin` tool:
 
-- Iframe-Refresh: stabil, kein White Screen, kein Loop.
-- Klick auf Service-Karten-Text im Studio: rechtes Edit-Panel öffnet sich.
-- Console: keine `enableVisualEditing`-Fehler mehr.
+- `https://id-preview--e106eeef-8ae8-469b-b64d-dae180e6aade.lovable.app` (allow credentials: true)
+- Keep the existing `https://wietek-geruestbau.sanity.studio` origin.
+- Keep `https://scaffolding-craft.lovable.app` for when published.
+
+### 3. Verify the `sanity-preview` Edge Function accepts the new referrer
+
+The Edge Function that hands out the preview secret token must accept requests originating from the preview URL. I'll read the function and, if it filters by origin/referrer, add the preview host to the allowlist.
+
+### 4. White-screen-on-refresh hardening
+
+Even with the right URL, the refresh-inside-iframe path needs:
+
+- `bootstrapPreview()` in `src/main.tsx` must not loop reload when the secret param is absent on a normal refresh (already guarded — re-verify after the origin change).
+- `SanityVisualEditing` must keep rendering after refresh — confirm the lazy import resolves inside the iframe context (no top-level throw).
+
+### 5. Step-by-step test instructions for you
+
+After deploy:
+
+1. Open `https://wietek-geruestbau.sanity.studio/presentation`.
+2. The iframe loads `https://id-preview--e106eeef-8ae8-469b-b64d-dae180e6aade.lovable.app/?sanity-preview-secret=…`.
+3. Toggle **Edit** in the top toolbar.
+4. Click any **Service card title or description** (these are wired to Sanity with Stega). The right-hand inspector opens with the field focused.
+5. Hardcoded sections (Hero, About, Stats, Process, Footer) will still NOT be clickable — they're not in Sanity yet. Migration of those sections is a separate follow-up.
+
+## Out of scope (separate task)
+
+Migrating Hero / About / Stats / Process / Footer content from hardcoded JSX into Sanity `homepage` / `about` / `settings` documents so they become click-to-edit too. Say the word and I'll plan that next.

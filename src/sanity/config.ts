@@ -7,9 +7,11 @@ import { structure } from "./structure";
 import { SANITY_PROJECT_ID, SANITY_DATASET } from "@/lib/sanity";
 
 // Origin der Live-Website, die im Presentation Tool als Vorschau geladen wird.
-// Fest auf die Lovable-URL gesetzt, weil die Custom-Domain (wietek-geruestbau.de)
-// aktuell noch nicht auf Lovable zeigt und im Iframe nicht lädt.
-const PREVIEW_ORIGIN = "https://scaffolding-craft.lovable.app";
+// Default: stabile Lovable-Preview-URL (immer erreichbar, unabhängig vom Publish-Status).
+// Override per VITE_PREVIEW_ORIGIN möglich (z.B. published Domain).
+const PREVIEW_ORIGIN =
+  (import.meta.env.VITE_PREVIEW_ORIGIN as string | undefined) ||
+  "https://id-preview--e106eeef-8ae8-469b-b64d-dae180e6aade.lovable.app";
 
 
 export const sanityConfig = defineConfig({
