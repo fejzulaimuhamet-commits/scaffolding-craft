@@ -5,8 +5,10 @@ import { ArrowRight, Check, Zap, ShieldCheck, Users } from "lucide-react";
 import { PageLayout } from "@/components/PageLayout";
 import { PageHero } from "@/components/shared/PageHero";
 import { ASSETS } from "@/lib/site";
+import { useServiceMap } from "@/hooks/useServiceContent";
 
 type Service = {
+  slug: string;
   tag: string;
   title: string;
   intro: string;
@@ -15,7 +17,7 @@ type Service = {
   to: string;
 };
 
-const services: Service[] = [
+const fallbackServices: Service[] = [
   {
     tag: "Fassade",
     title: "Fassadengerüste",
