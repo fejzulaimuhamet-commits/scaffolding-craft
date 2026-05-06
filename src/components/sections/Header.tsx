@@ -206,7 +206,7 @@ export const Header = () => {
                             {/* Service grid */}
                             <ul className="grid grid-cols-2 p-2">
                               {SERVICES.map((s) => {
-                                const Icon = s.icon;
+                                const Icon = ICONS[s.icon] ?? Building2;
                                 return (
                                   <li key={s.href}>
                                     <Link
@@ -314,7 +314,7 @@ export const Header = () => {
                               <ArrowRight className="h-4 w-4" />
                             </Link>
                             {SERVICES.map((s) => {
-                              const Icon = s.icon;
+                              const Icon = ICONS[s.icon] ?? Building2;
                               return (
                                 <Link
                                   key={s.href}
