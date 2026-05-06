@@ -115,7 +115,7 @@ const Page = () => {
         eyebrow="Karriere"
         title="Werde Teil des Wietek-Teams in Hamburg"
         subtitle="Faire Bezahlung, kollegiales Team, moderne Ausstattung – wir suchen Gerüstbauer (m/w/d) und Helfer."
-        backgroundImage={ASSETS.slide(20)}
+        backgroundImage={ASSETS.career1}
         breadcrumb="Karriere"
       />
 

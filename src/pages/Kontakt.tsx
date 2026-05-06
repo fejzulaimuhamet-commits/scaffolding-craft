@@ -70,7 +70,7 @@ const Page = () => (
       eyebrow="Kontakt"
       title="Direkt mit dem Wietek-Team sprechen"
       subtitle="Anrufen, schreiben oder Anfrage stellen – wir antworten persönlich und schnell."
-      backgroundImage={ASSETS.slide(30)}
+      backgroundImage={ASSETS.contact}
       breadcrumb="Kontakt"
     />
 
