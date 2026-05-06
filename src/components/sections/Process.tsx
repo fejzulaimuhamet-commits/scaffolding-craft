@@ -1,31 +1,14 @@
 import { motion } from "framer-motion";
 import { ClipboardCheck, Hammer, MessageSquare, PackageOpen } from "lucide-react";
+import { useHomepage } from "@/hooks/useSanity";
 
-const steps = [
-  {
-    n: "01",
-    title: "Anfrage stellen",
-    desc: "Beschreiben Sie Ihr Vorhaben in 60 Sekunden – online, telefonisch oder per WhatsApp.",
-    icon: MessageSquare,
-  },
-  {
-    n: "02",
-    title: "Aufmaß vor Ort",
-    desc: "Wir kommen kostenlos vorbei, messen auf und erstellen ein verbindliches Angebot.",
-    icon: ClipboardCheck,
-  },
-  {
-    n: "03",
-    title: "Aufbau in 24–72 h",
-    desc: "Pünktliche Anlieferung und sauberer Aufbau durch unser eingespieltes Team.",
-    icon: Hammer,
-  },
-  {
-    n: "04",
-    title: "Abbau & Abrechnung",
-    desc: "Nach Projektende bauen wir zuverlässig ab und rechnen transparent ab.",
-    icon: PackageOpen,
-  },
+const icons = [MessageSquare, ClipboardCheck, Hammer, PackageOpen];
+
+const defaultSteps = [
+  { title: "Anfrage stellen", description: "Beschreiben Sie Ihr Vorhaben in 60 Sekunden – online, telefonisch oder per WhatsApp." },
+  { title: "Aufmaß vor Ort", description: "Wir kommen kostenlos vorbei, messen auf und erstellen ein verbindliches Angebot." },
+  { title: "Aufbau in 24–72 h", description: "Pünktliche Anlieferung und sauberer Aufbau durch unser eingespieltes Team." },
+  { title: "Abbau & Abrechnung", description: "Nach Projektende bauen wir zuverlässig ab und rechnen transparent ab." },
 ];
 
 export const Process = () => {

@@ -37,28 +37,50 @@ function Counter({ end, suffix, format }: { end: number; suffix: string; format?
 
 export const Stats = () => {
   const { data: hp } = useHomepage();
-  const stats = [
+
+  // Wenn Redakteur statsItems gepflegt hat → diese rendern (klickbar via Stega).
+  // Sonst Counter-Default mit den drei Number-Feldern.
+  const customItems = hp?.statsItems ?? [];
+
+  const fallbackStats = [
     { end: hp?.counterYears ?? defaultStats[0].end, suffix: "+", label: "Jahre Erfahrung" },
     { end: hp?.counterProjects ?? defaultStats[1].end, suffix: "+", label: "Abgeschlossene Projekte" },
     { end: hp?.counterSquareMeters ?? defaultStats[2].end, suffix: "+", label: "m² Gerüst gebaut", format: true },
   ];
+
   return (
     <section className="relative bg-blueprint py-14 lg:py-20">
       <div className="container-w">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-6">
-          {stats.map((s, i) => (
-            <div
-              key={s.label}
-              className={`text-center sm:text-left ${
-                i > 0 ? "sm:border-l sm:border-white/15 sm:pl-6 lg:pl-10" : ""
-              }`}
-            >
-              <Counter end={s.end} suffix={s.suffix} format={s.format} />
-              <div className="mt-3 text-sm font-semibold uppercase tracking-wider text-white/70">
-                {s.label}
-              </div>
-            </div>
-          ))}
+          {customItems.length > 0
+            ? customItems.map((s, i) => (
+                <div
+                  key={i}
+                  className={`text-center sm:text-left ${
+                    i > 0 ? "sm:border-l sm:border-white/15 sm:pl-6 lg:pl-10" : ""
+                  }`}
+                >
+                  <div className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-none">
+                    {s.value}
+                  </div>
+                  <div className="mt-3 text-sm font-semibold uppercase tracking-wider text-white/70">
+                    {s.label}
+                  </div>
+                </div>
+              ))
+            : fallbackStats.map((s, i) => (
+                <div
+                  key={s.label}
+                  className={`text-center sm:text-left ${
+                    i > 0 ? "sm:border-l sm:border-white/15 sm:pl-6 lg:pl-10" : ""
+                  }`}
+                >
+                  <Counter end={s.end} suffix={s.suffix} format={s.format} />
+                  <div className="mt-3 text-sm font-semibold uppercase tracking-wider text-white/70">
+                    {s.label}
+                  </div>
+                </div>
+              ))}
         </div>
       </div>
 
