@@ -70,57 +70,43 @@ export const Hero = () => {
           className="w-full lg:max-w-[82%]"
         >
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 rounded-full bg-signal px-4 py-2 text-xs sm:text-sm font-bold text-steel-deep shadow-lg">
-            <Star className="h-4 w-4 fill-steel-deep text-steel-deep" />
-            <span>{COMPANY.rating} Google</span>
-            <span className="opacity-50">·</span>
-            <span>Familiengeführt seit {COMPANY.founded}</span>
-          </div>
+          {heroBadge && (
+            <div className="inline-flex items-center gap-2 rounded-full bg-signal px-4 py-2 text-xs sm:text-sm font-bold text-steel-deep shadow-lg">
+              <Star className="h-4 w-4 fill-steel-deep text-steel-deep" />
+              <span>{heroBadge}</span>
+            </div>
+          )}
 
           {/* H1 */}
-          <h1
-            className="mt-6 font-display font-extrabold text-white leading-tight tracking-tight w-full text-4xl lg:text-[3.75rem] xl:text-[4.25rem] 2xl:text-[4.75rem]"
-          >
-            {heroTitle ?? (
-              <>
-                Gerüstbau in{" "}
-                <span className="hand-underline-light text-white">Hamburg</span>
-                {" –"}
-                <br />
-                <span className="text-white/95">sicher, pünktlich,<br />ab 24 Std. einsatzbereit.</span>
-              </>
-            )}
+          <h1 className="mt-6 font-display font-extrabold text-white leading-tight tracking-tight w-full text-4xl lg:text-[3.75rem] xl:text-[4.25rem] 2xl:text-[4.75rem]">
+            {heroTitle}
           </h1>
 
           {/* Subline */}
           <p className="mt-6 max-w-xl text-base sm:text-lg text-white/85 leading-relaxed">
-            {heroSubtitle ?? (
-              <>
-                Familiengeführter Gerüstbau aus {COMPANY.city}-{COMPANY.district}. Wir liefern,
-                montieren und demontieren Gerüste für Privathaushalte, Handwerker und Industrie –
-                schnell, sauber und mit echtem Wort.
-              </>
-            )}
+            {heroSubtitle}
           </p>
 
           {/* USP-Bullets */}
-          <ul className="mt-7 grid sm:grid-cols-2 gap-2.5">
-            {usps.map((u) => (
-              <li key={u} className="flex items-start gap-2.5 text-sm font-semibold text-white">
-                <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                {u}
-              </li>
-            ))}
-          </ul>
+          {usps.length > 0 && (
+            <ul className="mt-7 grid sm:grid-cols-2 gap-2.5">
+              {usps.map((u, i) => (
+                <li key={i} className="flex items-start gap-2.5 text-sm font-semibold text-white">
+                  <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                  {u}
+                </li>
+              ))}
+            </ul>
+          )}
 
           {/* CTAs */}
           <div className="mt-9 flex flex-col sm:flex-row gap-3">
             <a href="#anfrage" className="btn-primary justify-center">
-              Kostenloses Angebot in 60 Sek.
+              {ctaPrimary}
               <ArrowRight className="h-4 w-4" />
             </a>
             <a href="#projekte" className="btn-ghost-light justify-center">
-              Projekte ansehen
+              {ctaSecondary}
             </a>
           </div>
         </motion.div>
