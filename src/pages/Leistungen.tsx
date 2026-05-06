@@ -19,6 +19,7 @@ type Service = {
 
 const fallbackServices: Service[] = [
   {
+    slug: "fassadengeruest",
     tag: "Fassade",
     title: "Fassadengerüste",
     intro:
@@ -33,6 +34,7 @@ const fallbackServices: Service[] = [
     to: "/leistungen/fassadengeruest",
   },
   {
+    slug: "innengeruest",
     tag: "Innen",
     title: "Innengerüste",
     intro:
@@ -47,6 +49,7 @@ const fallbackServices: Service[] = [
     to: "/leistungen/innengeruest",
   },
   {
+    slug: "treppenturm",
     tag: "Aufstieg",
     title: "Treppentürme",
     intro:
@@ -61,6 +64,7 @@ const fallbackServices: Service[] = [
     to: "/leistungen/treppenturm",
   },
   {
+    slug: "dachfanggeruest",
     tag: "Dachschutz",
     title: "Dachfanggerüste",
     intro:
@@ -75,6 +79,7 @@ const fallbackServices: Service[] = [
     to: "/leistungen/dachfanggeruest",
   },
   {
+    slug: "schutznetze-gelaender",
     tag: "Sicherheit",
     title: "Schutznetze & Geländer",
     intro:
@@ -89,6 +94,7 @@ const fallbackServices: Service[] = [
     to: "/leistungen/schutznetze-gelaender",
   },
   {
+    slug: "wetterschutz",
     tag: "Wetter",
     title: "Wetterschutzdach",
     intro:
