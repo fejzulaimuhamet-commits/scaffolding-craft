@@ -7,11 +7,9 @@ import { structure } from "./structure";
 import { SANITY_PROJECT_ID, SANITY_DATASET } from "@/lib/sanity";
 
 // Origin der Live-Website, die im Presentation Tool als Vorschau geladen wird.
-const PREVIEW_ORIGIN =
-  (import.meta.env.VITE_SITE_URL as string) ||
-  (typeof window !== "undefined"
-    ? window.location.origin
-    : "https://scaffolding-craft.lovable.app");
+// Fest auf die Lovable-URL gesetzt, weil die Custom-Domain (wietek-geruestbau.de)
+// aktuell noch nicht auf Lovable zeigt und im Iframe nicht lädt.
+const PREVIEW_ORIGIN = "https://scaffolding-craft.lovable.app";
 
 // Edge function endpoint that validates the one-time preview secret and
 // returns a Sanity read token for draft mode.
