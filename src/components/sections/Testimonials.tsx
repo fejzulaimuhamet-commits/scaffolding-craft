@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Quote, Star } from "lucide-react";
-import { COMPANY } from "@/lib/site";
-import { useTestimonials } from "@/hooks/useSanity";
+import { useTestimonials, useHomepage } from "@/hooks/useSanity";
+import { useCompany } from "@/hooks/useCompany";
 
 const fallbackReviews = [
   {
