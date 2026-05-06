@@ -141,12 +141,25 @@ export interface Post {
 export interface Settings {
   _id: string;
   phone?: string;
+  phoneMobile?: string;
   whatsapp?: string;
   email?: string;
   address?: string;
   openingHours?: string;
   googleRating?: number;
+  googleRatingCount?: number;
   footerTagline?: string;
   footerLegal?: string;
   serviceArea?: string;
+  footerCtaEyebrow?: string;
+  footerCtaHeadline?: string;
+  footerCtaButton?: string;
+  footerColServicesTitle?: string;
+  footerColServices?: LinkItem[];
+  footerColLocationsTitle?: string;
+  footerColLocations?: LinkItem[];
+  footerContactTitle?: string;
+  footerLegalLinks?: LinkItem[];
+  instagramUrl?: string;
+  facebookUrl?: string;
 }
