@@ -131,9 +131,14 @@ const ServiceRow = ({ service, index }: { service: Service; index: number }) => 
           >
             <div className="relative overflow-hidden bg-steel-deep h-[320px] sm:h-[420px] lg:h-[500px] group">
               <img
-                src={service.img}
+                src={service.img.replace(/w_\d+/, "w_1024")}
+                srcSet={[400, 640, 800, 1024, 1280].map(w => `${service.img.replace(/w_\d+/, `w_${w}`)} ${w}w`).join(", ")}
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                width={1024}
+                height={720}
                 alt={`${service.title} – Wietek Gerüstbau Hamburg`}
                 loading="lazy"
+                decoding="async"
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute top-4 left-4 z-10 bg-primary text-white px-3 py-1 text-[10px] font-display font-extrabold uppercase tracking-[0.18em] shadow-md">

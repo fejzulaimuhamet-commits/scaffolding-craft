@@ -246,9 +246,14 @@ const Page = () => {
             </div>
             <div className="relative z-10 overflow-hidden bg-steel-deep h-[360px] sm:h-[480px] lg:h-[560px] shadow-[0_30px_60px_-30px_rgba(15,23,42,0.55)]">
               <img
-                src={teamImg}
+                src={teamImg.replace(/w_\d+/, "w_1024")}
+                srcSet={[400, 640, 800, 1024, 1280].map(w => `${teamImg.replace(/w_\d+/, `w_${w}`)} ${w}w`).join(", ")}
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                width={1024}
+                height={1366}
                 alt="Wietek Gerüstbau Team auf einer Baustelle in Hamburg"
                 loading="lazy"
+                decoding="async"
                 className="absolute inset-0 h-full w-full object-cover"
               />
               <div className="absolute bottom-0 right-0 bg-primary text-white px-4 py-3 text-xs font-display font-extrabold uppercase tracking-[0.2em]">
@@ -347,9 +352,14 @@ const Page = () => {
             </div>
             <div className="relative z-10 overflow-hidden bg-steel-deep h-[360px] sm:h-[480px] lg:h-[560px] shadow-[0_30px_60px_-30px_rgba(15,23,42,0.55)]">
               <img
-                src={ASSETS.aboutImg2}
+                src={ASSETS.aboutImg2.replace(/w_\d+/, "w_1024")}
+                srcSet={[400, 640, 800, 1024, 1280].map(w => `${ASSETS.aboutImg2.replace(/w_\d+/, `w_${w}`)} ${w}w`).join(", ")}
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                width={1024}
+                height={1366}
                 alt="Wietek Gerüstbau – moderner Aufbau & Layher-Material"
                 loading="lazy"
+                decoding="async"
                 className="absolute inset-0 h-full w-full object-cover"
               />
             </div>

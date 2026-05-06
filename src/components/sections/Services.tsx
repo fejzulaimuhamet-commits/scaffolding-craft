@@ -83,9 +83,14 @@ const Card = ({
     >
       {/* Foto */}
       <img
-        src={service.img}
+        src={service.img.replace(/w_\d+/, "w_800")}
+        srcSet={[400, 640, 800, 1024].map(w => `${service.img.replace(/w_\d+/, `w_${w}`)} ${w}w`).join(", ")}
+        sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+        width={800}
+        height={600}
         alt={`${service.title} – Wietek Gerüstbau Hamburg`}
         loading="lazy"
+        decoding="async"
         className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
       />
 
