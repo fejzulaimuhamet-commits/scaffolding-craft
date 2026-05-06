@@ -12,6 +12,7 @@ import {
 import { PageLayout } from "@/components/PageLayout";
 import { PageHero } from "@/components/shared/PageHero";
 import { COMPANY } from "@/lib/site";
+import { useServiceContent } from "@/hooks/useServiceContent";
 
 export interface FaqItem {
   q: string;
@@ -31,6 +32,7 @@ export interface ReasonItem {
 }
 
 export interface ServicePageProps {
+  slug?: string;
   seoTitle: string;
   seoDescription: string;
   canonical: string;
@@ -71,7 +73,36 @@ export interface ServicePageProps {
   related?: { label: string; to: string }[];
 }
 
-export const ServicePage = (p: ServicePageProps) => {
+export const ServicePage = (props: ServicePageProps) => {
+  const cms = useServiceContent(props.slug ?? "");
+  // Overlay Sanity content over the static fallback props
+  const p: ServicePageProps = {
+    ...props,
+    seoTitle: cms.metaTitle || props.seoTitle,
+    seoDescription: cms.metaDescription || props.seoDescription,
+    serviceName: cms.title || props.serviceName,
+    hero: {
+      ...props.hero,
+      title: cms.title || props.hero.title,
+      subtitle: cms.description || props.hero.subtitle,
+      backgroundImage: cms.image || props.hero.backgroundImage,
+    },
+    intro: {
+      ...props.intro,
+      headline: cms.title || props.intro.headline,
+      paragraphs: cms.description ? [cms.description] : props.intro.paragraphs,
+      image: cms.image || props.intro.image,
+    },
+    scope: props.scope
+      ? {
+          ...props.scope,
+          items: cms.features?.length ? cms.features : props.scope.items,
+        }
+      : props.scope,
+    faq: cms.faq?.length
+      ? cms.faq.map((f) => ({ q: f.question, a: f.answer }))
+      : props.faq,
+  };
   const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
