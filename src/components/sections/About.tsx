@@ -107,34 +107,44 @@ export const About = () => {
             </div>
 
             <h2 className="mt-5 font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-white leading-[1.1]">
-              Familiengeführt. Verwurzelt in{" "}
-              <span className="hand-underline-light text-white">Hamburg</span>.
-              <br />
-              <span className="text-white/95">Seit {COMPANY.founded}.</span>
+              {headline ?? (
+                <>
+                  Familiengeführt. Verwurzelt in{" "}
+                  <span className="hand-underline-light text-white">Hamburg</span>.
+                  <br />
+                  <span className="text-white/95">Seit {COMPANY.founded}.</span>
+                </>
+              )}
             </h2>
 
             <div className="mt-6 space-y-4 text-white/75 leading-relaxed max-w-xl">
-              <p>
-                Wir packen seit über zehn Jahren mit eigenem Team und eigenem Material an –
-                von Bergedorf bis Stade. Kein Subunternehmer, keine Ausreden.
-              </p>
-              <p>
-                Wenn wir „morgen früh" sagen, stehen wir morgen früh auf der Baustelle.
-                Das ist unser Wort – und der Grund, warum unsere Kunden wiederkommen.
-              </p>
+              {intro ? (
+                <p>{intro}</p>
+              ) : (
+                <>
+                  <p>
+                    Wir packen seit über zehn Jahren mit eigenem Team und eigenem Material an –
+                    von Bergedorf bis Stade. Kein Subunternehmer, keine Ausreden.
+                  </p>
+                  <p>
+                    Wenn wir „morgen früh" sagen, stehen wir morgen früh auf der Baustelle.
+                    Das ist unser Wort – und der Grund, warum unsere Kunden wiederkommen.
+                  </p>
+                </>
+              )}
             </div>
 
             {/* Fact-Badges */}
             <div className="mt-8 flex flex-wrap gap-3">
-              {facts.map((f) => {
-                const Icon = f.icon;
+              {stats.map((f, i) => {
+                const Icon = factIcons[i % factIcons.length];
                 return (
                   <div
-                    key={f.label}
+                    key={i}
                     className="inline-flex items-center gap-2 border border-white/30 px-4 py-2.5 text-white text-sm font-display font-bold"
                   >
                     <Icon className="h-4 w-4 text-primary" />
-                    {f.label}
+                    {f.value ? `${f.value} ${f.label}` : f.label}
                   </div>
                 );
               })}
