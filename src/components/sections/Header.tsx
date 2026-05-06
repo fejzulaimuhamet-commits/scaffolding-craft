@@ -40,6 +40,7 @@ const DEFAULT_SERVICES = [
 
 export const Header = () => {
   const COMPANY = useCompany();
+  const { data: nav } = useNavigation();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [megaOpen, setMegaOpen] = useState(false);
@@ -47,6 +48,19 @@ export const Header = () => {
   const megaRef = useRef<HTMLDivElement | null>(null);
   const closeTimer = useRef<number | null>(null);
   const location = useLocation();
+
+  const SERVICES = nav?.megaServices && nav.megaServices.length > 0
+    ? nav.megaServices.map((s) => ({
+        label: s.label ?? "",
+        desc: s.desc ?? "",
+        href: s.href ?? "/leistungen",
+        icon: s.icon ?? "building",
+      }))
+    : DEFAULT_SERVICES;
+  const NAV_ITEMS = nav?.navItems && nav.navItems.length > 0 ? nav.navItems : NAV;
+  const topBarText = nav?.topBarText ?? `${COMPANY.street}, ${COMPANY.zip} ${COMPANY.city}-${COMPANY.district}`;
+  const megaCtaTitle = nav?.megaCtaTitle ?? "Alle Leistungen ansehen";
+  const megaCtaSubtitle = nav?.megaCtaSubtitle ?? "Übersicht aller Wietek-Gerüstlösungen";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
