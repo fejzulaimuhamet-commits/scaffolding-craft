@@ -150,8 +150,14 @@ export const getSettings = (): Promise<Settings | null> =>
   safe(
     sanityClient.fetch<Settings | null>(
       `*[_type == "settings"][0]{
-        _id, phone, whatsapp, email, address, openingHours, googleRating,
-        footerTagline, footerLegal, serviceArea
+        _id, phone, phoneMobile, whatsapp, email, address, openingHours,
+        googleRating, googleRatingCount,
+        footerTagline, footerLegal, serviceArea,
+        footerCtaEyebrow, footerCtaHeadline, footerCtaButton,
+        footerColServicesTitle, footerColServices,
+        footerColLocationsTitle, footerColLocations,
+        footerContactTitle, footerLegalLinks,
+        instagramUrl, facebookUrl
       }`,
     ),
     null,
