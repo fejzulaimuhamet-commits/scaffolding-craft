@@ -59,8 +59,8 @@ export const Header = () => {
     : DEFAULT_SERVICES;
   const NAV_ITEMS = nav?.navItems && nav.navItems.length > 0 ? nav.navItems : NAV;
   const topBarText = nav?.topBarText ?? `${COMPANY.street}, ${COMPANY.zip} ${COMPANY.city}-${COMPANY.district}`;
-  const megaCtaTitle = nav?.megaCtaTitle ?? "{megaCtaTitle}";
-  const megaCtaSubtitle = nav?.megaCtaSubtitle ?? "{megaCtaSubtitle}";
+  const megaCtaTitle = nav?.megaCtaTitle ?? "Alle Leistungen ansehen";
+  const megaCtaSubtitle = nav?.megaCtaSubtitle ?? "Übersicht aller Wietek-Gerüstlösungen";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
