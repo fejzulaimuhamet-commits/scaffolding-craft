@@ -9,6 +9,14 @@
         {
           "key": "Cache-Control",
           "value": "no-cache, no-store, must-revalidate"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "frame-ancestors 'self' https://*.sanity.studio https://wietek-geruestbau.sanity.studio http://localhost:3333"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "ALLOW-FROM https://wietek-geruestbau.sanity.studio"
         }
       ]
     }
