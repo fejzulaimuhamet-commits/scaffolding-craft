@@ -132,9 +132,14 @@ const Page = () => {
                 className="group relative overflow-hidden bg-steel-deep aspect-[4/3]"
               >
                 <img
-                  src={p.img}
+                  src={p.img.replace(/w_\d+/, "w_800")}
+                  srcSet={[400, 640, 800, 1024].map(w => `${p.img.replace(/w_\d+/, `w_${w}`)} ${w}w`).join(", ")}
+                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                  width={800}
+                  height={600}
                   alt={`Gerüstbau ${p.type} ${p.city} – Wietek Gerüstbau ${p.year}`}
                   loading="lazy"
+                  decoding="async"
                   className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
