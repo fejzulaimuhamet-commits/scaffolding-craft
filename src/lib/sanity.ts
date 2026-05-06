@@ -10,7 +10,7 @@ export const SANITY_DATASET =
 
 const STUDIO_URL =
   (import.meta.env.VITE_SANITY_STUDIO_URL as string) ||
-  "https://wietek-geruestbau.sanity.studio";
+  "https://scaffolding-craft.lovable.app/studio";
 
 const PREVIEW_TOKEN_KEY = "sanity-preview-token";
 
