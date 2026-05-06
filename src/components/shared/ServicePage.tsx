@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, Check, LucideIcon } from "lucide-react";
@@ -11,6 +10,7 @@ import {
 } from "@/components/ui/accordion";
 import { PageLayout } from "@/components/PageLayout";
 import { PageHero } from "@/components/shared/PageHero";
+import { PageSeo } from "@/components/PageSeo";
 import { COMPANY } from "@/lib/site";
 import { useServiceContent } from "@/hooks/useServiceContent";
 
@@ -106,11 +106,13 @@ export const ServicePage = (props: ServicePageProps) => {
   const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
+    name: `${p.serviceName} Hamburg`,
     serviceType: p.serviceName,
     provider: {
       "@type": "GeneralContractor",
       name: COMPANY.name,
       telephone: COMPANY.phonePrimary,
+      url: "https://wietek-geruestbau.de/",
       address: {
         "@type": "PostalAddress",
         streetAddress: COMPANY.street,
@@ -118,8 +120,18 @@ export const ServicePage = (props: ServicePageProps) => {
         addressLocality: `${COMPANY.city}-${COMPANY.district}`,
         addressCountry: "DE",
       },
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: COMPANY.rating,
+        reviewCount: COMPANY.ratingCount,
+        bestRating: 5,
+        worstRating: 1,
+      },
     },
-    areaServed: ["Hamburg", "Bergedorf", "Lüneburg", "Stade", "Norderstedt", "Reinbek"],
+    areaServed: [
+      "Hamburg", "Bergedorf", "Harburg", "Altona", "Wandsbek",
+      "Norderstedt", "Reinbek", "Geesthacht", "Lüneburg", "Stade", "Pinneberg",
+    ].map((c) => ({ "@type": "City", name: c })),
     url: `https://wietek-geruestbau.de${p.canonical}`,
   };
 
@@ -135,13 +147,19 @@ export const ServicePage = (props: ServicePageProps) => {
 
   return (
     <PageLayout>
-      <Helmet>
-        <title>{p.seoTitle}</title>
-        <meta name="description" content={p.seoDescription} />
-        <link rel="canonical" href={`https://wietek-geruestbau.de${p.canonical}`} />
-        <script type="application/ld+json">{JSON.stringify(serviceSchema)}</script>
-        <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
-      </Helmet>
+      <PageSeo
+        title={p.seoTitle}
+        description={p.seoDescription}
+        path={p.canonical}
+        ogImage={p.hero.backgroundImage}
+        keywords={`${p.serviceName} Hamburg, ${p.serviceName} mieten, Gerüstbau Hamburg, Gerüst Hamburg, Wietek Gerüstbau`}
+        breadcrumbs={[
+          { name: "Startseite", path: "/" },
+          { name: "Leistungen", path: "/leistungen" },
+          { name: p.hero.breadcrumb, path: p.canonical },
+        ]}
+        jsonLd={[serviceSchema, faqSchema]}
+      />
 
       <PageHero {...p.hero} />
 
