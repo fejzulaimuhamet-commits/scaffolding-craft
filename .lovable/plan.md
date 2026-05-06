@@ -1,11 +1,15 @@
-## Warum die Texte weg waren
+## Root Cause (verifiziert per curl)
 
-Beim Umstellen auf Sanity habe ich die hardcoded Fallbacks im Hero entfernt — Idee war: leeres Feld = sichtbare Lücke = Edit-Anreiz. Nachteil: solange Sanity-Query noch lädt (oder bei Cache-Miss/CORS-Fehler), ist der Hero leer. Das war zu aggressiv.
+Die hartkodierte Preview-Origin `https://id-preview--e106eeef-…lovable.app` zeigt **nicht** auf unsere App — dort läuft ein **fremdes Next.js-Projekt** (curl bestätigt: `<html data-dpl-id="…"><link href="/_next/static/…">`). Deshalb:
+- Im Iframe: "Unable to connect" — die fremde Seite hat keinen Sanity-Preview-Bootstrap
+- Klick auf "Continue anyway" → man landet auf einer fremden Webseite
 
-Außerdem: weil Stega die Daten als unsichtbare Marker an den String hängt, **bleiben Klick-zu-Edit-Marker auch mit `??`-Fallback erhalten** — der Fallback greift nur wenn der String wirklich `undefined` ist. Wir verlieren also nichts.
+`https://scaffolding-craft.lovable.app/` liefert dagegen unsere App (curl: `<title>Wietek Gerüstbau Hamburg</title>`).
 
-## Fix
+Mein vorheriger Plan hat die `scaffolding-craft.lovable.app`-DNS für „nicht garantiert vorhanden" gehalten — das war falsch. Die URL existiert, weil das Projekt published ist.
 
-In `src/components/sections/Hero.tsx`: Defaults zurückbringen via `??`-Operator für `heroBadge`, `heroTitle`, `heroSubtitle`, `heroUsps`, `heroCtaPrimary`, `heroCtaSecondary`. Die Werte matchen exakt den Ursprungstext, der bereits in Sanity geseedet wurde — Anzeige bleibt also identisch, egal ob Sanity geladen ist oder nicht.
+## Fix (1 Datei)
 
-Keine Änderungen an Stats/Process/About/Footer nötig — die haben bereits Fallbacks.
+**`src/sanity/config.ts`** — `PREVIEW_ORIGIN` zurück auf `https://scaffolding-craft.lovable.app`. `allowOrigins` enthält die URL bereits.
+
+Danach: einmal Publish → im Studio (`scaffolding-craft.lovable.app/studio/presentation`) lädt der Iframe die richtige App und Click-to-Edit funktioniert.

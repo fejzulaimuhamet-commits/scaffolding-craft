@@ -7,11 +7,11 @@ import { structure } from "./structure";
 import { SANITY_PROJECT_ID, SANITY_DATASET } from "@/lib/sanity";
 
 // Origin der Live-Website, die im Presentation Tool als Vorschau geladen wird.
-// Default: stabile Lovable-Preview-URL (immer erreichbar, unabhängig vom Publish-Status).
-// Override per VITE_PREVIEW_ORIGIN möglich (z.B. published Domain).
+// MUSS auf die published Lovable-URL zeigen (dort läuft unsere App).
+// Die `id-preview--…lovable.app` URL hostet ein fremdes Projekt — nicht nutzen.
 const PREVIEW_ORIGIN =
   (import.meta.env.VITE_PREVIEW_ORIGIN as string | undefined) ||
-  "https://id-preview--e106eeef-8ae8-469b-b64d-dae180e6aade.lovable.app";
+  "https://scaffolding-craft.lovable.app";
 
 
 export const sanityConfig = defineConfig({
