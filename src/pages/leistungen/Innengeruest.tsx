@@ -4,6 +4,7 @@ import { ASSETS } from "@/lib/site";
 
 const Page = () => (
   <ServicePage
+    slug="innengeruest"
     seoTitle="Innengerüst Hamburg | Raumgerüst mieten – Wietek Gerüstbau"
     seoDescription="Sichere Innengerüste & Raumgerüste in Hamburg. Für Hallen, Kirchen, Industrieanlagen & große Innenräume. Aufbau in 24–72 Std."
     canonical="/leistungen/innengeruest"

@@ -4,6 +4,7 @@ import { ASSETS } from "@/lib/site";
 
 const Page = () => (
   <ServicePage
+    slug="schutznetze-gelaender"
     seoTitle="Schutznetze & Sicherheitsgeländer Hamburg – Wietek Gerüstbau"
     seoDescription="Schutznetze, Fangnetze & Sicherheitsgeländer in Hamburg. Normgerecht nach EN 1263, schnelle Montage. Jetzt Angebot anfordern!"
     canonical="/leistungen/schutznetze-gelaender"
