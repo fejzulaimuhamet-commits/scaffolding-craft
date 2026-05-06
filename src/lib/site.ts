@@ -45,17 +45,15 @@ const GALLERY = [
   PLACEHOLDER.team,
 ];
 
-// Inline-SVG Logos (CORS-frei) als Fallback bis echte Assets verfügbar sind.
-const logoSvg = (color: string) =>
-  `data:image/svg+xml;utf8,${encodeURIComponent(
-    `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 60'><text x='0' y='44' font-family='Manrope,Arial,sans-serif' font-weight='800' font-size='40' fill='${color}'>WIETEK</text><rect x='178' y='12' width='34' height='34' fill='%23D7263D'/></svg>`
-  )}`;
+// Echte Wietek Brand Assets
+import wietekLogoWhite from "@/assets/wietek-logo-white.png";
+import wietekHero from "@/assets/hero-facade.jpg";
 
 export const ASSETS = {
-  logo: logoSvg("#1F2937"),
-  logoWhite: logoSvg("#FFFFFF"),
-  logoBg: logoSvg("#1F2937"),
-  hero: PLACEHOLDER.hero,
+  logo: wietekLogoWhite,
+  logoWhite: wietekLogoWhite,
+  logoBg: wietekLogoWhite,
+  hero: wietekHero,
   slide: (n: number) => GALLERY[(Math.max(1, n) - 1) % GALLERY.length],
   about: PLACEHOLDER.team,
   contact: PLACEHOLDER.team,
