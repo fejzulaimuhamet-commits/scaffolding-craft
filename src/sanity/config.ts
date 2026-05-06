@@ -22,14 +22,14 @@ export const sanityConfig = defineConfig({
   basePath: "/studio",
   plugins: [
     presentationTool({
+      allowOrigins: [
+        "https://id-preview--e106eeef-8ae8-469b-b64d-dae180e6aade.lovable.app",
+        "https://scaffolding-craft.lovable.app",
+        PREVIEW_ORIGIN,
+      ],
       previewUrl: {
         origin: PREVIEW_ORIGIN,
         preview: "/",
-        // Same-origin SPA-Pfad. Das Studio hängt ?sanity-preview-secret=…
-        // an und navigiert den iframe dorthin. bootstrapPreview() in
-        // src/main.tsx validiert den Secret per fetch gegen die
-        // sanity-preview Edge-Function, speichert das Token in
-        // sessionStorage und lädt im Draft-Mode neu.
         previewMode: {
           enable: "/",
         },
