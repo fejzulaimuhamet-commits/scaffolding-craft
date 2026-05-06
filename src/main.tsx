@@ -3,7 +3,7 @@ import { HelmetProvider } from "react-helmet-async";
 import App from "./App.tsx";
 import "./index.css";
 import { PREVIEW_TOKEN_KEY } from "./lib/sanity";
-import { supabase } from "./integrations/supabase/client";
+
 
 // Sanity Visual Editing + Draft Mode bootstrap.
 // Runs only when the page is loaded inside the Sanity Presentation Tool (iframe).
