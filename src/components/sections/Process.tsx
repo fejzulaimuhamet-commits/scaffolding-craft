@@ -12,6 +12,11 @@ const defaultSteps = [
 ];
 
 export const Process = () => {
+  const { data: hp } = useHomepage();
+  const steps = (hp?.processSteps && hp.processSteps.length > 0)
+    ? hp.processSteps
+    : defaultSteps;
+
   return (
     <section className="py-20 lg:py-28 bg-plaster relative">
       <div className="container-w">
@@ -28,10 +33,11 @@ export const Process = () => {
 
         <div className="mt-12 lg:mt-16 grid sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6 relative">
           {steps.map((s, i) => {
-            const Icon = s.icon;
+            const Icon = icons[i % icons.length];
+            const n = String(i + 1).padStart(2, "0");
             return (
               <motion.div
-                key={s.n}
+                key={i}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
@@ -41,14 +47,14 @@ export const Process = () => {
                 <div className="flex items-start justify-between mb-5">
                   <span className="font-display font-extrabold text-3xl text-plaster"
                     style={{ WebkitTextStroke: "1.5px hsl(var(--steel))", color: "transparent" }}>
-                    {s.n}
+                    {n}
                   </span>
                   <span className="grid h-11 w-11 place-items-center bg-steel text-white">
                     <Icon className="h-5 w-5" />
                   </span>
                 </div>
                 <h3 className="font-display font-extrabold text-lg text-steel">{s.title}</h3>
-                <p className="mt-2 text-sm text-concrete leading-relaxed">{s.desc}</p>
+                <p className="mt-2 text-sm text-concrete leading-relaxed">{s.description}</p>
               </motion.div>
             );
           })}
