@@ -9,7 +9,14 @@ import { SANITY_PROJECT_ID, SANITY_DATASET } from "@/lib/sanity";
 // Origin der Live-Website, die im Presentation Tool als Vorschau geladen wird.
 const PREVIEW_ORIGIN =
   (import.meta.env.VITE_SITE_URL as string) ||
-  (typeof window !== "undefined" ? window.location.origin : "https://scaffolding-craft.lovable.app");
+  (typeof window !== "undefined"
+    ? window.location.origin
+    : "https://scaffolding-craft.lovable.app");
+
+// Edge function endpoint that validates the one-time preview secret and
+// returns a Sanity read token for draft mode.
+const PREVIEW_SECRET_ENDPOINT =
+  "https://mvmynkefvkarxtxlejqw.supabase.co/functions/v1/sanity-preview";
 
 export const sanityConfig = defineConfig({
   name: "wietek",
@@ -22,6 +29,9 @@ export const sanityConfig = defineConfig({
       previewUrl: {
         origin: PREVIEW_ORIGIN,
         preview: "/",
+        previewMode: {
+          enable: PREVIEW_SECRET_ENDPOINT,
+        },
       },
     }),
     structureTool({ structure }),
