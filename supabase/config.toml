@@ -1,1 +1,4 @@
 project_id = "mvmynkefvkarxtxlejqw"
+
+[functions.sanity-preview]
+verify_jwt = false

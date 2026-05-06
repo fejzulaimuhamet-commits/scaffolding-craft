@@ -12,22 +12,35 @@ const STUDIO_URL =
   (import.meta.env.VITE_SANITY_STUDIO_URL as string) ||
   "https://wietek-geruestbau.sanity.studio";
 
+const PREVIEW_TOKEN_KEY = "sanity-preview-token";
+
 // Visual Editing aktiv, wenn die Seite im Sanity Presentation Tool (iframe) läuft.
 const isInIframe =
   typeof window !== "undefined" && window.self !== window.top;
+
+// Draft mode requires a valid preview token (set after secret validation).
+const previewToken =
+  isInIframe && typeof window !== "undefined"
+    ? window.sessionStorage.getItem(PREVIEW_TOKEN_KEY) ?? undefined
+    : undefined;
+
+const draftMode = isInIframe && Boolean(previewToken);
 
 export const sanityClient: SanityClient = createClient({
   projectId: SANITY_PROJECT_ID,
   dataset: SANITY_DATASET,
   apiVersion: "2024-01-01",
-  useCdn: !isInIframe,
-  perspective: isInIframe ? "previewDrafts" : "published",
+  useCdn: !draftMode,
+  perspective: draftMode ? "previewDrafts" : "published",
+  token: draftMode ? previewToken : undefined,
   stega: isInIframe
     ? { enabled: true, studioUrl: STUDIO_URL }
     : { enabled: false },
 });
 
 export const client = sanityClient;
+
+export { PREVIEW_TOKEN_KEY };
 
 const builder = imageUrlBuilder(sanityClient);
 
