@@ -16,7 +16,8 @@ import {
   X,
 } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
-import { ASSETS, COMPANY, NAV } from "@/lib/site";
+import { ASSETS, NAV } from "@/lib/site";
+import { useCompany } from "@/hooks/useCompany";
 
 const SERVICES = [
   {
@@ -58,6 +59,7 @@ const SERVICES = [
 ];
 
 export const Header = () => {
+  const COMPANY = useCompany();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [megaOpen, setMegaOpen] = useState(false);

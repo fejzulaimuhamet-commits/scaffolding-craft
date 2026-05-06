@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import { Facebook, Instagram, Mail, MapPin, Phone, ArrowRight } from "lucide-react";
-import { ASSETS, COMPANY } from "@/lib/site";
+import { ASSETS } from "@/lib/site";
+import { useCompany } from "@/hooks/useCompany";
 
 export const Footer = () => {
+  const COMPANY = useCompany();
   return (
     <footer className="footer-grain text-white pt-0 pb-8 relative">
       {/* Top CTA strip */}
