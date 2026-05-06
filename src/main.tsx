@@ -18,11 +18,14 @@ async function bootstrapPreview() {
   // to fetch drafts. We reload once after storing so the SDK picks it up.
   if (hasPreviewSecret) {
     try {
-      const { data, error } = await supabase.functions.invoke(
-        `sanity-preview${url.search}`,
-        { method: "GET" },
-      );
-      if (!error && data?.valid && data?.token) {
+      const fnUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/sanity-preview${url.search}`;
+      const res = await fetch(fnUrl, {
+        headers: {
+          apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string,
+        },
+      });
+      const data = await res.json();
+      if (data?.valid && data?.token) {
         window.sessionStorage.setItem(PREVIEW_TOKEN_KEY, data.token);
         // strip the secret from the URL and reload to apply draft mode
         url.searchParams.delete("sanity-preview-secret");
