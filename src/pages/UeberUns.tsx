@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import { PageSeo } from "@/components/PageSeo";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -164,15 +164,17 @@ const Page = () => {
   const teamImg = imageUrl(about?.teamImage, 1200) || ASSETS.about;
   return (
   <PageLayout>
-    <Helmet>
-      <title>Über uns | Wietek Gerüstbau Hamburg – Familienunternehmen seit 2014</title>
-      <meta
-        name="description"
-        content="Wietek Gerüstbau – Ihr familiengeführter Gerüstbauer aus Hamburg-Bergedorf. Seit 2014 zuverlässig, versichert & persönlich. Lernen Sie uns kennen!"
-      />
-      <link rel="canonical" href="https://wietek-geruestbau.de/ueber-uns" />
-      <script type="application/ld+json">{JSON.stringify(localBusiness)}</script>
-    </Helmet>
+    <PageSeo
+      title="Über uns – Wietek Gerüstbau Hamburg-Bergedorf, seit 2014"
+      description="Wietek Gerüstbau – familiengeführter Gerüstbauer aus Hamburg-Bergedorf. Seit 2014 zuverlässig, versichert & persönlich für Bauherren und Handwerker in ganz Hamburg."
+      path="/ueber-uns"
+      keywords="Wietek Gerüstbau, Gerüstbauer Bergedorf, Familienbetrieb Hamburg, Gerüstbau Hamburg seit 2014"
+      breadcrumbs={[
+        { name: "Startseite", path: "/" },
+        { name: "Über uns", path: "/ueber-uns" },
+      ]}
+      jsonLd={[localBusiness]}
+    />
 
     <PageHero
       eyebrow="Über uns"

@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import { PageSeo } from "@/components/PageSeo";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -102,14 +102,16 @@ const Page = () => {
 
   return (
     <PageLayout>
-      <Helmet>
-        <title>Jobs & Karriere | Wietek Gerüstbau Hamburg – Jetzt bewerben</title>
-        <meta
-          name="description"
-          content="Gerüstbauer (m/w/d) in Hamburg gesucht! Familiengeführtes Unternehmen, faire Bezahlung, sicherer Job. Jetzt bei Wietek Gerüstbau bewerben!"
-        />
-        <link rel="canonical" href="https://wietek-geruestbau.de/karriere" />
-      </Helmet>
+      <PageSeo
+        title="Karriere & Jobs – Gerüstbauer Hamburg | Wietek Gerüstbau"
+        description="Gerüstbauer (m/w/d) Jobs in Hamburg: faire Bezahlung, sicherer Job, familiäres Team, moderne Layher-Ausstattung. Jetzt bei Wietek Gerüstbau bewerben!"
+        path="/karriere"
+        keywords="Gerüstbauer Job Hamburg, Karriere Gerüstbau Hamburg, Gerüstbauer m/w/d Hamburg, Job Wietek Gerüstbau"
+        breadcrumbs={[
+          { name: "Startseite", path: "/" },
+          { name: "Karriere", path: "/karriere" },
+        ]}
+      />
 
       <PageHero
         eyebrow="Karriere"

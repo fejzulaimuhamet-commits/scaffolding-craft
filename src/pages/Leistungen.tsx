@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
+import { PageSeo } from "@/components/PageSeo";
 import { ArrowRight, Check, Zap, ShieldCheck, Users } from "lucide-react";
 import { PageLayout } from "@/components/PageLayout";
 import { PageHero } from "@/components/shared/PageHero";
@@ -289,13 +289,16 @@ const Leistungen = () => {
   });
   return (
   <PageLayout>
-    <Helmet>
-      <title>Leistungen | Wietek Gerüstbau Hamburg</title>
-      <meta
-        name="description"
-        content="Fassadengerüst, Innengerüst, Treppenturm, Dachfanggerüst, Schutznetze und Wetterschutz – Wietek Gerüstbau aus Hamburg liefert die passende Lösung."
-      />
-    </Helmet>
+    <PageSeo
+      title="Leistungen Gerüstbau Hamburg | Wietek Gerüstbau"
+      description="Alle Gerüstbau-Leistungen aus Hamburg: Fassaden-, Innen- & Dachfanggerüste, Treppentürme, Schutznetze, Wetterschutzdach. Aufbau in 24–72 Std., Festpreis."
+      path="/leistungen"
+      keywords="Gerüstbau Hamburg, Gerüst mieten Hamburg, Fassadengerüst Hamburg, Innengerüst Hamburg, Treppenturm Hamburg, Wietek Gerüstbau"
+      breadcrumbs={[
+        { name: "Startseite", path: "/" },
+        { name: "Leistungen", path: "/leistungen" },
+      ]}
+    />
     <PageHero
       eyebrow="Unsere Leistungen"
       title="Gerüstlösungen für jeden Einsatz"

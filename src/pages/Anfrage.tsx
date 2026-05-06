@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { Helmet } from "react-helmet-async";
+import { PageSeo } from "@/components/PageSeo";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -189,14 +189,16 @@ const Anfrage = () => {
 
   return (
     <PageLayout>
-      <Helmet>
-        <title>Gerüst anfragen | Wietek Gerüstbau Hamburg – Kostenlos & unverbindlich</title>
-        <meta
-          name="description"
-          content="Gerüst in Hamburg anfragen – schnell, einfach & kostenlos. Antwort innerhalb 24 Std. Fassadengerüst, Innengerüst, Treppenturm & mehr."
-        />
-        <link rel="canonical" href="https://wietek-geruestbau.de/anfrage" />
-      </Helmet>
+      <PageSeo
+        title="Gerüst anfragen Hamburg – Angebot in 24 h | Wietek Gerüstbau"
+        description="Gerüst in Hamburg anfragen – schnell, einfach & kostenlos. Antwort innerhalb 24 Std. für Fassadengerüst, Innengerüst, Treppenturm & mehr."
+        path="/anfrage"
+        keywords="Gerüst anfragen Hamburg, Gerüst Angebot Hamburg, Gerüstbau Anfrage, Wietek Anfrage"
+        breadcrumbs={[
+          { name: "Startseite", path: "/" },
+          { name: "Anfrage", path: "/anfrage" },
+        ]}
+      />
 
       <PageHero
         eyebrow="Anfrage"
