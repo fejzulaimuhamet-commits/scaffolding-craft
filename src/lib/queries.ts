@@ -27,7 +27,23 @@ export const getHomepage = (): Promise<Homepage | null> =>
         _id, heroBadge, heroTitle, heroSubtitle, heroUsps,
         heroCtaPrimary, heroCtaSecondary, heroImage,
         counterProjects, counterYears, counterSquareMeters,
-        statsItems, processSteps
+        statsItems, processSteps,
+        servicesEyebrow, servicesTitle, servicesIntro,
+        industriesEyebrow, industriesTitle, industriesIntro, industriesItems,
+        testimonialsEyebrow, testimonialsTitle, testimonialsIntro, testimonialsBadgeText,
+        serviceAreaEyebrow, serviceAreaTitle, serviceAreaIntro, serviceAreaCities,
+        faqEyebrow, faqTitle, faqIntro, faqItems,
+        contactEyebrow, contactTitle, contactIntro, contactCtaWhatsapp, contactCtaCall
+      }`,
+    ),
+    null,
+  );
+
+export const getNavigation = (): Promise<Navigation | null> =>
+  safe(
+    sanityClient.fetch<Navigation | null>(
+      `*[_type == "navigation"][0]{
+        _id, topBarText, navItems, megaCtaTitle, megaCtaSubtitle, megaServices
       }`,
     ),
     null,
