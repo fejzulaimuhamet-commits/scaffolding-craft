@@ -23,8 +23,10 @@ export const getHomepage = (): Promise<Homepage | null> =>
   safe(
     sanityClient.fetch<Homepage | null>(
       `*[_type == "homepage"][0]{
-        _id, heroTitle, heroSubtitle, heroImage,
-        counterProjects, counterYears, counterSquareMeters
+        _id, heroBadge, heroTitle, heroSubtitle, heroUsps,
+        heroCtaPrimary, heroCtaSecondary, heroImage,
+        counterProjects, counterYears, counterSquareMeters,
+        statsItems, processSteps
       }`,
     ),
     null,
@@ -90,7 +92,7 @@ export const getAboutPage = (): Promise<AboutPage | null> =>
   safe(
     sanityClient.fetch<AboutPage | null>(
       `*[_type == "about"][0]{
-        _id, story, teamImage, values, certifications
+        _id, headline, intro, story, teamImage, stats, values, certifications
       }`,
     ),
     null,
@@ -131,7 +133,8 @@ export const getSettings = (): Promise<Settings | null> =>
   safe(
     sanityClient.fetch<Settings | null>(
       `*[_type == "settings"][0]{
-        _id, phone, whatsapp, email, address, openingHours, googleRating
+        _id, phone, whatsapp, email, address, openingHours, googleRating,
+        footerTagline, footerLegal, serviceArea
       }`,
     ),
     null,

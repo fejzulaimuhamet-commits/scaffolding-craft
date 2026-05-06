@@ -2,9 +2,12 @@ import { Link } from "react-router-dom";
 import { Facebook, Instagram, Mail, MapPin, Phone, ArrowRight } from "lucide-react";
 import { ASSETS } from "@/lib/site";
 import { useCompany } from "@/hooks/useCompany";
+import { useSettings } from "@/hooks/useSanity";
 
 export const Footer = () => {
   const COMPANY = useCompany();
+  const { data: settings } = useSettings();
+  const tagline = settings?.footerTagline;
   return (
     <footer className="footer-grain text-white pt-0 pb-8 relative">
       {/* Top CTA strip */}
@@ -54,8 +57,7 @@ export const Footer = () => {
               />
             </div>
             <p className="mt-5 text-sm text-white/70 leading-relaxed">
-              Familiengeführter Gerüstbau aus {COMPANY.city}-{COMPANY.district}. Sicher, pünktlich
-              und persönlich – seit {COMPANY.founded}.
+              {tagline ?? `Familiengeführter Gerüstbau aus ${COMPANY.city}-${COMPANY.district}. Sicher, pünktlich und persönlich – seit ${COMPANY.founded}.`}
             </p>
             <div className="mt-5 flex gap-2">
               <a
