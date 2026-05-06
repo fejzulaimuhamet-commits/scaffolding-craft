@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { AnimatedHeading } from "@/components/shared/AnimatedHeading";
-import { buildSrcSet, cappedSrc } from "@/lib/img";
 
 interface PageHeroProps {
   title: string;
@@ -25,11 +24,13 @@ export const PageHero = ({
     >
       {/* Background */}
       <img
-        src={cappedSrc(backgroundImage, 1280)}
-        srcSet={buildSrcSet(backgroundImage, [400, 640, 828, 1024, 1280, 1600])}
+        src={backgroundImage}
+        srcSet={
+          backgroundImage.includes("res.cloudinary.com")
+            ? [640, 1024, 1600].map((w) => `${backgroundImage.replace(/w_\d+/, `w_${w}`)} ${w}w`).join(", ")
+            : undefined
+        }
         sizes="100vw"
-        width={1600}
-        height={500}
         alt={`${title} – Wietek Gerüstbau Hamburg`}
         loading="eager"
         fetchPriority="high"

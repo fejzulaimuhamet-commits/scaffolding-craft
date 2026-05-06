@@ -3,7 +3,6 @@ import { ArrowRight, CheckCircle2, Star } from "lucide-react";
 import { ASSETS, COMPANY } from "@/lib/site";
 import { useHomepage } from "@/hooks/useSanity";
 import { imageUrl } from "@/lib/sanity";
-import { buildSrcSet, cappedSrc } from "@/lib/img";
 
 const usps = [
   "Aufbau in 24–72 Stunden",
@@ -15,7 +14,18 @@ const usps = [
 export const Hero = () => {
   const { data: homepage } = useHomepage();
   const heroImgBase = imageUrl(homepage?.heroImage, 1920) ?? ASSETS.hero;
-  const heroSrcSet = buildSrcSet(heroImgBase, [400, 640, 828, 1024, 1280, 1600, 1920]);
+  const buildSrcSet = (url: string) => {
+    const widths = [640, 1024, 1600, 1920];
+    if (url.includes("res.cloudinary.com")) {
+      return widths.map((w) => `${url.replace(/w_\d+/, `w_${w}`)} ${w}w`).join(", ");
+    }
+    if (url.includes("cdn.sanity.io")) {
+      const sep = url.includes("?") ? "&" : "?";
+      return widths.map((w) => `${url}${sep}w=${w} ${w}w`).join(", ");
+    }
+    return undefined;
+  };
+  const heroSrcSet = buildSrcSet(heroImgBase);
   const heroTitle = homepage?.heroTitle;
   const heroSubtitle = homepage?.heroSubtitle;
 
@@ -27,11 +37,9 @@ export const Hero = () => {
     >
       {/* Vollbild-Foto */}
       <img
-        src={cappedSrc(heroImgBase, 1280)}
+        src={heroImgBase}
         srcSet={heroSrcSet}
         sizes="100vw"
-        width={1920}
-        height={1080}
         alt="Eingerüstetes Wohnhaus in Hamburg von Wietek Gerüstbau"
         loading="eager"
         fetchPriority="high"

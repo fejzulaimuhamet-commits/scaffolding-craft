@@ -46,14 +46,9 @@ export const About = () => {
           >
             <div className="relative aspect-[4/5] shadow-[0_30px_80px_-30px_rgba(0,0,0,0.7)]">
               <img
-                src={ASSETS.about.replace(/w_\d+/, "w_800")}
-                srcSet={[400, 640, 800, 1024].map(w => `${ASSETS.about.replace(/w_\d+/, `w_${w}`)} ${w}w`).join(", ")}
-                sizes="(min-width: 1024px) 40vw, 100vw"
-                width={800}
-                height={1000}
+                src={ASSETS.about}
                 alt="Wietek Gerüstbau Team auf der Baustelle in Hamburg"
                 loading="lazy"
-                decoding="async"
                 className="absolute inset-0 h-full w-full object-cover"
               />
 

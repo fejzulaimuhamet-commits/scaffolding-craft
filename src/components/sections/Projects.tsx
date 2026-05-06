@@ -96,14 +96,9 @@ export const Projects = () => {
               >
                 <div className="aspect-[4/3] overflow-hidden">
                   <img
-                    src={p.img.replace(/w_\d+/, "w_800")}
-                    srcSet={[400, 640, 800, 1024].map(w => `${p.img.replace(/w_\d+/, `w_${w}`)} ${w}w`).join(", ")}
-                    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                    width={800}
-                    height={600}
+                    src={p.img}
                     alt={`${p.title} – ${p.city}, Wietek Gerüstbau`}
                     loading="lazy"
-                    decoding="async"
                     className="h-full w-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
                   />
                 </div>

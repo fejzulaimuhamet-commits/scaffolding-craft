@@ -176,14 +176,9 @@ export const ServicePage = (props: ServicePageProps) => {
             >
               <div className="relative overflow-hidden bg-steel-deep h-[320px] sm:h-[420px] lg:h-[500px]">
                 <img
-                  src={p.intro.image.replace(/w_\d+/, "w_1024")}
-                  srcSet={[400, 640, 800, 1024, 1280].map(w => `${p.intro.image.replace(/w_\d+/, `w_${w}`)} ${w}w`).join(", ")}
-                  sizes="(min-width: 1024px) 50vw, 100vw"
-                  width={1024}
-                  height={720}
+                  src={p.intro.image}
                   alt={p.intro.imageAlt}
                   loading="lazy"
-                  decoding="async"
                   className="absolute inset-0 h-full w-full object-cover"
                 />
               </div>

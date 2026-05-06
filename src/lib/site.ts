@@ -70,35 +70,36 @@ const SLIDE_IDS = [
 ];
 
 export const ASSETS = {
-  logo: cld(CLD.logoWhite, 320),
-  logoWhite: cld(CLD.logoWhite, 320),
-  logoBg: cld(CLD.logoDark, 320),
-  hero: cld(CLD.heroBg, 1280),
-  about: cld(CLD.aboutImg1, 1024),
-  contact: cld(CLD.contact, 1024),
+  logo: cld(CLD.logoWhite, 400),
+  logoWhite: cld(CLD.logoWhite, 400),
+  logoBg: cld(CLD.logoDark, 400),
+  hero: cld(CLD.heroBg, 1920),
+  about: cld(CLD.aboutImg1, 1200),
+  contact: cld(CLD.contact, 1200),
   slide: (n: number) => {
     const id = SLIDE_IDS[(Math.max(1, n) - 1) % SLIDE_IDS.length];
-    return cld(id, 1280);
+    return cld(id, 1600);
   },
   placeholder: {
-    fassade: cld(CLD.fassade1, 1280),
-    innen: cld(CLD.innen1, 1280),
-    treppe: cld(CLD.treppe, 1280),
-    dach: cld(CLD.schutz, 1280),
-    schutz: cld(CLD.schutz, 1280),
-    wetter: cld(CLD.innenBg, 1280),
+    fassade: cld(CLD.fassade1, 1600),
+    innen: cld(CLD.innen1, 1600),
+    treppe: cld(CLD.treppe, 1600),
+    dach: cld(CLD.schutz, 1600), // kein dediziertes Dachfang-Bild → Schutz/Geländer
+    schutz: cld(CLD.schutz, 1600),
+    wetter: cld(CLD.innenBg, 1600), // kein dediziertes Wetterschutz-Bild → Innen-BG
   },
   projects: [
-    cld(CLD.project1, 1280),
-    cld(CLD.project2, 1280),
-    cld(CLD.project3, 1280),
+    cld(CLD.project1, 1600),
+    cld(CLD.project2, 1600),
+    cld(CLD.project3, 1600),
   ],
-  aboutImg2: cld(CLD.aboutImg2, 1024),
-  aboutBg: cld(CLD.aboutBg, 1280),
-  career1: cld(CLD.career1, 1280),
-  career2: cld(CLD.career2, 1280),
-  impressum: cld(CLD.impressum, 1024),
-  innen2: cld(CLD.innen2, 1280),
+  // Zusätzliche, direkt erreichbare Bilder
+  aboutImg2: cld(CLD.aboutImg2, 1200),
+  aboutBg: cld(CLD.aboutBg, 1920),
+  career1: cld(CLD.career1, 1600),
+  career2: cld(CLD.career2, 1600),
+  impressum: cld(CLD.impressum, 1200),
+  innen2: cld(CLD.innen2, 1600),
 };
 
 export const NAV = [
