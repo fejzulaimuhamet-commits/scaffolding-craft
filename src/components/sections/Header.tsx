@@ -18,44 +18,24 @@ import {
 import { NavLink } from "@/components/NavLink";
 import { ASSETS, NAV } from "@/lib/site";
 import { useCompany } from "@/hooks/useCompany";
+import { useNavigation } from "@/hooks/useSanity";
 
-const SERVICES = [
-  {
-    label: "Fassadengerüst",
-    desc: "Sanierung, Anstrich & Neubau",
-    href: "/leistungen/fassadengeruest",
-    icon: Building2,
-  },
-  {
-    label: "Innengerüst",
-    desc: "Hallen, Kirchen, Treppenhäuser",
-    href: "/leistungen/innengeruest",
-    icon: Layers,
-  },
-  {
-    label: "Treppenturm",
-    desc: "Sicherer Zugang bis 20 m",
-    href: "/leistungen/treppenturm",
-    icon: TowerControl,
-  },
-  {
-    label: "Dachfanggerüst",
-    desc: "Absturzsicherung nach DGUV",
-    href: "/leistungen/dachfanggeruest",
-    icon: Hammer,
-  },
-  {
-    label: "Schutznetze & Geländer",
-    desc: "Auffangnetze, EN 1263",
-    href: "/leistungen/schutznetze-gelaender",
-    icon: ShieldCheck,
-  },
-  {
-    label: "Wetterschutz",
-    desc: "Arbeiten bei jedem Wetter",
-    href: "/leistungen/wetterschutz",
-    icon: CloudRain,
-  },
+const ICONS: Record<string, typeof Building2> = {
+  building: Building2,
+  layers: Layers,
+  tower: TowerControl,
+  hammer: Hammer,
+  shield: ShieldCheck,
+  cloud: CloudRain,
+};
+
+const DEFAULT_SERVICES = [
+  { label: "Fassadengerüst", desc: "Sanierung, Anstrich & Neubau", href: "/leistungen/fassadengeruest", icon: "building" },
+  { label: "Innengerüst", desc: "Hallen, Kirchen, Treppenhäuser", href: "/leistungen/innengeruest", icon: "layers" },
+  { label: "Treppenturm", desc: "Sicherer Zugang bis 20 m", href: "/leistungen/treppenturm", icon: "tower" },
+  { label: "Dachfanggerüst", desc: "Absturzsicherung nach DGUV", href: "/leistungen/dachfanggeruest", icon: "hammer" },
+  { label: "Schutznetze & Geländer", desc: "Auffangnetze, EN 1263", href: "/leistungen/schutznetze-gelaender", icon: "shield" },
+  { label: "Wetterschutz", desc: "Arbeiten bei jedem Wetter", href: "/leistungen/wetterschutz", icon: "cloud" },
 ];
 
 export const Header = () => {
