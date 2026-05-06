@@ -54,7 +54,7 @@ export function SanityVisualEditing() {
 
   return (
     <Suspense fallback={null}>
-      <VisualEditingComponent history={history} />
+      <VisualEditingComponent history={history} portal />
     </Suspense>
   );
 }
