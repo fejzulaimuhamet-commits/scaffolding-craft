@@ -10,12 +10,16 @@ import {
   getAllJobs,
   getAllPosts,
   getSettings,
+  getNavigation,
 } from "@/lib/queries";
 
 const opts = { staleTime: 1000 * 60 * 5, refetchOnWindowFocus: false };
 
 export const useHomepage = () =>
   useQuery({ queryKey: ["sanity", "homepage"], queryFn: getHomepage, ...opts });
+
+export const useNavigation = () =>
+  useQuery({ queryKey: ["sanity", "navigation"], queryFn: getNavigation, ...opts });
 
 export const useServices = () =>
   useQuery({ queryKey: ["sanity", "services"], queryFn: getAllServices, ...opts });
