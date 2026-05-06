@@ -4,6 +4,8 @@ export type SanityImageSource = Record<string, unknown>;
 export type SanitySlug = { current: string };
 export type SanityImage = SanityImageSource & { alt?: string };
 
+export interface LinkItem { label: string; to: string }
+
 export interface Homepage {
   _id: string;
   heroBadge?: string;
@@ -18,6 +20,51 @@ export interface Homepage {
   counterSquareMeters?: number;
   statsItems?: { value: string; label: string }[];
   processSteps?: { title: string; description: string }[];
+
+  // Services section
+  servicesEyebrow?: string;
+  servicesTitle?: string;
+  servicesIntro?: string;
+
+  // Industries section
+  industriesEyebrow?: string;
+  industriesTitle?: string;
+  industriesIntro?: string;
+  industriesItems?: { icon?: string; title?: string; description?: string }[];
+
+  // Testimonials section
+  testimonialsEyebrow?: string;
+  testimonialsTitle?: string;
+  testimonialsIntro?: string;
+  testimonialsBadgeText?: string;
+
+  // Service area
+  serviceAreaEyebrow?: string;
+  serviceAreaTitle?: string;
+  serviceAreaIntro?: string;
+  serviceAreaCities?: string[];
+
+  // FAQ
+  faqEyebrow?: string;
+  faqTitle?: string;
+  faqIntro?: string;
+  faqItems?: { question: string; answer: string }[];
+
+  // Contact
+  contactEyebrow?: string;
+  contactTitle?: string;
+  contactIntro?: string;
+  contactCtaWhatsapp?: string;
+  contactCtaCall?: string;
+}
+
+export interface Navigation {
+  _id: string;
+  topBarText?: string;
+  navItems?: { label: string; href: string }[];
+  megaCtaTitle?: string;
+  megaCtaSubtitle?: string;
+  megaServices?: { icon?: string; label?: string; desc?: string; href?: string }[];
 }
 
 export interface FAQItem {
@@ -94,12 +141,25 @@ export interface Post {
 export interface Settings {
   _id: string;
   phone?: string;
+  phoneMobile?: string;
   whatsapp?: string;
   email?: string;
   address?: string;
   openingHours?: string;
   googleRating?: number;
+  googleRatingCount?: number;
   footerTagline?: string;
   footerLegal?: string;
   serviceArea?: string;
+  footerCtaEyebrow?: string;
+  footerCtaHeadline?: string;
+  footerCtaButton?: string;
+  footerColServicesTitle?: string;
+  footerColServices?: LinkItem[];
+  footerColLocationsTitle?: string;
+  footerColLocations?: LinkItem[];
+  footerContactTitle?: string;
+  footerLegalLinks?: LinkItem[];
+  instagramUrl?: string;
+  facebookUrl?: string;
 }

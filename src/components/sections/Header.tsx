@@ -18,48 +18,29 @@ import {
 import { NavLink } from "@/components/NavLink";
 import { ASSETS, NAV } from "@/lib/site";
 import { useCompany } from "@/hooks/useCompany";
+import { useNavigation } from "@/hooks/useSanity";
 
-const SERVICES = [
-  {
-    label: "Fassadengerüst",
-    desc: "Sanierung, Anstrich & Neubau",
-    href: "/leistungen/fassadengeruest",
-    icon: Building2,
-  },
-  {
-    label: "Innengerüst",
-    desc: "Hallen, Kirchen, Treppenhäuser",
-    href: "/leistungen/innengeruest",
-    icon: Layers,
-  },
-  {
-    label: "Treppenturm",
-    desc: "Sicherer Zugang bis 20 m",
-    href: "/leistungen/treppenturm",
-    icon: TowerControl,
-  },
-  {
-    label: "Dachfanggerüst",
-    desc: "Absturzsicherung nach DGUV",
-    href: "/leistungen/dachfanggeruest",
-    icon: Hammer,
-  },
-  {
-    label: "Schutznetze & Geländer",
-    desc: "Auffangnetze, EN 1263",
-    href: "/leistungen/schutznetze-gelaender",
-    icon: ShieldCheck,
-  },
-  {
-    label: "Wetterschutz",
-    desc: "Arbeiten bei jedem Wetter",
-    href: "/leistungen/wetterschutz",
-    icon: CloudRain,
-  },
+const ICONS: Record<string, typeof Building2> = {
+  building: Building2,
+  layers: Layers,
+  tower: TowerControl,
+  hammer: Hammer,
+  shield: ShieldCheck,
+  cloud: CloudRain,
+};
+
+const DEFAULT_SERVICES = [
+  { label: "Fassadengerüst", desc: "Sanierung, Anstrich & Neubau", href: "/leistungen/fassadengeruest", icon: "building" },
+  { label: "Innengerüst", desc: "Hallen, Kirchen, Treppenhäuser", href: "/leistungen/innengeruest", icon: "layers" },
+  { label: "Treppenturm", desc: "Sicherer Zugang bis 20 m", href: "/leistungen/treppenturm", icon: "tower" },
+  { label: "Dachfanggerüst", desc: "Absturzsicherung nach DGUV", href: "/leistungen/dachfanggeruest", icon: "hammer" },
+  { label: "Schutznetze & Geländer", desc: "Auffangnetze, EN 1263", href: "/leistungen/schutznetze-gelaender", icon: "shield" },
+  { label: "Wetterschutz", desc: "Arbeiten bei jedem Wetter", href: "/leistungen/wetterschutz", icon: "cloud" },
 ];
 
 export const Header = () => {
   const COMPANY = useCompany();
+  const { data: nav } = useNavigation();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [megaOpen, setMegaOpen] = useState(false);
@@ -67,6 +48,19 @@ export const Header = () => {
   const megaRef = useRef<HTMLDivElement | null>(null);
   const closeTimer = useRef<number | null>(null);
   const location = useLocation();
+
+  const SERVICES = nav?.megaServices && nav.megaServices.length > 0
+    ? nav.megaServices.map((s) => ({
+        label: s.label ?? "",
+        desc: s.desc ?? "",
+        href: s.href ?? "/leistungen",
+        icon: s.icon ?? "building",
+      }))
+    : DEFAULT_SERVICES;
+  const NAV_ITEMS = nav?.navItems && nav.navItems.length > 0 ? nav.navItems : NAV;
+  const topBarText = nav?.topBarText ?? `${COMPANY.street}, ${COMPANY.zip} ${COMPANY.city}-${COMPANY.district}`;
+  const megaCtaTitle = nav?.megaCtaTitle ?? "Alle Leistungen ansehen";
+  const megaCtaSubtitle = nav?.megaCtaSubtitle ?? "Übersicht aller Wietek-Gerüstlösungen";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -119,7 +113,7 @@ export const Header = () => {
       >
         <div className="container-w h-9 flex items-center justify-between">
           <span className="opacity-70">
-            {COMPANY.street}, {COMPANY.zip} {COMPANY.city}-{COMPANY.district}
+            {topBarText}
           </span>
           <span className="flex items-center gap-5 opacity-90">
             <span>{COMPANY.hours}</span>
@@ -155,7 +149,7 @@ export const Header = () => {
           </Link>
 
           <nav className="hidden lg:flex items-center gap-8">
-            {NAV.map((item) => {
+            {NAV_ITEMS.map((item) => {
               if (item.href === "/leistungen") {
                 const isActive = location.pathname.startsWith("/leistungen");
                 return (
@@ -200,10 +194,10 @@ export const Header = () => {
                             >
                               <div>
                                 <div className="font-display font-extrabold text-sm uppercase tracking-[0.18em]">
-                                  Alle Leistungen ansehen
+                                  {megaCtaTitle}
                                 </div>
                                 <div className="text-xs text-white/80 mt-0.5">
-                                  Übersicht aller Wietek-Gerüstlösungen
+                                  {megaCtaSubtitle}
                                 </div>
                               </div>
                               <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
@@ -212,7 +206,7 @@ export const Header = () => {
                             {/* Service grid */}
                             <ul className="grid grid-cols-2 p-2">
                               {SERVICES.map((s) => {
-                                const Icon = s.icon;
+                                const Icon = ICONS[s.icon] ?? Building2;
                                 return (
                                   <li key={s.href}>
                                     <Link
@@ -284,7 +278,7 @@ export const Header = () => {
       {open && (
         <div className="lg:hidden bg-white border-t border-border animate-fade-in">
           <nav className="container-w py-5 flex flex-col gap-1">
-            {NAV.map((item) => {
+            {NAV_ITEMS.map((item) => {
               if (item.href === "/leistungen") {
                 return (
                   <div key={item.href} className="border-b border-border/60">
@@ -316,11 +310,11 @@ export const Header = () => {
                               onClick={() => setOpen(false)}
                               className="flex items-center justify-between bg-primary text-white px-4 py-3 mb-2 mr-2 rounded-md text-xs font-display font-extrabold uppercase tracking-[0.18em]"
                             >
-                              Alle Leistungen ansehen
+                              {megaCtaTitle}
                               <ArrowRight className="h-4 w-4" />
                             </Link>
                             {SERVICES.map((s) => {
-                              const Icon = s.icon;
+                              const Icon = ICONS[s.icon] ?? Building2;
                               return (
                                 <Link
                                   key={s.href}

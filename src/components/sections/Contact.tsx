@@ -1,26 +1,31 @@
 import { Clock, ExternalLink, Mail, MapPin, Phone } from "lucide-react";
-import { COMPANY, waLink } from "@/lib/site";
-
-const mapQuery = encodeURIComponent(
-  `${COMPANY.street}, ${COMPANY.zip} ${COMPANY.city}`
-);
-const mapEmbed = `https://maps.google.com/maps?q=${mapQuery}&output=embed`;
-const mapOpen = `https://www.google.com/maps/search/?api=1&query=${mapQuery}`;
+import { waLink } from "@/lib/site";
+import { useCompany } from "@/hooks/useCompany";
+import { useHomepage } from "@/hooks/useSanity";
 
 export const Contact = () => {
+  const COMPANY = useCompany();
+  const { data: hp } = useHomepage();
+  const mapQuery = encodeURIComponent(`${COMPANY.street}, ${COMPANY.zip} ${COMPANY.city}`);
+  const mapEmbed = `https://maps.google.com/maps?q=${mapQuery}&output=embed`;
+  const mapOpen = `https://www.google.com/maps/search/?api=1&query=${mapQuery}`;
+
+  const eyebrow = hp?.contactEyebrow ?? "Kontakt";
+  const title = hp?.contactTitle ?? "Direkt mit dem Team sprechen.";
+  const intro = hp?.contactIntro ?? "Lieber direkt anrufen oder schreiben? Wir sind erreichbar – persönlich, schnell und ohne Warteschleife.";
+  const ctaWa = hp?.contactCtaWhatsapp ?? "Per WhatsApp schreiben";
+  const ctaCall = hp?.contactCtaCall ?? "Jetzt anrufen";
+
   return (
     <section id="kontakt" className="py-20 lg:py-28 bg-white">
       <div className="container-w">
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-16">
           <div className="lg:col-span-5">
-            <span className="eyebrow">Kontakt</span>
+            <span className="eyebrow">{eyebrow}</span>
             <h2 className="mt-4 font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-steel leading-tight">
-              Direkt mit dem <span className="hand-underline">Team sprechen.</span>
+              {title}
             </h2>
-            <p className="mt-5 text-concrete">
-              Lieber direkt anrufen oder schreiben? Wir sind erreichbar – persönlich, schnell und
-              ohne Warteschleife.
-            </p>
+            <p className="mt-5 text-concrete">{intro}</p>
 
             <div className="mt-8 space-y-5">
               <ContactRow icon={MapPin} title="Adresse">
@@ -49,10 +54,10 @@ export const Contact = () => {
 
             <div className="mt-8 flex flex-col sm:flex-row gap-3">
               <a href={waLink()} target="_blank" rel="noopener noreferrer" className="btn-primary">
-                Per WhatsApp schreiben
+                {ctaWa}
               </a>
               <a href={`tel:${COMPANY.phonePrimary}`} className="btn-ghost-dark">
-                Jetzt anrufen
+                {ctaCall}
               </a>
             </div>
           </div>

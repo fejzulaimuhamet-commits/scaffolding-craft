@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { ASSETS } from "@/lib/site";
 import { useServiceMap } from "@/hooks/useServiceContent";
+import { useHomepage } from "@/hooks/useSanity";
 
 type Service = {
   slug: string;
@@ -128,9 +129,9 @@ const Card = ({
 
 export const Services = () => {
   const cms = useServiceMap();
+  const { data: hp } = useHomepage();
   const services: Service[] = fallback.map((s) => {
     const c = cms.get(s.slug);
-    // Preserve Stega-encoded strings: only fallback when CMS field is missing.
     return {
       ...s,
       title: c?.title ?? s.title,
@@ -138,22 +139,21 @@ export const Services = () => {
       img: c?.image ?? s.img,
     };
   });
+  const eyebrow = hp?.servicesEyebrow ?? "Unsere Leistungen";
+  const title = hp?.servicesTitle ?? "Hochwertige Gerüstlösungen – für jedes Bauvorhaben.";
+  const intro = hp?.servicesIntro ?? "Von der Einfamilienhaus-Sanierung bis zur Industrieanlage: Wir liefern, bauen und demontieren – komplett und termingerecht.";
   return (
     <section id="leistungen" className="pt-24 lg:pt-32 pb-20 lg:pb-28 bg-white">
       <div className="container-w">
         <div className="grid lg:grid-cols-12 gap-8 items-end mb-12 lg:mb-16">
           <div className="lg:col-span-7">
-            <span className="eyebrow">Unsere Leistungen</span>
+            <span className="eyebrow">{eyebrow}</span>
             <h2 className="mt-4 font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-steel leading-tight">
-              Hochwertige Gerüstlösungen –{" "}
-              <span className="hand-underline">für jedes Bauvorhaben.</span>
+              {title}
             </h2>
           </div>
           <div className="lg:col-span-5">
-            <p className="text-concrete leading-relaxed">
-              Von der Einfamilienhaus-Sanierung bis zur Industrieanlage: Wir liefern, bauen
-              und demontieren – komplett und termingerecht.
-            </p>
+            <p className="text-concrete leading-relaxed">{intro}</p>
           </div>
         </div>
 

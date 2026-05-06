@@ -7,14 +7,16 @@ import { testimonial } from "./testimonial";
 import { career } from "./career";
 import { post } from "./post";
 import { settings } from "./settings";
+import { navigation } from "./navigation";
 
 export const schemaTypes: SchemaTypeDefinition[] = [
   homepage,
+  about,
+  navigation,
+  settings,
   service,
   project,
-  about,
   testimonial,
   career,
   post,
-  settings,
 ];

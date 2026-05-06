@@ -8,6 +8,7 @@ import type {
   Career,
   Post,
   Settings,
+  Navigation,
 } from "./sanityTypes";
 
 const safe = async <T>(promise: Promise<T>, fallback: T): Promise<T> => {
@@ -26,7 +27,23 @@ export const getHomepage = (): Promise<Homepage | null> =>
         _id, heroBadge, heroTitle, heroSubtitle, heroUsps,
         heroCtaPrimary, heroCtaSecondary, heroImage,
         counterProjects, counterYears, counterSquareMeters,
-        statsItems, processSteps
+        statsItems, processSteps,
+        servicesEyebrow, servicesTitle, servicesIntro,
+        industriesEyebrow, industriesTitle, industriesIntro, industriesItems,
+        testimonialsEyebrow, testimonialsTitle, testimonialsIntro, testimonialsBadgeText,
+        serviceAreaEyebrow, serviceAreaTitle, serviceAreaIntro, serviceAreaCities,
+        faqEyebrow, faqTitle, faqIntro, faqItems,
+        contactEyebrow, contactTitle, contactIntro, contactCtaWhatsapp, contactCtaCall
+      }`,
+    ),
+    null,
+  );
+
+export const getNavigation = (): Promise<Navigation | null> =>
+  safe(
+    sanityClient.fetch<Navigation | null>(
+      `*[_type == "navigation"][0]{
+        _id, topBarText, navItems, megaCtaTitle, megaCtaSubtitle, megaServices
       }`,
     ),
     null,
@@ -133,8 +150,14 @@ export const getSettings = (): Promise<Settings | null> =>
   safe(
     sanityClient.fetch<Settings | null>(
       `*[_type == "settings"][0]{
-        _id, phone, whatsapp, email, address, openingHours, googleRating,
-        footerTagline, footerLegal, serviceArea
+        _id, phone, phoneMobile, whatsapp, email, address, openingHours,
+        googleRating, googleRatingCount,
+        footerTagline, footerLegal, serviceArea,
+        footerCtaEyebrow, footerCtaHeadline, footerCtaButton,
+        footerColServicesTitle, footerColServices,
+        footerColLocationsTitle, footerColLocations,
+        footerContactTitle, footerLegalLinks,
+        instagramUrl, facebookUrl
       }`,
     ),
     null,

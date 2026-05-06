@@ -10,8 +10,9 @@ export const useCompany = () => {
   const { data } = useSettings();
 
   const phone = data?.phone?.trim() || COMPANY.phonePrimary;
-  // Display = Sanity-Wert wie eingegeben; sonst Default-Display
   const phoneDisplay = data?.phone?.trim() || COMPANY.phonePrimaryDisplay;
+  const phoneMobile = data?.phoneMobile?.trim() || COMPANY.phoneMobile;
+  const phoneMobileDisplay = data?.phoneMobile?.trim() || COMPANY.phoneMobileDisplay;
   const email = data?.email?.trim() || COMPANY.email;
   const whatsappRaw = data?.whatsapp?.trim();
   const whatsappNumber = whatsappRaw
@@ -20,16 +21,23 @@ export const useCompany = () => {
   const address = data?.address?.trim();
   const hours = data?.openingHours?.trim() || COMPANY.hours;
   const rating = data?.googleRating ?? COMPANY.rating;
+  const ratingCount = data?.googleRatingCount ?? COMPANY.ratingCount;
+  const instagram = data?.instagramUrl?.trim() || COMPANY.instagram;
+  const facebook = data?.facebookUrl?.trim() || COMPANY.facebook;
 
   return {
     ...COMPANY,
     phonePrimary: phone,
     phonePrimaryDisplay: phoneDisplay,
+    phoneMobile,
+    phoneMobileDisplay,
     email,
     whatsappNumber,
     hours,
     rating,
-    // Wenn ein freier Adress-String gepflegt ist, exponieren wir ihn als addressLine.
+    ratingCount,
+    instagram,
+    facebook,
     addressLine:
       address ||
       `${COMPANY.street}, ${COMPANY.zip} ${COMPANY.city}-${COMPANY.district}`,
