@@ -6,6 +6,8 @@ import { ArrowRight, MapPin } from "lucide-react";
 import { PageLayout } from "@/components/PageLayout";
 import { PageHero } from "@/components/shared/PageHero";
 import { ASSETS } from "@/lib/site";
+import { useProjects } from "@/hooks/useSanity";
+import { imageUrl } from "@/lib/sanity";
 
 type Category = "Fassade" | "Innen" | "Industrie" | "Sonderlösung";
 
@@ -16,8 +18,7 @@ interface ProjectItem {
   year: number;
 }
 
-// Bilder aus dem Wietek-Bestand (1..59)
-const projects: ProjectItem[] = [
+const fallbackProjects: ProjectItem[] = [
   { img: ASSETS.slide(1), city: "Hamburg-Bergedorf", type: "Fassade", year: 2025 },
   { img: ASSETS.slide(2), city: "Hamburg-Altona", type: "Fassade", year: 2025 },
   { img: ASSETS.slide(3), city: "Reinbek", type: "Fassade", year: 2024 },
@@ -42,13 +43,29 @@ const projects: ProjectItem[] = [
   { img: ASSETS.slide(45), city: "Hamburg", type: "Industrie", year: 2020 },
 ];
 
+const catMap = (c?: string): Category => {
+  if (c === "fassade") return "Fassade";
+  if (c === "innen") return "Innen";
+  if (c === "dach") return "Industrie";
+  return "Sonderlösung";
+};
+
 const filters: ("Alle" | Category)[] = ["Alle", "Fassade", "Innen", "Industrie", "Sonderlösung"];
 
 const Page = () => {
+  const { data: cms } = useProjects();
+  const projects: ProjectItem[] = cms && cms.length > 0
+    ? cms.map((p) => ({
+        img: imageUrl(p.mainImage, 1200) || ASSETS.slide(1),
+        city: p.location || "",
+        type: catMap(p.category),
+        year: p.year ?? new Date().getFullYear(),
+      }))
+    : fallbackProjects;
   const [active, setActive] = useState<(typeof filters)[number]>("Alle");
   const filtered = useMemo(
     () => (active === "Alle" ? projects : projects.filter((p) => p.type === active)),
-    [active],
+    [active, projects],
   );
 
   return (

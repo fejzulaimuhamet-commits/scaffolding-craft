@@ -1,6 +1,8 @@
 import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ASSETS } from "@/lib/site";
+import { useProjects } from "@/hooks/useSanity";
+import { imageUrl } from "@/lib/sanity";
 
 type Cat = "Alle" | "Privat" | "Gewerbe" | "Industrie";
 
@@ -13,7 +15,7 @@ type Project = {
   img: string;
 };
 
-const projects: Project[] = [
+const fallbackProjects: Project[] = [
   { title: "Zweistöckiges Wohnhaus", city: "Bergedorf", year: "2025", sqm: "180 m²", cat: "Privat", img: ASSETS.slide(1) },
   { title: "Dachsanierung Reihenhaus", city: "Hamburg-Nord", year: "2025", sqm: "120 m²", cat: "Privat", img: ASSETS.slide(18) },
   { title: "Bürogebäude Fassade", city: "Hamburg-City", year: "2024", sqm: "640 m²", cat: "Gewerbe", img: ASSETS.slide(4) },
@@ -25,13 +27,31 @@ const projects: Project[] = [
   { title: "Werkshalle Komplettgerüst", city: "Stade", year: "2023", sqm: "2.100 m²", cat: "Industrie", img: ASSETS.slide(46) },
 ];
 
+const catFromSanity = (c?: string): Project["cat"] => {
+  if (c === "innen" || c === "fassade") return "Privat";
+  if (c === "treppe" || c === "schutz" || c === "wetter") return "Gewerbe";
+  if (c === "dach") return "Industrie";
+  return "Privat";
+};
+
 const cats: Cat[] = ["Alle", "Privat", "Gewerbe", "Industrie"];
 
 export const Projects = () => {
+  const { data: cms } = useProjects();
+  const projects: Project[] = cms && cms.length > 0
+    ? cms.map((p) => ({
+        title: p.title,
+        city: p.location || "",
+        year: String(p.year ?? ""),
+        sqm: p.squareMeters ? `${p.squareMeters} m²` : "",
+        cat: catFromSanity(p.category),
+        img: imageUrl(p.mainImage, 1200) || ASSETS.slide(1),
+      }))
+    : fallbackProjects;
   const [active, setActive] = useState<Cat>("Alle");
   const filtered = useMemo(
     () => (active === "Alle" ? projects : projects.filter((p) => p.cat === active)),
-    [active],
+    [active, projects],
   );
 
   return (
