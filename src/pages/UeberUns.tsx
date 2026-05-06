@@ -161,7 +161,7 @@ function Counter({
 
 const Page = () => {
   const { data: about } = useAboutPage();
-  const teamImg = imageUrl(about?.teamImage, 1200) || ASSETS.slide(5);
+  const teamImg = imageUrl(about?.teamImage, 1200) || ASSETS.about;
   return (
   <PageLayout>
     <Helmet>
@@ -178,7 +178,7 @@ const Page = () => {
       eyebrow="Über uns"
       title="Familiengeführt. Verwurzelt in Hamburg. Seit 2014."
       subtitle="Lernen Sie das Team kennen, das auch dann ans Telefon geht, wenn die Baustelle brennt."
-      backgroundImage={ASSETS.slide(4)}
+      backgroundImage={ASSETS.aboutBg}
       breadcrumb="Über uns"
     />
 
@@ -345,7 +345,7 @@ const Page = () => {
             </div>
             <div className="relative z-10 overflow-hidden bg-steel-deep h-[360px] sm:h-[480px] lg:h-[560px] shadow-[0_30px_60px_-30px_rgba(15,23,42,0.55)]">
               <img
-                src={ASSETS.slide(18)}
+                src={ASSETS.aboutImg2}
                 alt="Wietek Gerüstbau – moderner Aufbau & Layher-Material"
                 loading="lazy"
                 className="absolute inset-0 h-full w-full object-cover"
