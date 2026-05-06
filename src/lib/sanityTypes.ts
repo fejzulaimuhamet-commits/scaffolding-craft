@@ -6,12 +6,18 @@ export type SanityImage = SanityImageSource & { alt?: string };
 
 export interface Homepage {
   _id: string;
+  heroBadge?: string;
   heroTitle?: string;
   heroSubtitle?: string;
+  heroUsps?: string[];
+  heroCtaPrimary?: string;
+  heroCtaSecondary?: string;
   heroImage?: SanityImage;
   counterProjects?: number;
   counterYears?: number;
   counterSquareMeters?: number;
+  statsItems?: { value: string; label: string }[];
+  processSteps?: { title: string; description: string }[];
 }
 
 export interface FAQItem {
@@ -45,8 +51,11 @@ export interface Project {
 
 export interface AboutPage {
   _id: string;
+  headline?: string;
+  intro?: string;
   story?: unknown;
   teamImage?: SanityImage;
+  stats?: { value: string; label: string }[];
   values?: { title: string; description: string }[];
   certifications?: string[];
 }
@@ -90,4 +99,7 @@ export interface Settings {
   address?: string;
   openingHours?: string;
   googleRating?: number;
+  footerTagline?: string;
+  footerLegal?: string;
+  serviceArea?: string;
 }
