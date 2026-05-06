@@ -11,10 +11,6 @@ import { SANITY_PROJECT_ID, SANITY_DATASET } from "@/lib/sanity";
 // aktuell noch nicht auf Lovable zeigt und im Iframe nicht lädt.
 const PREVIEW_ORIGIN = "https://scaffolding-craft.lovable.app";
 
-// Edge function endpoint that validates the one-time preview secret and
-// returns a Sanity read token for draft mode.
-const PREVIEW_SECRET_ENDPOINT =
-  "https://mvmynkefvkarxtxlejqw.supabase.co/functions/v1/sanity-preview";
 
 export const sanityConfig = defineConfig({
   name: "wietek",
