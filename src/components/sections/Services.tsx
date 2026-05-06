@@ -130,11 +130,12 @@ export const Services = () => {
   const cms = useServiceMap();
   const services: Service[] = fallback.map((s) => {
     const c = cms.get(s.slug);
+    // Preserve Stega-encoded strings: only fallback when CMS field is missing.
     return {
       ...s,
-      title: c?.title || s.title,
-      desc: c?.description || s.desc,
-      img: c?.image || s.img,
+      title: c?.title ?? s.title,
+      desc: c?.description ?? s.desc,
+      img: c?.image ?? s.img,
     };
   });
   return (

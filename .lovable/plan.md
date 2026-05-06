@@ -1,29 +1,39 @@
-## Echte Ursache
+## Ziel
 
-Im Screenshot sieht man: das Studio navigiert den iframe direkt zur Supabase-Function-URL und zeigt deren JSON-Response (inkl. Sanity-Token im Klartext). Das ist:
+Edit-Panel öffnet sich beim Klick im Studio, Refresh in der Presentation-View bleibt stabil, Overlays erscheinen.
 
-1. **Der Grund für "Unable to connect"** — der iframe ist eine fremde Origin (supabase.co), die Webseite wird nie geladen, also kann die Comlink-Verbindung des Presentation-Tools nicht zustande kommen.
-2. **Ein Token-Leak** — der private `SANITY_TOKEN` ist im DOM sichtbar.
+## Ursachen (kurz)
 
-`previewMode.enable` muss laut Sanity-Doku ein **same-origin Pfad** sein (z. B. `/`), nicht eine externe URL. Das Studio hängt dann selbst `?sanity-preview-secret=…` an und navigiert den iframe auf `https://scaffolding-craft.lovable.app/?sanity-preview-secret=…`. Unser `bootstrapPreview()` in `main.tsx` fängt diesen Query-Param ab, ruft die Edge-Function per `fetch` auf (Token bleibt im Speicher, nicht im DOM), speichert ihn in `sessionStorage` und lädt in Draft-Mode neu.
+1. `enableVisualEditing()` wurde global in `main.tsx` aufgerufen — ohne History-Adapter, außerhalb des React-Trees. Die Presentation-Comlink-Verbindung kann ohne Router-Sync keine Edit-Klicks an das Studio melden, und beim Iframe-Refresh entsteht eine Reload-Schleife.
+2. `bootstrapPreview()` ruft bei jedem Aufruf mit `?sanity-preview-secret=…` neu `fetch + reload` auf — auch wenn schon ein Token im sessionStorage liegt → White Screen / Loop.
+3. Stega-Marker werden in `Services.tsx` durch das `c?.title || s.title` Pattern verworfen, sobald der CMS-Wert leer ist (was zumindest die Robustheit beeinträchtigt — funktional ok, wird im selben Schritt sauber gemacht).
 
-Das erklärt auch, warum es bei beiden Studios (`wietek-geruestbau.sanity.studio` UND `/studio` lokal) gleich kaputt war — die Config ist beide Male falsch gewesen.
+## Änderungen
 
-## Fix
+### 1. NEU `src/components/SanityVisualEditing.tsx`
 
-In `src/sanity/config.ts`:
+React-Komponente, die nur im Iframe rendert. Lazy-importiert `VisualEditing` aus `@sanity/visual-editing/react` und versorgt es mit einem React-Router-`HistoryAdapter` (subscribe → ref-callback, update → `useNavigate`). Bei Routenwechseln wird der Studio-Side via Callback informiert.
 
-```ts
-previewMode: {
-  enable: "/",   // statt der vollen Supabase-URL
-},
-```
+### 2. `src/App.tsx`
 
-Den jetzt unbenutzten `PREVIEW_SECRET_ENDPOINT` Konstanten entfernen.
+`<SanityVisualEditing />` direkt unter `<BrowserRouter>` einhängen — dadurch bekommt der Adapter `useNavigate`/`useLocation`.
 
-## Danach
+### 3. `src/main.tsx`
 
-- Im eingebetteten Studio (`scaffolding-craft.lovable.app/studio`) ist die Änderung sofort live → Presentation öffnen → iframe lädt jetzt die echte Webseite, Edit-Toggle wird aktivierbar.
-- Damit es auch unter `wietek-geruestbau.sanity.studio` funktioniert, einmalig **`npx sanity deploy`** im lokalen Sanity-Ordner ausführen — das pusht die geänderte Config zum gehosteten Studio.
+`enableVisualEditing()` Aufruf entfernen (wird durch die React-Komponente ersetzt). `bootstrapPreview()`:
+- Wenn schon Token in sessionStorage → nur Query-Params strippen, **kein** fetch, **kein** reload.
+- Sonst wie bisher: validieren, Token speichern, Params strippen, **einmaliger** Reload.
 
-Beides nutzt danach denselben Visual-Editing-Flow.
+### 4. `src/components/sections/Services.tsx`
+
+Fallback-Logik so, dass Stega-Strings erhalten bleiben: nur fallbacken, wenn das CMS-Feld `undefined`/leer ist (statt `||`, das auch falsy Stega-Strings ersetzen würde — defensiv, da Stega-Strings idR truthy sind, aber sauberer).
+
+## Hinweis Folgesession (kein Code in dieser Runde)
+
+Die meisten Sektionen (Hero, About, Stats, Process, Footer) sind hardcodiert und daher **nicht** per Klick editierbar. Visual Editing greift nur dort, wo Texte direkt aus Sanity-Queries (mit aktivem Stega) gerendert werden. Aktuell sind das: Service-Karten-Titel/Beschreibung. Nächster Schritt wäre die Migration der weiteren Sektionen auf Sanity-Schemas, die wir bereits angelegt haben (`homepage`, `about`, `settings`).
+
+## Erwartet danach
+
+- Iframe-Refresh: stabil, kein White Screen, kein Loop.
+- Klick auf Service-Karten-Text im Studio: rechtes Edit-Panel öffnet sich.
+- Console: keine `enableVisualEditing`-Fehler mehr.
