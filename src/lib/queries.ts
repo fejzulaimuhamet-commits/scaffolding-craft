@@ -8,6 +8,7 @@ import type {
   Career,
   Post,
   Settings,
+  Navigation,
 } from "./sanityTypes";
 
 const safe = async <T>(promise: Promise<T>, fallback: T): Promise<T> => {
