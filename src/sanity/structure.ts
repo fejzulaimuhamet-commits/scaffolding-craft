@@ -5,14 +5,18 @@ export const structure = (S: StructureBuilder) =>
     .title("Inhalte")
     .items([
       S.listItem()
-        .title("Homepage")
+        .title("🏠 Homepage")
         .child(S.editor().id("homepage").schemaType("homepage").documentId("homepage")),
       S.listItem()
-        .title("Über uns")
+        .title("📄 Über uns")
         .child(S.editor().id("about").schemaType("about").documentId("about")),
+      S.divider(),
       S.listItem()
-        .title("Einstellungen")
+        .title("⚙️ Globale Einstellungen")
         .child(S.editor().id("settings").schemaType("settings").documentId("settings")),
+      S.listItem()
+        .title("🧭 Navigation")
+        .child(S.editor().id("navigation").schemaType("navigation").documentId("navigation")),
       S.divider(),
       S.documentTypeListItem("service").title("Leistungen"),
       S.documentTypeListItem("project").title("Projekte"),
