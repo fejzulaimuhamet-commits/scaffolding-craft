@@ -76,27 +76,27 @@ export const Footer = () => {
             </div>
           </div>
 
-          <FooterCol
+          <FooterColLinks
             title="Leistungen"
             items={[
-              "Fassadengerüste",
-              "Innengerüste",
-              "Treppentürme",
-              "Dachfanggerüste",
-              "Schutznetze & Geländer",
-              "Wetterschutzdach",
+              { label: "Fassadengerüst Hamburg", to: "/leistungen/fassadengeruest" },
+              { label: "Innengerüst Hamburg", to: "/leistungen/innengeruest" },
+              { label: "Treppenturm Hamburg", to: "/leistungen/treppenturm" },
+              { label: "Dachfanggerüst Hamburg", to: "/leistungen/dachfanggeruest" },
+              { label: "Schutznetze & Geländer", to: "/leistungen/schutznetze-gelaender" },
+              { label: "Wetterschutzdach", to: "/leistungen/wetterschutz" },
             ]}
           />
 
-          <FooterCol
+          <FooterColLinks
             title="Standorte"
             items={[
-              "Gerüstbau Hamburg",
-              "Gerüstbau Bergedorf",
-              "Gerüstbau Harburg",
-              "Gerüstbau Lüneburg",
-              "Gerüstbau Norderstedt",
-              "Gerüstbau Stade",
+              { label: "Gerüstbau Hamburg", to: "/leistungen" },
+              { label: "Gerüstbau Bergedorf", to: "/leistungen" },
+              { label: "Gerüstbau Harburg", to: "/leistungen" },
+              { label: "Gerüstbau Lüneburg", to: "/leistungen" },
+              { label: "Gerüstbau Norderstedt", to: "/leistungen" },
+              { label: "Gerüstbau Stade", to: "/leistungen" },
             ]}
           />
 
@@ -140,17 +140,23 @@ export const Footer = () => {
   );
 };
 
-const FooterCol = ({ title, items }: { title: string; items: string[] }) => (
+const FooterColLinks = ({
+  title,
+  items,
+}: {
+  title: string;
+  items: { label: string; to: string }[];
+}) => (
   <div>
     <div className="font-display font-extrabold uppercase tracking-wider text-sm mb-5">
       {title}
     </div>
     <ul className="space-y-2.5 text-sm text-white/70">
       {items.map((it) => (
-        <li key={it}>
-          <a href="#" className="hover:text-white transition-colors">
-            {it}
-          </a>
+        <li key={it.label}>
+          <Link to={it.to} className="hover:text-white transition-colors">
+            {it.label}
+          </Link>
         </li>
       ))}
     </ul>
