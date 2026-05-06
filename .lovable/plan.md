@@ -1,51 +1,42 @@
-## Empfehlung: Sanity behalten + Visual Editing aktivieren
+## Root cause
 
-Sanity ist bereits eingerichtet, alle Inhalte fließen schon über `useSanity`-Hooks. Sanity bietet **Visual Editing** (offizielles Feature seit 2024): Der Kunde sieht die echte Live-Website mit kleinen Stift-Symbolen über jedem Text/Bild — Klick → Sidebar zum Bearbeiten → Speichern → Live-Update. Kein zweites CMS, keine AI, keine Lovable-Oberfläche.
+The runtime error in the iframe is the actual problem:
 
-Alternativen wie Storyblok, Builder.io oder TinaCMS würden einen kompletten Umbau bedeuten und bieten dasselbe Ergebnis. Bei Sanity bleiben heißt: ~1 Tag Arbeit statt mehrerer Tage Migration.
+```
+TypeError: (0 , import_react11.useEffectEvent) is not a function
+  at usePerspectiveSync (chunk-…:35011)
+  at Overlays (chunk-…:35265)
+```
 
-### Was der Kunde am Ende sieht
+`@sanity/visual-editing@5.3.4` (currently installed) uses React 19's `useEffectEvent` hook. This project runs **React 18.3.1**, so the hook does not exist → `Overlays` crashes immediately when mounted inside the iframe.
 
-1. Login auf `https://wietek-geruestbau.sanity.studio` (eigene URL, kein Lovable-Branding, kein AI-Chat).
-2. Linke Hälfte: das **Presentation-Tool** mit der echten Website. Rechte Hälfte: das Bearbeitungsformular.
-3. Hover über jeden Text/jedes Bild → Stift-Symbol → Klick → editieren → Speichern → Änderung sofort sichtbar.
-4. Kein Code, keine technischen Begriffe, eine einzige Login-Seite.
+Because the overlay/comlink layer never finishes mounting, the Studio's Presentation tool cannot establish the postMessage channel to the site → it shows **"Unable to connect"**, and the **Edit toggle stays disabled** (the toggle only enables once a comlink connection is reported).
 
-### Umsetzungs-Schritte
+So this is not a CSP/X-Frame-Options issue — the iframe loads fine. It's a React-version mismatch in the visual-editing SDK.
 
-**1. Sanity Studio deployen** (einmalig, lokal vom Kunden-unabhängigen Rechner)
-- `npx sanity deploy` mit Hostname `wietek-geruestbau` → erzeugt `https://wietek-geruestbau.sanity.studio`.
-- In `sanity.io/manage` → Project `d683vf4r` → API → CORS Origins: Live-Domain + Studio-Domain mit "Allow credentials" hinzufügen.
+## Fix
 
-**2. Visual Editing im Frontend aktivieren**
-- Pakete hinzufügen: `@sanity/visual-editing`, `@sanity/preview-url-secret`.
-- `enableVisualEditing()` einmalig in `src/main.tsx` aufrufen — rendert die Edit-Overlays nur, wenn die Seite aus dem Studio heraus geöffnet wird, sonst unsichtbar für normale Besucher.
-- In allen GROQ-Queries (`src/lib/queries.ts`) **Source Maps** aktivieren: `client.fetch(query, params, { perspective: 'previewDrafts', stega: true })` für die Studio-Vorschau, normaler Modus für Besucher.
-- Eine `data-sanity` Markierung ist nicht nötig — Sanity nutzt unsichtbare Stega-Encoding-Marker im Text, dadurch wird **jeder Text auf jeder bestehenden Seite automatisch klickbar**.
+Downgrade `@sanity/visual-editing` to the last React 18-compatible major (v2.x). The public API we use (`enableVisualEditing()` with no args) is identical between v2 and v5.
 
-**3. Presentation-Tool im Studio konfigurieren**
-- In `src/sanity/config.ts` das `presentationTool` aus `sanity/presentation` zu den Plugins hinzufügen mit `previewUrl: { origin: 'https://scaffolding-craft.lovable.app', preview: '/' }`.
-- Dokument-Locations definieren (welche Sanity-Dokumente zu welchen URLs gehören), damit das Studio beim Bearbeiten eines Service automatisch zur passenden Seite navigiert.
+```
+@sanity/visual-editing: ^5.3.4  →  ^2.13.16
+```
 
-**4. Preview-Token für Drafts** (damit der Kunde unveröffentlichte Änderungen sieht)
-- In Sanity Manage einen Read-Token erzeugen, in Lovable Cloud als Secret `SANITY_PREVIEW_TOKEN` ablegen.
-- Kleine Edge Function `/api/preview` validiert den Token via `@sanity/preview-url-secret` und schaltet im Browser den Draft-Modus (Cookie) frei.
+No code changes required in `src/main.tsx` — the dynamic `import("@sanity/visual-editing")` and `enableVisualEditing()` call work the same way.
 
-**5. Texte/Bilder, die noch hardgecodet sind, ins CMS übertragen**
-- Aktuell sind viele Sektionen (Hero-Texte einzelner Services, About-Sektion, Footer) teils statisch im Code. Audit: in jedem Page/Section-Component prüfen, ob Texte aus `useSanity`-Hook oder aus String-Literalen kommen.
-- Für hardgecodete Inhalte: passendes Schema-Feld ergänzen (z.B. `homepage.servicesIntro`) und im Component einsetzen.
-- Nur was im CMS liegt, ist klickbar editierbar.
+## Steps
 
-**6. Kunden-Onboarding**
-- In Sanity Manage einen User mit Rolle "Editor" einladen (E-Mail des Kunden). Editor-Rolle = darf bearbeiten + veröffentlichen, sieht aber keine API-Schlüssel/Schema-Settings.
-- Kurze Anleitung (1 Seite): Login-URL, "Klick auf Text → bearbeiten → Publish-Button".
+1. **Downgrade the package** in `package.json` and reinstall:
+   - Replace `"@sanity/visual-editing": "^5.3.4"` with `"@sanity/visual-editing": "^2.13.16"`.
+2. **Verify** in the running preview that the runtime error is gone (no more `useEffectEvent` trace in the console).
+3. **Re-test in Sanity Studio**:
+   - Open `https://wietek-geruestbau.sanity.studio` → Presentation.
+   - The "Unable to connect" banner should disappear once the iframe loads and the overlay mounts.
+   - The **Edit** toggle in the top-left of the Presentation pane should become clickable.
+   - Clicking it triggers the preview-secret flow → our edge function `sanity-preview` validates and returns the read token → the page reloads in draft mode.
 
-### Technische Details
+## Notes / out of scope
 
-- **Kein Lovable-Branding sichtbar:** Studio läuft auf `*.sanity.studio` (eigene Subdomain). Die Live-Site, die der Kunde im Presentation-Tool sieht, ist die published Lovable-URL bzw. eine Custom Domain — das Lovable-Badge lässt sich über `publish_settings` ausblenden (Pro-Plan nötig) oder per Custom Domain umgehen.
-- **Kein AI-Chat:** Sanity Studio hat keinen AI-Chat. Lovable wird vom Kunden nie geöffnet.
-- **Sicherheit:** Preview-Token-Validierung verhindert, dass Externe in den Draft-Modus gelangen.
-- **Bestehender `/studio`-Route** in der App kann bleiben oder entfernt werden — die deployte Studio-URL ist die saubere Lösung für den Kunden.
-
-### Aufwand
-~4–8 Stunden je nachdem wie viel Inhalt aktuell hardgecodet ist und ins Schema überführt werden muss.
+- `vercel.json` headers are not used by Lovable hosting (`scaffolding-craft.lovable.app` and `wietek-geruestbau.de` if pointed at Lovable). They were a no-op for the iframe issue. We can leave them in place for any future Vercel deploy; they don't hurt.
+- If, after the downgrade, "Unable to connect" still appears on the **published** site only (not the Lovable preview), that would be a separate `X-Frame-Options` issue from Lovable's edge — we'd address it then. The runtime error fix is the prerequisite either way.
+- The hard-coded text migration into Sanity schema fields (so click-to-edit actually has fields to edit) is still pending from the earlier plan and is not part of this fix.
