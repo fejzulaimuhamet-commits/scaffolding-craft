@@ -29,7 +29,7 @@ const Page = () => (
     }}
     audiences={{
       eyebrow: "Einsatzbereiche",
-      headline: "Treppenturm für Bau & Industrie",
+      headline: "Treppenturm für Bau & Öffentliches Recht",
       items: [
         { icon: Building2, title: "Baustellen", desc: "Hauptzugang für Personal, Material und Bauleitung." },
         { icon: HardHat, title: "Industrie", desc: "Wartungszugang an Anlagen, Tanks und Maschinen." },
