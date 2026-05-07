@@ -21,7 +21,7 @@ const fallbackProjects: Project[] = [
   { title: "Fassade Bürohaus", city: "Hamburg-City", year: "2024", sqm: "", cat: "Gewerbe", img: ASSETS.slide(4) },
   { title: "Neubau ", city: "Hamburg", year: "2024", sqm: "", cat: "Privat", img: ASSETS.slide(34) },
   { title: "Wohnhaus Fassade", city: "Harburg", year: "2024", sqm: "", cat: "Gewerbe", img: ASSETS.slide(22) },
-  { title: "Neubau", city: "Lüneburg", year: "2024", sqm: "", cat: "Gewerbe", img: ASSETS.slide(28) },
+  { title: "Neubau", city: "Lüneburg", year: "2024", sqm: "", cat: "Privat", img: ASSETS.slide(28) },
   { title: "Fassade Altbau", city: "Eppendorf", year: "2024", sqm: "", cat: "Gewerbe", img: ASSETS.slide(15) },
   { title: "Fassade Einfamilienhaus", city: "St. Pauli", year: "2023", sqm: "", cat: "Gewerbe", img: ASSETS.slide(40) },
   { title: "Kirche Sanierung", city: "Stade", year: "2023", sqm: "", cat: "Gewerbe", img: ASSETS.slide(46) },
