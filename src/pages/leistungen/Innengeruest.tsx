@@ -61,7 +61,7 @@ const Page = () => (
     faq={[
       {
         q: "Wie hoch kann ein Innengerüst sein?",
-        a: "Wir bauen Raumgerüste in praktisch jeder Höhe – vom 3 m hohen Wohnraum bis zur 25 m hohen Industriehalle.",
+        a: "Wir bauen Raumgerüste in praktisch jeder Höhe – vom 3 m hohen Wohnraum bis zur 25 m hohen öffentlichen Halle.",
       },
       {
         q: "Werden Böden geschützt?",
