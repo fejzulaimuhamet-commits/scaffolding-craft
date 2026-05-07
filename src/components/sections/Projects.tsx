@@ -4,7 +4,7 @@ import { ASSETS } from "@/lib/site";
 import { useProjects } from "@/hooks/useSanity";
 import { imageUrl } from "@/lib/sanity";
 
-type Cat = "Alle" | "Gewerbe" | "Privat";
+type Cat = "Alle" | "Gewerbe" | "Privat" | "Kirche / Religionsgemeinschaft";
 
 type Project = {
   title: string;
@@ -24,7 +24,7 @@ const fallbackProjects: Project[] = [
   { title: "Neubau", city: "Lüneburg", year: "2024", sqm: "", cat: "Privat", img: ASSETS.slide(28) },
   { title: "Fassade Altbau", city: "Eppendorf", year: "2024", sqm: "", cat: "Gewerbe", img: ASSETS.slide(15) },
   { title: "Fassade Einfamilienhaus", city: "St. Pauli", year: "2023", sqm: "", cat: "Gewerbe", img: ASSETS.slide(40) },
-  { title: "Kirche Sanierung", city: "Stade", year: "2023", sqm: "", cat: "Gewerbe", img: ASSETS.slide(46) },
+  { title: "Kirche Sanierung", city: "Stade", year: "2023", sqm: "", cat: "Kirche / Religionsgemeinschaft", img: ASSETS.slide(46) },
 ];
 
 const catFromSanity = (c?: string): Project["cat"] => {
@@ -34,7 +34,7 @@ const catFromSanity = (c?: string): Project["cat"] => {
   return "Gewerbe";
 };
 
-const cats: Cat[] = ["Alle", "Gewerbe", "Privat"];
+const cats: Cat[] = ["Alle", "Gewerbe", "Privat", "Kirche / Religionsgemeinschaft"];
 
 export const Projects = () => {
   const { data: cms } = useProjects();
