@@ -22,7 +22,7 @@ const Page = () => (
       headline: "Was ist ein Treppenturm und wann wird er benötigt?",
       paragraphs: [
         "Ein Treppenturm ist eine freistehende Gerüstkonstruktion mit integrierter Treppe – die sicherste und komfortabelste Art, Höhen auf Baustellen zu überwinden. Im Gegensatz zu Leitern erlaubt er Material­transport, hohen Personenverkehr und ist auch für Besucher und Bauherren freigegeben.",
-        "Wir liefern Treppentürme für Neubau, Sanierung, Veranstaltungen und Industrieanlagen in Hamburg und Norddeutschland – montiert, geprüft und freigegeben.",
+        "Wir liefern Treppentürme für Neubau, Sanierung, Veranstaltungen und öffentliche Gebäude in Hamburg und Norddeutschland – montiert, geprüft und freigegeben.",
       ],
       image: ASSETS.placeholder.treppe,
       imageAlt: "Treppenturm Wietek Gerüstbau Hamburg",
