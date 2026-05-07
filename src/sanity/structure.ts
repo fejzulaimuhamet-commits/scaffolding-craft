@@ -1,5 +1,9 @@
 import type { StructureBuilder } from "sanity/structure";
 
+/**
+ * Strukturierte Sidebar im Studio – nur kundenrelevante Bereiche sind sichtbar.
+ * Navigation-Schema ist absichtlich nicht aufgelistet (Header wird im Code gepflegt).
+ */
 export const structure = (S: StructureBuilder) =>
   S.list()
     .title("Inhalte")
@@ -11,16 +15,13 @@ export const structure = (S: StructureBuilder) =>
         .title("📄 Über uns")
         .child(S.editor().id("about").schemaType("about").documentId("about")),
       S.divider(),
-      S.listItem()
-        .title("⚙️ Globale Einstellungen")
-        .child(S.editor().id("settings").schemaType("settings").documentId("settings")),
-      S.listItem()
-        .title("🧭 Navigation")
-        .child(S.editor().id("navigation").schemaType("navigation").documentId("navigation")),
+      S.documentTypeListItem("service").title("🛠 Leistungen"),
+      S.documentTypeListItem("project").title("📁 Projekte"),
+      S.documentTypeListItem("testimonial").title("⭐ Bewertungen"),
+      S.documentTypeListItem("career").title("💼 Stellen"),
+      S.documentTypeListItem("post").title("📰 Blog"),
       S.divider(),
-      S.documentTypeListItem("service").title("Leistungen"),
-      S.documentTypeListItem("project").title("Projekte"),
-      S.documentTypeListItem("testimonial").title("Bewertungen"),
-      S.documentTypeListItem("career").title("Karriere"),
-      S.documentTypeListItem("post").title("Blog"),
+      S.listItem()
+        .title("📞 Kontaktdaten")
+        .child(S.editor().id("settings").schemaType("settings").documentId("settings")),
     ]);

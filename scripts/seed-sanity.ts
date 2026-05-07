@@ -22,7 +22,7 @@ const client = createClient({
 const homepage = {
   _id: "homepage",
   _type: "homepage",
-  heroBadge: "5,0 ★ Google · Familiengeführt seit 2014",
+  heroBadge: "Familiengeführt seit 2014",
   heroTitle: "Gerüstbau in Hamburg – sicher, pünktlich, ab 24 Std. einsatzbereit.",
   heroSubtitle:
     "Familiengeführter Gerüstbau aus Hamburg-Bergedorf. Wir liefern, montieren und demontieren Gerüste für Privathaushalte, Handwerker und Industrie – schnell, sauber und mit echtem Wort.",
