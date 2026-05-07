@@ -54,7 +54,12 @@ export function SanityVisualEditing() {
 
   return (
     <Suspense fallback={null}>
-      <VisualEditingComponent history={history} portal />
+      <VisualEditingComponent
+        history={history}
+        portal
+        zIndex={9999}
+        refresh={() => {}}
+      />
     </Suspense>
   );
 }
