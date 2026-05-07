@@ -58,7 +58,6 @@ export function SanityVisualEditing() {
         history={history}
         portal
         zIndex={9999}
-        refresh={() => {}}
       />
     </Suspense>
   );
