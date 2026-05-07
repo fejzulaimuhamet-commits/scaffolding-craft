@@ -1,39 +1,59 @@
-## Problem
+## Plan: Anfragen per E-Mail mit Web3Forms
 
-Viele Texte auf der Live-Seite sind im Sanity Studio (Visual Editing / Presentation Mode) **nicht klickbar**, obwohl Stega aktiv ist. Grund: Im Code stehen überall `??`-Fallback-Strings (z. B. `hp?.heroTitle ?? "Gerüstbau in Hamburg…"`). Wenn das Sanity-Feld leer ist, rendert React den **hartkodierten String** — dieser hat keine Stega-Markierung und ist deshalb nicht editierbar. Auch das Anlegen der Felder im Studio ist mühsam, weil der Kunde nicht weiß, was reingehört.
+Beide Formulare (`RequestWizard` auf Kontakt/Startseite + ausführliches `Anfrage`-Formular) senden ihre Daten per `fetch` an die Web3Forms-API. Die Mail landet direkt bei `info@wietek-geruestbau.de`. Kein DNS, keine Datenbank, kein Backend.
 
-## Lösung (zwei Schritte, gemeinsam umgesetzt)
+### Was du einmalig tust (2 Min)
+1. Auf https://web3forms.com → „Create Access Key" → `info@wietek-geruestbau.de` eintragen
+2. Bestätigungsmail öffnen → Klick auf Bestätigen
+3. Den Access Key (sieht aus wie `xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`) kopieren und mir geben
 
-### Schritt 1 – Sanity-Dokument mit allen aktuellen Texten befüllen
-Das `homepage`-Dokument (sowohl `published` als auch `drafts.homepage`) wird per MCP-Patch mit den exakten Default-Texten aus dem Code befüllt. Felder:
+Den Key trage ich dann in eine zentrale Konstante ein. Es ist ein **publishable** Key – darf im Code stehen, kein Geheimnis.
 
-- Hero: `heroBadge`, `heroTitle`, `heroCtaPrimary`, `heroCtaSecondary`
-- Industries: `industriesEyebrow`, `industriesTitle`, `industriesIntro`
-- Services: `servicesEyebrow`, `servicesTitle`, `servicesIntro`
-- ServiceArea: `serviceAreaEyebrow`, `serviceAreaTitle`, `serviceAreaIntro`
-- Testimonials: `testimonialsEyebrow` (Titel & Badge bereits gesetzt)
-- FAQ: `faqEyebrow`, `faqTitle`, `faqIntro`
-- Contact: `contactEyebrow`, `contactTitle`, `contactIntro`, `contactCtaWhatsapp`, `contactCtaCall`
+### Was ich im Code mache
 
-Ergebnis: Jedes Textelement hat einen echten Sanity-Wert → wird mit Stega-Marker gerendert → im Studio klickbar.
+**Neue Datei `src/lib/web3forms.ts`**
+- Konstante `WEB3FORMS_KEY` (dein Access Key)
+- Hilfsfunktion `submitToWeb3Forms(data, subject)`:
+  - POST an `https://api.web3forms.com/submit`
+  - Felder: `access_key`, `subject`, `from_name: "Wietek Website"`, alle Formularwerte als lesbare Strings
+  - Honeypot-Feld `botcheck` (Spamschutz, Web3Forms-Standard)
+  - Wirft Error bei Fehlerresponse
 
-### Schritt 2 – Code-Fallbacks in den Sektionen entfernen
-In den 7 Sektions-Dateien wird `hp?.feld ?? "…"` zu `hp?.feld` (bzw. `hp?.feld || ""`). Betroffen:
+**`src/components/sections/RequestWizard.tsx`**
+- `onSubmit`: statt Dummy-`setTimeout` → `submitToWeb3Forms(data, "Neue Schnellanfrage – Wietek Website")` aufrufen
+- Erfolg → wie bisher Step 3 + Toast
+- Fehler → Toast mit Fallback-Hinweis (Telefon/WhatsApp anzeigen)
 
-- `src/components/sections/Hero.tsx`
-- `src/components/sections/Industries.tsx`
-- `src/components/sections/Services.tsx`
-- `src/components/sections/ServiceArea.tsx`
-- `src/components/sections/Testimonials.tsx`
-- `src/components/sections/FAQ.tsx`
-- `src/components/sections/Contact.tsx`
+**`src/pages/Anfrage.tsx`**
+- `onSubmit`: gleiche Funktion mit ausführlichen Feldern (Service-Liste, Adresse, Termine, Notizen)
+- Hinweis: Datei-Uploads werden bei Web3Forms im freien Tarif **nicht** mitgeschickt → wir erwähnen im Erfolgs-Screen, dass Anhänge bei Bedarf per Mail an `info@wietek-geruestbau.de` nachgereicht werden können. (Falls du Uploads später brauchst → upgrade auf Option B.)
 
-Damit gibt es keine "stillen" Hartkodierungen mehr — was im Studio steht, wird angezeigt; was leer ist, ist sichtbar leer (und der Kunde merkt sofort, dass er es füllen soll).
+### So sieht die E-Mail bei dir aus
+```
+Von:     Web3Forms <noreply@web3forms.com>
+An:      info@wietek-geruestbau.de
+Betreff: Neue Schnellanfrage – Wietek Website
 
-### Schritt 3 – Verifikation
-- Studio öffnen (`wietek-geruestbau.sanity.studio`) → Presentation Mode → Homepage → mit der Maus über jedes Textelement fahren und prüfen, dass der blaue Edit-Rahmen erscheint.
-- Falls einzelne Items in Listen (Industries-Cards, Services-Cards, Testimonials, City-Tags) noch nicht editierbar sind: separat im nächsten Schritt angehen (das sind Array-Items mit eigener Schema-Struktur).
+Name: Max Mustermann
+Telefon: 0172 6666297
+E-Mail: max@example.de
+Art: Fassadengerüst
+Höhe: ca. 8 m
+Fläche: 120 m²
+PLZ/Ort: 21037 Hamburg
+…
+```
+Antworten direkt in deinem Mailprogramm geht – das Reply-To wird auf die E-Mail des Kunden gesetzt.
 
-## Hinweis
+### Was du nicht tust
+- Keine DNS-Änderungen
+- Keine Subdomain
+- Kein Account verknüpfen außer Mail-Bestätigung
+- Keine Backend-/Cloud-Einrichtung
 
-Dieser Plan adressiert die **statischen Textfelder**. Falls auch Listen-Items (Karten, Cities, Testimonial-Zitate) editierbar sein sollen, sage mir Bescheid — dort braucht es eine zusätzliche Runde, weil der Code dort eigene Default-Arrays hat.
+### Limits Free-Tarif
+250 Submissions/Monat kostenlos. Reicht für die Praxis locker; falls überschritten → Upgrade ($5/Monat) oder Wechsel auf Option B.
+
+---
+
+**Nach deiner Freigabe brauche ich nur den Access Key, dann baue ich das in einem Rutsch ein.**
