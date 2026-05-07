@@ -1,46 +1,31 @@
-## Root Cause gefunden
+## Echte Root Cause (3. Versuch — diesmal mit Beweis)
 
-In `vercel.json` ist gesetzt:
+Die Live-Site läuft, lädt Sanity-Daten korrekt (Console: `[Sanity] ✅ Verbindung OK – Dokumente: 3`), Headers sind perfekt (kein X-Frame-Options, CSP erlaubt `*.sanity.studio`).
+
+**Das eigentliche Problem:** In `src/sanity/config.ts` zeigt die `presentationTool`-Konfiguration auf die **falsche Origin**:
+
+```ts
+const PREVIEW_ORIGIN = "https://scaffolding-craft.lovable.app";  // ← falsch
 ```
-"X-Frame-Options": "ALLOW-FROM https://wietek-geruestbau.sanity.studio"
+
+Das Studio versucht den Presentation-Handshake mit Lovable zu machen, nicht mit Vercel/Strato. Auch die URL `wietek-geruestbau.de` fehlt komplett in `allowOrigins`. Deshalb: "Unable to connect", obwohl alles andere funktioniert.
+
+## Fix (1 Datei: `src/sanity/config.ts`)
+
+```ts
+const PREVIEW_ORIGIN =
+  (import.meta.env.VITE_PREVIEW_ORIGIN as string | undefined) ||
+  "https://www.wietek-geruestbau.de";
+
+// allowOrigins erweitern um:
+//   https://www.wietek-geruestbau.de
+//   https://wietek-geruestbau.de
 ```
 
-`X-Frame-Options: ALLOW-FROM` ist **deprecated** und wird von Chrome/Edge/Firefox wie `DENY` behandelt — d.h. **kein** iframe-Embedding ist erlaubt, egal von wo. Deshalb zeigt das Sanity-Studio "Unable to connect", obwohl die Site live ist und CORS stimmt.
-
-Die `Content-Security-Policy: frame-ancestors` darunter ist bereits korrekt gesetzt und wird von modernen Browsern bevorzugt — wir müssen nur den schädlichen X-Frame-Options-Header **entfernen**.
-
-## Fix (1 Datei)
-
-**`vercel.json`** — `X-Frame-Options`-Header entfernen, CSP `frame-ancestors` bleibt unverändert (erlaubt schon `https://*.sanity.studio`).
-
-Neue `vercel.json`:
-```json
-{
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
-  ],
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "no-cache, no-store, must-revalidate"
-        },
-        {
-          "key": "Content-Security-Policy",
-          "value": "frame-ancestors 'self' https://*.sanity.studio https://wietek-geruestbau.sanity.studio http://localhost:3333"
-        }
-      ]
-    }
-  ]
-}
-```
+Lovable/Vercel-URLs bleiben in `allowOrigins` für Dev/Preview, aber Default-Origin wird die echte Live-Domain.
 
 ## Was danach passiert
-
-1. Lovable pusht den Fix automatisch zu GitHub
-2. Vercel deployt automatisch (1–2 Min)
-3. Sanity Studio → Presentation → Refresh → Vorschau lädt die Live-Site
-
-Keine weiteren Schritte nötig. Kein Studio-Redeploy, keine DNS-Änderung, kein Domain-Verbinden.
+1. Lovable pusht zu GitHub
+2. Vercel deployt das neue Studio-Bundle (das Studio läuft auch auf der Live-Site unter `/studio`, falls genutzt — Hauptsache der Code im Studio-Bundle wird neu deployt)
+3. **Wichtig:** Du musst danach **einmal** `npx sanity deploy` ausführen, damit `wietek-geruestbau.sanity.studio` die neue Config bekommt — denn das gehostete Studio nutzt das gebuildete Studio-Bundle, nicht das von Vercel
+4. Refresh im Studio → Presentation funktioniert

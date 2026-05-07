@@ -6,12 +6,11 @@ import { schemaTypes } from "./schemas";
 import { structure } from "./structure";
 import { SANITY_PROJECT_ID, SANITY_DATASET } from "@/lib/sanity";
 
-// Origin der Live-Website, die im Presentation Tool als Vorschau geladen wird.
-// MUSS auf die published Lovable-URL zeigen (dort läuft unsere App).
-// Die `id-preview--…lovable.app` URL hostet ein fremdes Projekt — nicht nutzen.
+// Origin der Live-Website (Vercel + Strato Domain wietek-geruestbau.de),
+// die im Presentation Tool als Vorschau geladen wird.
 const PREVIEW_ORIGIN =
   (import.meta.env.VITE_PREVIEW_ORIGIN as string | undefined) ||
-  "https://scaffolding-craft.lovable.app";
+  "https://www.wietek-geruestbau.de";
 
 
 export const sanityConfig = defineConfig({
@@ -23,6 +22,8 @@ export const sanityConfig = defineConfig({
   plugins: [
     presentationTool({
       allowOrigins: [
+        "https://www.wietek-geruestbau.de",
+        "https://wietek-geruestbau.de",
         "https://id-preview--e106eeef-8ae8-469b-b64d-dae180e6aade.lovable.app",
         "https://scaffolding-craft.lovable.app",
         "https://wietek-geruestbau.sanity.studio",
