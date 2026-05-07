@@ -161,13 +161,46 @@ const Anfrage = () => {
 
   const onSubmit = async (values: FormData) => {
     setSubmitting(true);
-    await new Promise((r) => setTimeout(r, 800));
-    setSubmitting(false);
-    setSubmitted(true);
-    toast.success("Anfrage versendet!", {
-      description: "Wir melden uns innerhalb von 24 Stunden.",
-    });
-    console.info("Anfrage (nicht versendet):", { ...values, files: files.map((f) => f.name) });
+    try {
+      await submitToWeb3Forms({
+        subject: "Neue Anfrage – Wietek Website (ausführlich)",
+        replyTo: values.email,
+        fields: {
+          "Geschäftsbeziehung": values.relation,
+          "Name": `${values.firstName} ${values.lastName}`,
+          "Firma": values.company || "—",
+          "E-Mail": values.email,
+          "Telefon": values.phone,
+          "Adresse": `${values.street}, ${values.zip} ${values.city}`,
+          "Leistungen": values.services.join(", "),
+          "Bauvorhaben-Adresse": values.siteAddress || "(wie oben)",
+          "Einrüstfläche (m²)": values.sqm,
+          "Höhe (m)": values.height,
+          "Parkmöglichkeiten": values.parking,
+          "Starttermin": values.startDate
+            ? format(values.startDate, "PPP", { locale: de })
+            : "—",
+          "Terminart": values.appointment,
+          "Voraussichtliche Dauer": values.duration,
+          "Projektdetails": values.notes || "—",
+          "Anhänge": files.length
+            ? `${files.length} Datei(en): ${files.map((f) => f.name).join(", ")} – bitte separat per E-Mail an info@wietek-geruestbau.de senden.`
+            : "keine",
+          "Quelle": "Anfrage-Seite (ausführliches Formular)",
+        },
+      });
+      setSubmitted(true);
+      toast.success("Anfrage versendet!", {
+        description: "Wir melden uns innerhalb von 24 Stunden.",
+      });
+    } catch (err) {
+      console.error("Web3Forms submit failed:", err);
+      toast.error("Senden fehlgeschlagen", {
+        description: "Bitte rufen Sie uns kurz an oder schreiben uns per WhatsApp.",
+      });
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const handleFiles = (list: FileList | null) => {
