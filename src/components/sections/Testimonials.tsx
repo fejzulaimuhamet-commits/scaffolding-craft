@@ -34,8 +34,8 @@ export const Testimonials = () => {
   const isLoading = false;
   const reviews = fallbackReviews;
   const eyebrow = "Was Kunden sagen";
-  const titleText = `${COMPANY.rating}/5 Sterne aus ${COMPANY.ratingCount}+ Bewertungen.`;
-  const badge = "Top-bewertet auf Google & ProvenExpert";
+  const titleText = "Bewertungen";
+  const badge = "Top-Zufriedenheit";
   return (
     <section className="py-20 lg:py-28 bg-plaster">
       <div className="container-w">
