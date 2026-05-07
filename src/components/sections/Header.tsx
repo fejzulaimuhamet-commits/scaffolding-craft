@@ -18,7 +18,6 @@ import {
 import { NavLink } from "@/components/NavLink";
 import { ASSETS, NAV } from "@/lib/site";
 import { useCompany } from "@/hooks/useCompany";
-import { useNavigation } from "@/hooks/useSanity";
 
 const ICONS: Record<string, typeof Building2> = {
   building: Building2,
@@ -29,7 +28,7 @@ const ICONS: Record<string, typeof Building2> = {
   cloud: CloudRain,
 };
 
-const DEFAULT_SERVICES = [
+const SERVICES = [
   { label: "Fassadengerüst", desc: "Sanierung, Anstrich & Neubau", href: "/leistungen/fassadengeruest", icon: "building" },
   { label: "Innengerüst", desc: "Hallen, Kirchen, Treppenhäuser", href: "/leistungen/innengeruest", icon: "layers" },
   { label: "Treppenturm", desc: "Sicherer Zugang bis 20 m", href: "/leistungen/treppenturm", icon: "tower" },
@@ -38,9 +37,12 @@ const DEFAULT_SERVICES = [
   { label: "Wetterschutz", desc: "Arbeiten bei jedem Wetter", href: "/leistungen/wetterschutz", icon: "cloud" },
 ];
 
+const NAV_ITEMS = NAV;
+const MEGA_CTA_TITLE = "Alle Leistungen ansehen";
+const MEGA_CTA_SUBTITLE = "Übersicht aller Wietek-Gerüstlösungen";
+
 export const Header = () => {
   const COMPANY = useCompany();
-  const { data: nav } = useNavigation();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [megaOpen, setMegaOpen] = useState(false);
@@ -49,18 +51,9 @@ export const Header = () => {
   const closeTimer = useRef<number | null>(null);
   const location = useLocation();
 
-  const SERVICES = nav?.megaServices && nav.megaServices.length > 0
-    ? nav.megaServices.map((s) => ({
-        label: s.label ?? "",
-        desc: s.desc ?? "",
-        href: s.href ?? "/leistungen",
-        icon: s.icon ?? "building",
-      }))
-    : DEFAULT_SERVICES;
-  const NAV_ITEMS = nav?.navItems && nav.navItems.length > 0 ? nav.navItems : NAV;
-  const topBarText = nav?.topBarText ?? `${COMPANY.street}, ${COMPANY.zip} ${COMPANY.city}-${COMPANY.district}`;
-  const megaCtaTitle = nav?.megaCtaTitle ?? "Alle Leistungen ansehen";
-  const megaCtaSubtitle = nav?.megaCtaSubtitle ?? "Übersicht aller Wietek-Gerüstlösungen";
+  const topBarText = `${COMPANY.street}, ${COMPANY.zip} ${COMPANY.city}-${COMPANY.district}`;
+  const megaCtaTitle = MEGA_CTA_TITLE;
+  const megaCtaSubtitle = MEGA_CTA_SUBTITLE;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
