@@ -20,21 +20,21 @@ const fallbackProjects: Project[] = [
   { title: "Dachsanierung Reihenhaus", city: "Hamburg", year: "2025", sqm: "120 m²", cat: "Privat", img: ASSETS.slide(18) },
   { title: "Bürogebäude Fassade", city: "Hamburg-City", year: "2024", sqm: "640 m²", cat: "Gewerbe", img: ASSETS.slide(4) },
   { title: "Sanierung Kinosaal", city: "Hamburg", year: "2024", sqm: "320 m²", cat: "Gewerbe", img: ASSETS.slide(34) },
-  { title: "Industrieanlage Wartung", city: "Harburg", year: "2024", sqm: "1.200 m²", cat: "Industrie", img: ASSETS.slide(22) },
-  { title: "Orthodox-Kirche Komplettgerüst", city: "Lüneburg", year: "2024", sqm: "850 m²", cat: "Industrie", img: ASSETS.slide(28) },
+  { title: "Industrieanlage Wartung", city: "Harburg", year: "2024", sqm: "1.200 m²", cat: "Öffentliches Recht", img: ASSETS.slide(22) },
+  { title: "Orthodox-Kirche Komplettgerüst", city: "Lüneburg", year: "2024", sqm: "850 m²", cat: "Öffentliches Recht", img: ASSETS.slide(28) },
   { title: "Altbau-Restaurierung", city: "Eppendorf", year: "2024", sqm: "260 m²", cat: "Privat", img: ASSETS.slide(15) },
   { title: "Hotel Außenfassade", city: "St. Pauli", year: "2023", sqm: "490 m²", cat: "Gewerbe", img: ASSETS.slide(40) },
-  { title: "Werkshalle Komplettgerüst", city: "Stade", year: "2023", sqm: "2.100 m²", cat: "Industrie", img: ASSETS.slide(46) },
+  { title: "Werkshalle Komplettgerüst", city: "Stade", year: "2023", sqm: "2.100 m²", cat: "Öffentliches Recht", img: ASSETS.slide(46) },
 ];
 
 const catFromSanity = (c?: string): Project["cat"] => {
   if (c === "innen" || c === "fassade") return "Privat";
   if (c === "treppe" || c === "schutz" || c === "wetter") return "Gewerbe";
-  if (c === "dach") return "Industrie";
+  if (c === "dach") return "Öffentliches Recht";
   return "Privat";
 };
 
-const cats: Cat[] = ["Alle", "Privat", "Gewerbe", "Industrie"];
+const cats: Cat[] = ["Alle", "Privat", "Gewerbe", "Öffentliches Recht"];
 
 export const Projects = () => {
   const { data: cms } = useProjects();
