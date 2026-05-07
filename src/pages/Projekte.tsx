@@ -22,35 +22,35 @@ const fallbackProjects: ProjectItem[] = [
   { img: ASSETS.slide(1), city: "Hamburg-Bergedorf", type: "Fassade", year: 2025 },
   { img: ASSETS.slide(2), city: "Hamburg-Altona", type: "Fassade", year: 2025 },
   { img: ASSETS.slide(3), city: "Reinbek", type: "Fassade", year: 2024 },
-  { img: ASSETS.slide(4), city: "Hamburg-Harburg", type: "Industrie", year: 2024 },
+  { img: ASSETS.slide(4), city: "Hamburg-Harburg", type: "Öffentliches Recht", year: 2024 },
   { img: ASSETS.slide(5), city: "Geesthacht", type: "Fassade", year: 2024 },
   { img: ASSETS.slide(6), city: "Hamburg-Bergedorf", type: "Innen", year: 2024 },
   { img: ASSETS.slide(7), city: "Lüneburg", type: "Fassade", year: 2024 },
   { img: ASSETS.slide(8), city: "Hamburg", type: "Innen", year: 2023 },
   { img: ASSETS.slide(9), city: "Norderstedt", type: "Innen", year: 2023 },
-  { img: ASSETS.slide(10), city: "Stade", type: "Industrie", year: 2023 },
+  { img: ASSETS.slide(10), city: "Stade", type: "Öffentliches Recht", year: 2023 },
   { img: ASSETS.slide(12), city: "Hamburg-Wandsbek", type: "Fassade", year: 2023 },
   { img: ASSETS.slide(14), city: "Pinneberg", type: "Sonderlösung", year: 2023 },
   { img: ASSETS.slide(15), city: "Hamburg-Bergedorf", type: "Sonderlösung", year: 2023 },
-  { img: ASSETS.slide(18), city: "Hamburg", type: "Industrie", year: 2022 },
+  { img: ASSETS.slide(18), city: "Hamburg", type: "Öffentliches Recht", year: 2022 },
   { img: ASSETS.slide(20), city: "Hamburg-Eimsbüttel", type: "Fassade", year: 2022 },
   { img: ASSETS.slide(22), city: "Hamburg", type: "Sonderlösung", year: 2022 },
-  { img: ASSETS.slide(25), city: "Lüneburg", type: "Industrie", year: 2022 },
+  { img: ASSETS.slide(25), city: "Lüneburg", type: "Öffentliches Recht", year: 2022 },
   { img: ASSETS.slide(28), city: "Hamburg-Bergedorf", type: "Sonderlösung", year: 2021 },
   { img: ASSETS.slide(30), city: "Hamburg", type: "Fassade", year: 2021 },
   { img: ASSETS.slide(35), city: "Stade", type: "Innen", year: 2021 },
   { img: ASSETS.slide(40), city: "Hamburg-Bergedorf", type: "Sonderlösung", year: 2020 },
-  { img: ASSETS.slide(45), city: "Hamburg", type: "Industrie", year: 2020 },
+  { img: ASSETS.slide(45), city: "Hamburg", type: "Öffentliches Recht", year: 2020 },
 ];
 
 const catMap = (c?: string): Category => {
   if (c === "fassade") return "Fassade";
   if (c === "innen") return "Innen";
-  if (c === "dach") return "Industrie";
+  if (c === "dach") return "Öffentliches Recht";
   return "Sonderlösung";
 };
 
-const filters: ("Alle" | Category)[] = ["Alle", "Fassade", "Innen", "Industrie", "Sonderlösung"];
+const filters: ("Alle" | Category)[] = ["Alle", "Fassade", "Innen", "Öffentliches Recht", "Sonderlösung"];
 
 const Page = () => {
   const { data: cms } = useProjects();
