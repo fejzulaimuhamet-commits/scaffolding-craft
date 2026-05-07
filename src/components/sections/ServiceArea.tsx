@@ -1,18 +1,15 @@
 import { MapPin } from "lucide-react";
-import { useHomepage } from "@/hooks/useSanity";
 
-const fallbackCities = [
+const cities = [
   "Hamburg-City", "Bergedorf", "Harburg", "Altona", "Eimsbüttel", "Wandsbek",
   "Hamburg-Nord", "Eppendorf", "Winterhude", "Lüneburg", "Stade", "Buxtehude",
   "Reinbek", "Geesthacht", "Glinde", "Norderstedt", "Pinneberg", "Ahrensburg",
 ];
 
 export const ServiceArea = () => {
-  const { data: hp } = useHomepage();
-  const eyebrow = hp?.serviceAreaEyebrow ?? "";
-  const title = hp?.serviceAreaTitle ?? "";
-  const intro = hp?.serviceAreaIntro ?? "";
-  const cities = hp?.serviceAreaCities && hp.serviceAreaCities.length > 0 ? hp.serviceAreaCities : fallbackCities;
+  const eyebrow = "Einsatzgebiet";
+  const title = "Hamburg & 80 km Umland.";
+  const intro = "Wir sind in ganz Hamburg unterwegs – und darüber hinaus in Schleswig-Holstein und Niedersachsen. Sagen Sie uns, wo's hingehen soll.";
 
   return (
     <section className="py-20 lg:py-28 bg-plaster">
