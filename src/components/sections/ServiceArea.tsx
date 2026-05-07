@@ -9,9 +9,9 @@ const fallbackCities = [
 
 export const ServiceArea = () => {
   const { data: hp } = useHomepage();
-  const eyebrow = hp?.serviceAreaEyebrow ?? "Unser Servicegebiet";
-  const title = hp?.serviceAreaTitle ?? "Gerüste in Hamburg & Umkreis.";
-  const intro = hp?.serviceAreaIntro ?? "Wir sind in der gesamten Metropolregion unterwegs – von der Hamburger Innenstadt bis nach Lüneburg, Stade und Norderstedt. Auf Anfrage auch darüber hinaus.";
+  const eyebrow = hp?.serviceAreaEyebrow ?? "";
+  const title = hp?.serviceAreaTitle ?? "";
+  const intro = hp?.serviceAreaIntro ?? "";
   const cities = hp?.serviceAreaCities && hp.serviceAreaCities.length > 0 ? hp.serviceAreaCities : fallbackCities;
 
   return (
