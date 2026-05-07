@@ -85,15 +85,36 @@ export const RequestWizard = () => {
 
   const onSubmit = async (data: FormData) => {
     setSubmitting(true);
-    // Phase 1: nur Frontend – keine echte Übermittlung.
-    await new Promise((r) => setTimeout(r, 700));
-    setSubmitting(false);
-    setStep(3);
-    toast.success("Anfrage versendet!", {
-      description: "Wir melden uns innerhalb von 24 Std. – meist deutlich schneller.",
-    });
-    // Daten könnten hier später an Lovable Cloud gehen
-    console.info("Wizard-Daten (nicht versendet):", data);
+    try {
+      await submitToWeb3Forms({
+        subject: "Neue Schnellanfrage – Wietek Website",
+        replyTo: data.email,
+        fields: {
+          "Art": TYPE_LABELS[data.type] ?? data.type,
+          "Höhe": data.height,
+          "Fläche (m²)": data.sqm,
+          "PLZ": data.zip,
+          "Ort": data.city,
+          "Wunschtermin": data.start || "—",
+          "Name": data.name,
+          "Telefon": data.phone,
+          "E-Mail": data.email,
+          "Notizen": data.notes || "—",
+          "Quelle": "RequestWizard (Kurzformular)",
+        },
+      });
+      setStep(3);
+      toast.success("Anfrage versendet!", {
+        description: "Wir melden uns innerhalb von 24 Std. – meist deutlich schneller.",
+      });
+    } catch (err) {
+      console.error("Web3Forms submit failed:", err);
+      toast.error("Senden fehlgeschlagen", {
+        description: "Bitte rufen Sie uns kurz an oder schreiben uns per WhatsApp.",
+      });
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const selectedType = form.watch("type");
