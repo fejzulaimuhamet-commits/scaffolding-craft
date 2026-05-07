@@ -1,31 +1,40 @@
-## Echte Root Cause (3. Versuch — diesmal mit Beweis)
+## Warum vieles nicht editierbar ist
 
-Die Live-Site läuft, lädt Sanity-Daten korrekt (Console: `[Sanity] ✅ Verbindung OK – Dokumente: 3`), Headers sind perfekt (kein X-Frame-Options, CSP erlaubt `*.sanity.studio`).
+Zwei zusammenhängende Probleme:
 
-**Das eigentliche Problem:** In `src/sanity/config.ts` zeigt die `presentationTool`-Konfiguration auf die **falsche Origin**:
-
+### 1. Falsche Studio-URL für Stega-Encoding
+In `src/lib/sanity.ts` zeigt die Studio-URL noch auf die alte Lovable-Adresse:
 ```ts
-const PREVIEW_ORIGIN = "https://scaffolding-craft.lovable.app";  // ← falsch
+"https://scaffolding-craft.lovable.app/studio"  // ← falsch
 ```
+Das Stega-Encoding bettet "klick zum editieren"-Links in die gerenderten Texte ein. Wenn die Studio-URL falsch ist, kann das Sanity-Dashboard die Klicks nicht zum richtigen Dokument zurückführen.
 
-Das Studio versucht den Presentation-Handshake mit Lovable zu machen, nicht mit Vercel/Strato. Auch die URL `wietek-geruestbau.de` fehlt komplett in `allowOrigins`. Deshalb: "Unable to connect", obwohl alles andere funktioniert.
+### 2. Hardcoded Fallbacks in 6 Sektionen
+`Industries`, `Projects`, `ServiceArea`, `Services`, `Stats`, `Testimonials` haben noch Fallback-Konstanten im Code. Wenn Sanity leere Felder hat, rendern sie den Fallback **ohne Stega-Marker** → nicht klickbar im Presentation-Modus. Editierbar werden sie nur, wenn die Texte tatsächlich aus Sanity kommen.
 
-## Fix (1 Datei: `src/sanity/config.ts`)
+## Fix
 
-```ts
-const PREVIEW_ORIGIN =
-  (import.meta.env.VITE_PREVIEW_ORIGIN as string | undefined) ||
-  "https://www.wietek-geruestbau.de";
+### Schritt 1 (mache ich): Studio-URL korrigieren
+`src/lib/sanity.ts`: `STUDIO_URL` auf `https://wietek-geruestbau.sanity.studio` umstellen. Damit funktionieren ab dem nächsten Vercel-Deploy alle Stega-Klicks korrekt.
 
-// allowOrigins erweitern um:
-//   https://www.wietek-geruestbau.de
-//   https://wietek-geruestbau.de
+### Schritt 2 (mache ich): Fallbacks aus 6 Sektionen entfernen
+- `Industries.tsx`
+- `Projects.tsx`
+- `ServiceArea.tsx`
+- `Services.tsx`
+- `Stats.tsx`
+- `Testimonials.tsx`
+
+Statt Fallback → wenn Sanity leer ist, Sektion ausblenden ODER leeren Editier-Slot rendern, sodass der Kunde den Inhalt im Studio anlegen muss. Damit ist alles, was sichtbar ist, auch editierbar.
+
+### Schritt 3: Studio neu deployen (machst du)
+Da das Studio-Bundle (`wietek-geruestbau.sanity.studio`) ein separater Build ist, musst du danach **einmal** im Projektordner laufen lassen:
 ```
+npx sanity deploy
+```
+Damit nimmt das gehostete Studio die neue Config (Stega + korrekte previewUrl) auf. Vercel-Deploy alleine reicht nicht für das gehostete Studio.
 
-Lovable/Vercel-URLs bleiben in `allowOrigins` für Dev/Preview, aber Default-Origin wird die echte Live-Domain.
-
-## Was danach passiert
-1. Lovable pusht zu GitHub
-2. Vercel deployt das neue Studio-Bundle (das Studio läuft auch auf der Live-Site unter `/studio`, falls genutzt — Hauptsache der Code im Studio-Bundle wird neu deployt)
-3. **Wichtig:** Du musst danach **einmal** `npx sanity deploy` ausführen, damit `wietek-geruestbau.sanity.studio` die neue Config bekommt — denn das gehostete Studio nutzt das gebuildete Studio-Bundle, nicht das von Vercel
-4. Refresh im Studio → Presentation funktioniert
+## Was du danach hast
+- ✅ Alle Texte/Bilder im Presentation-Modus klickbar → öffnen direkt das richtige Sanity-Dokument
+- ✅ Keine "Geister-Texte" mehr, die im Code stehen aber nicht editierbar sind
+- ✅ Header & Footer bleiben unangetastet (im Code, wie gewünscht)
