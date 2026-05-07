@@ -18,9 +18,9 @@ const fallback = [
 
 export const Industries = () => {
   const { data: hp } = useHomepage();
-  const eyebrow = hp?.industriesEyebrow ?? "Branchen-Lösungen";
-  const titleLead = hp?.industriesTitle ?? "Für Profis, die liefern müssen.";
-  const intro = hp?.industriesIntro ?? "Wir wissen, worauf es Ihrem Gewerk ankommt – und stellen das Gerüst genau so, wie Sie am effizientesten arbeiten können.";
+  const eyebrow = hp?.industriesEyebrow ?? "";
+  const titleLead = hp?.industriesTitle ?? "";
+  const intro = hp?.industriesIntro ?? "";
   const items = hp?.industriesItems && hp.industriesItems.length > 0 ? hp.industriesItems : fallback;
 
   return (

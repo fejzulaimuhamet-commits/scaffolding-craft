@@ -10,11 +10,11 @@ export const Contact = () => {
   const mapEmbed = `https://maps.google.com/maps?q=${mapQuery}&output=embed`;
   const mapOpen = `https://www.google.com/maps/search/?api=1&query=${mapQuery}`;
 
-  const eyebrow = hp?.contactEyebrow ?? "Kontakt";
-  const title = hp?.contactTitle ?? "Direkt mit dem Team sprechen.";
-  const intro = hp?.contactIntro ?? "Lieber direkt anrufen oder schreiben? Wir sind erreichbar – persönlich, schnell und ohne Warteschleife.";
-  const ctaWa = hp?.contactCtaWhatsapp ?? "Per WhatsApp schreiben";
-  const ctaCall = hp?.contactCtaCall ?? "Jetzt anrufen";
+  const eyebrow = hp?.contactEyebrow ?? "";
+  const title = hp?.contactTitle ?? "";
+  const intro = hp?.contactIntro ?? "";
+  const ctaWa = hp?.contactCtaWhatsapp ?? "";
+  const ctaCall = hp?.contactCtaCall ?? "";
 
   return (
     <section id="kontakt" className="py-20 lg:py-28 bg-white">

@@ -7,22 +7,12 @@ import { imageUrl } from "@/lib/sanity";
 export const Hero = () => {
   const { data: homepage } = useHomepage();
   const heroImg = imageUrl(homepage?.heroImage, 1920) ?? ASSETS.hero;
-  const heroBadge = homepage?.heroBadge ?? "Familiengeführt seit 2014";
-  const heroTitle = homepage?.heroTitle ?? "Gerüstbau in Hamburg – sicher, pünktlich, ab 24 Std. einsatzbereit.";
-  const heroSubtitle =
-    homepage?.heroSubtitle ??
-    "Familiengeführter Gerüstbau aus Hamburg-Bergedorf. Wir liefern, montieren und demontieren Gerüste für Gewerbebetriebe, Handwerker und Vereine – schnell, sauber und mit echtem Wort.";
-  const usps =
-    homepage?.heroUsps && homepage.heroUsps.length > 0
-      ? homepage.heroUsps
-      : [
-          "Aufbau in 24–72 Stunden",
-          "Familienunternehmen seit 2014",
-          "Vollständig versichert & geprüft",
-          "Festpreis-Garantie ohne Überraschungen",
-        ];
-  const ctaPrimary = homepage?.heroCtaPrimary ?? "Kostenloses Angebot in 60 Sek.";
-  const ctaSecondary = homepage?.heroCtaSecondary ?? "Projekte ansehen";
+  const heroBadge = homepage?.heroBadge ?? "";
+  const heroTitle = homepage?.heroTitle ?? "";
+  const heroSubtitle = homepage?.heroSubtitle ?? "";
+  const usps = homepage?.heroUsps ?? [];
+  const ctaPrimary = homepage?.heroCtaPrimary ?? "";
+  const ctaSecondary = homepage?.heroCtaSecondary ?? "";
 
   return (
     <section

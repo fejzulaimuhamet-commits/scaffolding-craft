@@ -43,9 +43,9 @@ export const Testimonials = () => {
           rating: t.rating ?? 5,
         }))
       : fallbackReviews;
-  const eyebrow = hp?.testimonialsEyebrow ?? "Was Kunden sagen";
-  const titleText = hp?.testimonialsTitle ?? "Ehrliche Stimmen aus Hamburg.";
-  const badge = hp?.testimonialsBadgeText ?? "Bewertungen";
+  const eyebrow = hp?.testimonialsEyebrow ?? "";
+  const titleText = hp?.testimonialsTitle ?? "";
+  const badge = hp?.testimonialsBadgeText ?? "";
   return (
     <section className="py-20 lg:py-28 bg-plaster">
       <div className="container-w">
