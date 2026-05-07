@@ -2,16 +2,18 @@ import { motion } from "framer-motion";
 import { ArrowRight, CheckCircle2, Star } from "lucide-react";
 import { ASSETS } from "@/lib/site";
 
-const HERO_BADGE = "Bestbewerteter Gerüstbauer in Hamburg";
-const HERO_TITLE = "Sicheres Gerüst. Pünktlich. Hamburgweit.";
-const HERO_SUBTITLE = "Aufbau in 24–72 Stunden, Festpreis vor Beginn, eigenes Team. Vom Carport bis zum Mehrfamilienhaus – wir machen Hamburg sicher.";
+const HERO_BADGE = "4.9 Google  ·  Familiengeführt seit 2014";
+const HERO_TITLE_LINE1 = "Gerüstbau in Hamburg –";
+const HERO_TITLE_LINE2 = "sicher, pünktlich,";
+const HERO_TITLE_LINE3 = "ab 24 Std. einsatzbereit.";
+const HERO_SUBTITLE = "Familiengeführter Gerüstbau aus Hamburg-Bergedorf. Wir liefern, montieren und demontieren Gerüste für Privathaushalte, Handwerker und Industrie – schnell, sauber und mit echtem Wort.";
 const HERO_USPS = [
   "Aufbau in 24–72 Stunden",
-  "Festpreis vor Auftrag",
-  "Eigenes Team, kein Subunternehmer",
-  "Versichert mit 5 Mio. € Haftpflicht",
+  "Familienunternehmen seit 2014",
+  "Vollständig versichert & geprüft",
+  "Festpreis-Garantie ohne Überraschungen",
 ];
-const CTA_PRIMARY = "Kostenloses Angebot anfragen";
+const CTA_PRIMARY = "Kostenloses Angebot in 60 Sek.";
 const CTA_SECONDARY = "Projekte ansehen";
 
 export const Hero = () => {
