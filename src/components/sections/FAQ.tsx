@@ -7,7 +7,7 @@ import {
 import { useHomepage } from "@/hooks/useSanity";
 
 export const FAQ_ITEMS = [
-  { q: "Was kostet ein Gerüst pro m² in Hamburg?", a: "Die Standzeit, Höhe und Komplexität bestimmen den Preis. Für Standard-Fassadengerüste am Einfamilienhaus liegen die Preise meist zwischen 6 € und 12 € pro m² für die ersten 4 Wochen. Wir erstellen Ihnen ein verbindliches Festpreisangebot nach kostenlosem Aufmaß." },
+  
   { q: "Wie schnell könnt ihr ein Gerüst aufbauen?", a: "In der Regel innerhalb von 24 bis 72 Stunden nach Auftragsbestätigung – bei freier Kapazität auch am Folgetag. Notfälle nach Sturmschäden o. Ä. behandeln wir bevorzugt." },
   { q: "Braucht man eine Genehmigung für das Gerüst?", a: "Sobald das Gerüst öffentlichen Verkehrsraum (Gehweg, Straße) berührt, ist eine Sondernutzungs­erlaubnis nötig. Das übernehmen wir komplett für Sie inkl. Verkehrssicherung." },
   { q: "Sind eure Gerüste versichert?", a: "Ja. Wir sind Mitglied der BG BAU und mit einer Betriebshaftpflicht von 5 Mio. € versichert. Sie erhalten auf Wunsch jederzeit Versicherungsnachweise." },
