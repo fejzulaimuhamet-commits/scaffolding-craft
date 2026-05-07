@@ -4,7 +4,7 @@ import { Footer } from "@/components/sections/Footer";
 
 export const PageLayout = ({ children }: { children: ReactNode }) => {
   return (
-    <div className="min-h-screen bg-background pb-16 sm:pb-0 flex flex-col">
+    <div className="min-h-screen bg-background flex flex-col">
       <Header />
       <main className="flex-1 pt-24 lg:pt-32">{children}</main>
       <Footer />

@@ -16,7 +16,7 @@ import { Footer } from "@/components/sections/Footer";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background pb-14 sm:pb-0">
+    <div className="min-h-screen bg-background">
       <Seo />
       <Header />
       <main>
