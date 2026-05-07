@@ -1,43 +1,46 @@
-## Ziel
-Die Vorschau im Sanity Studio (Presentation-Tab) soll die Live-Website unter `https://www.wietek-geruestbau.de/` anzeigen. Die URL bleibt unverändert.
+## Root Cause gefunden
 
-## Aktueller Stand
-- Studio läuft: ✅
-- Studio-Preview-URL ist korrekt auf `wietek-geruestbau.de` gesetzt: ✅
-- Die Domain `wietek-geruestbau.de` ist aktuell **nicht** mit dem Lovable-Projekt verbunden → deshalb "Unable to connect"
+In `vercel.json` ist gesetzt:
+```
+"X-Frame-Options": "ALLOW-FROM https://wietek-geruestbau.sanity.studio"
+```
 
-## Was nötig ist (zwei Schritte)
+`X-Frame-Options: ALLOW-FROM` ist **deprecated** und wird von Chrome/Edge/Firefox wie `DENY` behandelt — d.h. **kein** iframe-Embedding ist erlaubt, egal von wo. Deshalb zeigt das Sanity-Studio "Unable to connect", obwohl die Site live ist und CORS stimmt.
 
-### Schritt 1 – Domain mit Lovable verbinden (machst du, einmalig)
+Die `Content-Security-Policy: frame-ancestors` darunter ist bereits korrekt gesetzt und wird von modernen Browsern bevorzugt — wir müssen nur den schädlichen X-Frame-Options-Header **entfernen**.
 
-Zwei Möglichkeiten:
+## Fix (1 Datei)
 
-**A) Domain bei Lovable kaufen (einfachster Weg)**
-1. In Lovable: **Project Settings → Domains → Buy new domain**
-2. `wietek-geruestbau.de` suchen und kaufen
-3. Wird automatisch verbunden, SSL läuft automatisch
+**`vercel.json`** — `X-Frame-Options`-Header entfernen, CSP `frame-ancestors` bleibt unverändert (erlaubt schon `https://*.sanity.studio`).
 
-**B) Domain bei einem Registrar (IONOS/GoDaddy/Strato) kaufen und verbinden**
-1. Domain dort kaufen
-2. In Lovable: **Project Settings → Domains → Connect Domain** → `wietek-geruestbau.de` eingeben
-3. Beim Registrar diese DNS-Records eintragen:
-   - **A-Record** für `@` → `185.158.133.1`
-   - **A-Record** für `www` → `185.158.133.1`
-   - **TXT-Record** `_lovable` → (Wert aus Lovable-Dialog)
-4. Bis zu 72h warten auf DNS-Propagation, SSL kommt automatisch
+Neue `vercel.json`:
+```json
+{
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "frame-ancestors 'self' https://*.sanity.studio https://wietek-geruestbau.sanity.studio http://localhost:3333"
+        }
+      ]
+    }
+  ]
+}
+```
 
-### Schritt 2 – CORS-Origin in Sanity hinzufügen (mache ich automatisch)
+## Was danach passiert
 
-Damit das Studio nach Domain-Verbindung die Live-Website laden darf, füge ich via Sanity MCP folgende CORS-Origins hinzu:
-- `https://www.wietek-geruestbau.de`
-- `https://wietek-geruestbau.de`
+1. Lovable pusht den Fix automatisch zu GitHub
+2. Vercel deployt automatisch (1–2 Min)
+3. Sanity Studio → Presentation → Refresh → Vorschau lädt die Live-Site
 
-Das verhindert spätere CORS-Fehler in der Presentation-Vorschau.
-
-## Was passiert nach Approve
-Ich wechsle in Build-Mode und füge nur die CORS-Origins in Sanity hinzu. **Keine Code-Änderungen**, keine URL-Änderungen. Den Domain-Kauf/Verbindung musst du selbst in Lovable machen (Project Settings → Domains) – das kann ich nicht für dich klicken.
-
-## Wichtige Frage
-Hast du die Domain `wietek-geruestbau.de` schon irgendwo gekauft? 
-- Wenn **ja, wo?** (IONOS, Strato, GoDaddy …) → Variante B
-- Wenn **nein** → ich empfehle Variante A (direkt in Lovable kaufen, alles automatisch)
+Keine weiteren Schritte nötig. Kein Studio-Redeploy, keine DNS-Änderung, kein Domain-Verbinden.
