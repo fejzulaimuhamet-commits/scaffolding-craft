@@ -31,6 +31,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ASSETS, COMPANY, waLink } from "@/lib/site";
+import { submitToWeb3Forms } from "@/lib/web3forms";
 
 /* ---------------- Schema ---------------- */
 const SERVICES = [
