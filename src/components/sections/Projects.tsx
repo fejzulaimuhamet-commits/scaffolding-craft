@@ -1,8 +1,6 @@
 import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ASSETS } from "@/lib/site";
-import { useProjects } from "@/hooks/useSanity";
-import { imageUrl } from "@/lib/sanity";
 
 type Cat = "Alle" | "Gewerbe" | "Privat" | "Kirche / Religionsgemeinschaft";
 
@@ -27,27 +25,10 @@ const fallbackProjects: Project[] = [
   { title: "Kirche Sanierung", city: "Stade", year: "2023", sqm: "", cat: "Kirche / Religionsgemeinschaft", img: ASSETS.slide(46) },
 ];
 
-const catFromSanity = (c?: string): Project["cat"] => {
-  if (c === "innen" || c === "fassade") return "Gewerbe";
-  if (c === "treppe" || c === "schutz" || c === "wetter") return "Gewerbe";
-  if (c === "dach") return "Gewerbe";
-  return "Gewerbe";
-};
-
 const cats: Cat[] = ["Alle", "Gewerbe", "Privat", "Kirche / Religionsgemeinschaft"];
 
 export const Projects = () => {
-  const { data: cms } = useProjects();
-  const projects: Project[] = cms && cms.length > 0
-    ? cms.map((p) => ({
-        title: p.title,
-        city: p.location || "",
-        year: String(p.year ?? ""),
-        sqm: p.squareMeters ? `${p.squareMeters} m²` : "",
-        cat: catFromSanity(p.category),
-        img: imageUrl(p.mainImage, 1200) || ASSETS.slide(1),
-      }))
-    : fallbackProjects;
+  const projects: Project[] = fallbackProjects;
   const [active, setActive] = useState<Cat>("Alle");
   const filtered = useMemo(
     () => (active === "Alle" ? projects : projects.filter((p) => p.cat === active)),

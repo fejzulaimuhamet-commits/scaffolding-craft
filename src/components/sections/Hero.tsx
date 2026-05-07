@@ -1,18 +1,21 @@
 import { motion } from "framer-motion";
 import { ArrowRight, CheckCircle2, Star } from "lucide-react";
 import { ASSETS } from "@/lib/site";
-import { useHomepage } from "@/hooks/useSanity";
-import { imageUrl } from "@/lib/sanity";
+
+const HERO_BADGE = "Bestbewerteter Gerüstbauer in Hamburg";
+const HERO_TITLE = "Sicheres Gerüst. Pünktlich. Hamburgweit.";
+const HERO_SUBTITLE = "Aufbau in 24–72 Stunden, Festpreis vor Beginn, eigenes Team. Vom Carport bis zum Mehrfamilienhaus – wir machen Hamburg sicher.";
+const HERO_USPS = [
+  "Aufbau in 24–72 Stunden",
+  "Festpreis vor Auftrag",
+  "Eigenes Team, kein Subunternehmer",
+  "Versichert mit 5 Mio. € Haftpflicht",
+];
+const CTA_PRIMARY = "Kostenloses Angebot anfragen";
+const CTA_SECONDARY = "Projekte ansehen";
 
 export const Hero = () => {
-  const { data: homepage } = useHomepage();
-  const heroImg = imageUrl(homepage?.heroImage, 1920) ?? ASSETS.hero;
-  const heroBadge = homepage?.heroBadge ?? "";
-  const heroTitle = homepage?.heroTitle ?? "";
-  const heroSubtitle = homepage?.heroSubtitle ?? "";
-  const usps = homepage?.heroUsps ?? [];
-  const ctaPrimary = homepage?.heroCtaPrimary ?? "";
-  const ctaSecondary = homepage?.heroCtaSecondary ?? "";
+  const heroImg = ASSETS.hero;
 
   return (
     <section
@@ -20,7 +23,6 @@ export const Hero = () => {
       className="relative w-full overflow-hidden"
       style={{ minHeight: "85vh" }}
     >
-      {/* Vollbild-Foto */}
       <img
         src={heroImg}
         alt="Eingerüstetes Wohnhaus in Hamburg von Wietek Gerüstbau"
@@ -30,7 +32,6 @@ export const Hero = () => {
         className="absolute inset-0 h-full w-full object-cover object-center"
       />
 
-      {/* Schwerer Gradient nur von links nach rechts */}
       <div
         aria-hidden
         className="absolute inset-0"
@@ -40,7 +41,6 @@ export const Hero = () => {
         }}
       />
 
-      {/* Subtiler Bottom-Verlauf für Lesbarkeit auf Mobile */}
       <div
         aria-hidden
         className="absolute inset-0 sm:hidden"
@@ -50,7 +50,6 @@ export const Hero = () => {
         }}
       />
 
-      {/* Grain / Noise Overlay – handgemachter Look */}
       <div
         aria-hidden
         className="absolute inset-0 pointer-events-none mix-blend-overlay"
@@ -61,7 +60,6 @@ export const Hero = () => {
         }}
       />
 
-      {/* Content */}
       <div className="container-w relative z-10 flex items-center pt-32 pb-20 lg:pt-36 lg:pb-28" style={{ minHeight: "85vh" }}>
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -69,50 +67,40 @@ export const Hero = () => {
           transition={{ duration: 0.7, ease: "easeOut" }}
           className="w-full lg:max-w-[82%]"
         >
-          {/* Badge */}
-          {heroBadge && (
-            <div className="inline-flex items-center gap-2 rounded-full bg-signal px-4 py-2 text-xs sm:text-sm font-bold text-steel-deep shadow-lg">
-              <Star className="h-4 w-4 fill-steel-deep text-steel-deep" />
-              <span>{heroBadge}</span>
-            </div>
-          )}
+          <div className="inline-flex items-center gap-2 rounded-full bg-signal px-4 py-2 text-xs sm:text-sm font-bold text-steel-deep shadow-lg">
+            <Star className="h-4 w-4 fill-steel-deep text-steel-deep" />
+            <span>{HERO_BADGE}</span>
+          </div>
 
-          {/* H1 */}
           <h1 className="mt-6 font-display font-extrabold text-white leading-tight tracking-tight w-full text-4xl lg:text-[3.75rem] xl:text-[4.25rem] 2xl:text-[4.75rem]">
-            {heroTitle}
+            {HERO_TITLE}
           </h1>
 
-          {/* Subline */}
           <p className="mt-6 max-w-xl text-base sm:text-lg text-white/85 leading-relaxed">
-            {heroSubtitle}
+            {HERO_SUBTITLE}
           </p>
 
-          {/* USP-Bullets */}
-          {usps.length > 0 && (
-            <ul className="mt-7 grid sm:grid-cols-2 gap-2.5">
-              {usps.map((u, i) => (
-                <li key={i} className="flex items-start gap-2.5 text-sm font-semibold text-white">
-                  <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                  {u}
-                </li>
-              ))}
-            </ul>
-          )}
+          <ul className="mt-7 grid sm:grid-cols-2 gap-2.5">
+            {HERO_USPS.map((u, i) => (
+              <li key={i} className="flex items-start gap-2.5 text-sm font-semibold text-white">
+                <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                {u}
+              </li>
+            ))}
+          </ul>
 
-          {/* CTAs */}
           <div className="mt-9 flex flex-col sm:flex-row gap-3">
             <a href="#anfrage" className="btn-primary justify-center">
-              {ctaPrimary}
+              {CTA_PRIMARY}
               <ArrowRight className="h-4 w-4" />
             </a>
             <a href="#projekte" className="btn-ghost-light justify-center">
-              {ctaSecondary}
+              {CTA_SECONDARY}
             </a>
           </div>
         </motion.div>
       </div>
 
-      {/* Scroll Indicator – kleines Detail */}
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 hidden lg:flex flex-col items-center gap-2 text-white/60">
         <span className="text-[10px] uppercase tracking-[0.25em] font-bold">Scroll</span>
         <div className="h-10 w-px bg-white/40" />

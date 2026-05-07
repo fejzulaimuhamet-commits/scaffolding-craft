@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { ClipboardCheck, Hammer, MessageSquare, PackageOpen } from "lucide-react";
-import { useHomepage } from "@/hooks/useSanity";
 
 const icons = [MessageSquare, ClipboardCheck, Hammer, PackageOpen];
 
@@ -12,10 +11,7 @@ const defaultSteps = [
 ];
 
 export const Process = () => {
-  const { data: hp } = useHomepage();
-  const steps = (hp?.processSteps && hp.processSteps.length > 0)
-    ? hp.processSteps
-    : defaultSteps;
+  const steps = defaultSteps;
 
   return (
     <section className="py-20 lg:py-28 bg-plaster relative">

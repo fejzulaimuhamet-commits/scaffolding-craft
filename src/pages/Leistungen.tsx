@@ -5,7 +5,7 @@ import { ArrowRight, Check, Zap, ShieldCheck, Users } from "lucide-react";
 import { PageLayout } from "@/components/PageLayout";
 import { PageHero } from "@/components/shared/PageHero";
 import { ASSETS } from "@/lib/site";
-import { useServiceMap } from "@/hooks/useServiceContent";
+
 
 type Service = {
   slug: string;
@@ -276,17 +276,7 @@ const CTASection = () => (
 );
 
 const Leistungen = () => {
-  const cms = useServiceMap();
-  const services: Service[] = fallbackServices.map((s) => {
-    const c = cms.get(s.slug);
-    return {
-      ...s,
-      title: c?.title || s.title,
-      intro: c?.description || s.intro,
-      bullets: c?.features?.length ? c.features : s.bullets,
-      img: c?.image || s.img,
-    };
-  });
+  const services: Service[] = fallbackServices;
   const itemListSchema = {
     "@context": "https://schema.org",
     "@type": "ItemList",

@@ -20,8 +20,6 @@ import { PageLayout } from "@/components/PageLayout";
 import { PageHero } from "@/components/shared/PageHero";
 import { useInViewOnce } from "@/hooks/use-in-view";
 import { ASSETS, COMPANY } from "@/lib/site";
-import { useAboutPage } from "@/hooks/useSanity";
-import { imageUrl } from "@/lib/sanity";
 
 const localBusiness = {
   "@context": "https://schema.org",
@@ -179,8 +177,7 @@ function Counter({
 }
 
 const Page = () => {
-  const { data: about } = useAboutPage();
-  const teamImg = imageUrl(about?.teamImage, 1200) || ASSETS.about;
+  const teamImg = ASSETS.about;
   return (
   <PageLayout>
     <PageSeo

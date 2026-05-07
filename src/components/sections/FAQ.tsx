@@ -4,7 +4,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { useHomepage } from "@/hooks/useSanity";
 
 export const FAQ_ITEMS = [
   
@@ -18,13 +17,10 @@ export const FAQ_ITEMS = [
 ];
 
 export const FAQ = () => {
-  const { data: hp } = useHomepage();
-  const eyebrow = hp?.faqEyebrow ?? "";
-  const title = hp?.faqTitle ?? "";
-  const intro = hp?.faqIntro ?? "";
-  const items = hp?.faqItems && hp.faqItems.length > 0
-    ? hp.faqItems.map((it) => ({ q: it.question, a: it.answer }))
-    : FAQ_ITEMS;
+  const eyebrow = "Häufige Fragen";
+  const title = "Was Kunden uns oft fragen.";
+  const intro = "Die wichtigsten Antworten rund um Aufbau, Genehmigungen, Versicherung und Ablauf.";
+  const items = FAQ_ITEMS;
 
   return (
     <section className="py-20 lg:py-28 bg-white">

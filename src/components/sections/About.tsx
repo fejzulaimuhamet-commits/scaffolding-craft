@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Calendar, Hammer, Heart } from "lucide-react";
 import { ASSETS, COMPANY } from "@/lib/site";
-import { useAboutPage } from "@/hooks/useSanity";
 
 const factIcons = [Calendar, Hammer, Heart];
 
@@ -12,10 +11,9 @@ const defaultFacts = [
 ];
 
 export const About = () => {
-  const { data: about } = useAboutPage();
-  const headline = about?.headline;
-  const intro = about?.intro;
-  const stats = (about?.stats && about.stats.length > 0) ? about.stats : defaultFacts;
+  const headline: string | undefined = undefined;
+  const intro: string | undefined = undefined;
+  const stats = defaultFacts;
   return (
     <section id="ueber-uns" className="relative bg-white overflow-hidden">
       {/* Diagonaler Divider oben – kommt aus heller Sektion */}
