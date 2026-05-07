@@ -101,13 +101,24 @@ const Page = () => {
   };
 
   const today = new Date().toISOString().slice(0, 10);
+  const validThrough = new Date(Date.now() + 60 * 24 * 60 * 60 * 1000)
+    .toISOString()
+    .slice(0, 10);
+  const slugify = (s: string) =>
+    s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
   const jobPostings = jobs.map((j) => ({
     "@context": "https://schema.org",
     "@type": "JobPosting",
     title: j.title,
     description: `<p>${j.desc}</p><ul>${j.bullets.map((b) => `<li>${b}</li>`).join("")}</ul>`,
     datePosted: today,
+    validThrough,
     employmentType: (j.type || "").toLowerCase().includes("teilzeit") ? "PART_TIME" : "FULL_TIME",
+    identifier: {
+      "@type": "PropertyValue",
+      name: COMPANY.name,
+      value: `wietek-${slugify(j.title)}`,
+    },
     hiringOrganization: {
       "@type": "Organization",
       name: COMPANY.name,
@@ -121,7 +132,18 @@ const Page = () => {
         streetAddress: COMPANY.street,
         postalCode: COMPANY.zip,
         addressLocality: `${COMPANY.city}-${COMPANY.district}`,
+        addressRegion: "HH",
         addressCountry: "DE",
+      },
+    },
+    baseSalary: {
+      "@type": "MonetaryAmount",
+      currency: "EUR",
+      value: {
+        "@type": "QuantitativeValue",
+        minValue: j.title.toLowerCase().includes("helfer") ? 15 : 18,
+        maxValue: j.title.toLowerCase().includes("helfer") ? 19 : 24,
+        unitText: "HOUR",
       },
     },
     directApply: true,

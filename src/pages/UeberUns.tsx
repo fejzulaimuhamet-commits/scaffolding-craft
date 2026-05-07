@@ -26,19 +26,36 @@ import { imageUrl } from "@/lib/sanity";
 const localBusiness = {
   "@context": "https://schema.org",
   "@type": "GeneralContractor",
+  "@id": "https://wietek-geruestbau.de/#organization",
   name: COMPANY.name,
-  url: "https://wietek-geruestbau.de/ueber-uns",
+  url: "https://wietek-geruestbau.de/",
   telephone: COMPANY.phonePrimary,
   email: COMPANY.email,
   foundingDate: `${COMPANY.founded}`,
-  image: "https://wietek-geruestbau.de/assets/img/project-images-slideshow/4.webp",
+  priceRange: "€€",
+  image: ASSETS.hero,
+  logo: ASSETS.logoWhite,
   address: {
     "@type": "PostalAddress",
     streetAddress: COMPANY.street,
     postalCode: COMPANY.zip,
     addressLocality: `${COMPANY.city}-${COMPANY.district}`,
+    addressRegion: "HH",
     addressCountry: "DE",
   },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 53.4936,
+    longitude: 10.2086,
+  },
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens: "07:00",
+      closes: "17:00",
+    },
+  ],
   areaServed: [
     "Hamburg",
     "Bergedorf",
@@ -57,6 +74,8 @@ const localBusiness = {
     "@type": "AggregateRating",
     ratingValue: COMPANY.rating,
     reviewCount: COMPANY.ratingCount,
+    bestRating: 5,
+    worstRating: 1,
   },
 };
 
