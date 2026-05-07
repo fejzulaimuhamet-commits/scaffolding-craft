@@ -75,7 +75,11 @@ export const Hero = () => {
           </div>
 
           <h1 className="mt-6 font-display font-extrabold text-white leading-tight tracking-tight w-full text-4xl lg:text-[3.75rem] xl:text-[4.25rem] 2xl:text-[4.75rem]">
-            {HERO_TITLE}
+            {HERO_TITLE_LINE1}
+            <br />
+            {HERO_TITLE_LINE2}
+            <br />
+            {HERO_TITLE_LINE3}
           </h1>
 
           <p className="mt-6 max-w-xl text-base sm:text-lg text-white/85 leading-relaxed">
