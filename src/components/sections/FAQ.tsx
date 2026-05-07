@@ -19,9 +19,9 @@ export const FAQ_ITEMS = [
 
 export const FAQ = () => {
   const { data: hp } = useHomepage();
-  const eyebrow = hp?.faqEyebrow ?? "Häufige Fragen";
-  const title = hp?.faqTitle ?? "Antworten auf das, was Bauherren wirklich fragen.";
-  const intro = hp?.faqIntro ?? "Etwas nicht dabei? Schreiben Sie uns einfach per WhatsApp oder E-Mail – wir antworten persönlich, meistens innerhalb von zwei Stunden.";
+  const eyebrow = hp?.faqEyebrow ?? "";
+  const title = hp?.faqTitle ?? "";
+  const intro = hp?.faqIntro ?? "";
   const items = hp?.faqItems && hp.faqItems.length > 0
     ? hp.faqItems.map((it) => ({ q: it.question, a: it.answer }))
     : FAQ_ITEMS;
