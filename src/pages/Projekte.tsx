@@ -68,6 +68,23 @@ const Page = () => {
     [active, projects],
   );
 
+  const itemListSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Wietek Gerüstbau – Referenzprojekte",
+    itemListElement: projects.slice(0, 24).map((p, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      item: {
+        "@type": "CreativeWork",
+        name: `${p.type}-Gerüst ${p.city} (${p.year})`,
+        image: p.img,
+        locationCreated: { "@type": "Place", name: p.city },
+        dateCreated: String(p.year),
+      },
+    })),
+  };
+
   return (
     <PageLayout>
       <PageSeo
@@ -79,6 +96,7 @@ const Page = () => {
           { name: "Startseite", path: "/" },
           { name: "Projekte", path: "/projekte" },
         ]}
+        jsonLd={[itemListSchema]}
       />
 
       <PageHero

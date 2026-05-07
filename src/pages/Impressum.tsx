@@ -14,6 +14,23 @@ const Impressum = () => {
           { name: "Impressum", path: "/impressum" },
         ]}
         noindex={false}
+        jsonLd={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: COMPANY.name,
+            url: "https://wietek-geruestbau.de/",
+            email: COMPANY.email,
+            telephone: COMPANY.phonePrimary,
+            address: {
+              "@type": "PostalAddress",
+              streetAddress: COMPANY.street,
+              postalCode: COMPANY.zip,
+              addressLocality: `${COMPANY.city}-${COMPANY.district}`,
+              addressCountry: "DE",
+            },
+          },
+        ]}
       />
 
       <article className="container mx-auto max-w-3xl px-4 py-12 prose prose-neutral dark:prose-invert">
