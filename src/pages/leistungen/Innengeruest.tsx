@@ -31,7 +31,7 @@ const Page = () => (
       eyebrow: "Einsatzbereiche",
       headline: "Wo werden Innengerüste eingesetzt?",
       items: [
-        { icon: Factory, title: "Industriehallen", desc: "Wartung, Lüftung, Beleuchtung, Decken- und Hallenarbeiten." },
+        { icon: Factory, title: "Öffentliche Hallen", desc: "Wartung, Lüftung, Beleuchtung, Decken- und Hallenarbeiten." },
         { icon: Church, title: "Kirchen & Kulturbauten", desc: "Restaurierung von Decken, Stuck und Wandgemälden." },
         { icon: Building2, title: "Treppenhäuser", desc: "Sichere Plattformen über mehrere Stockwerke." },
         { icon: Warehouse, title: "Lager & Messebau", desc: "Hochregalbereiche, Aufbauten, Wartung an Decken." },
