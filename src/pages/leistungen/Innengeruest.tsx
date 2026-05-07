@@ -6,7 +6,7 @@ const Page = () => (
   <ServicePage
     slug="innengeruest"
     seoTitle="Innengerüst Hamburg | Raumgerüst mieten – Wietek Gerüstbau"
-    seoDescription="Sichere Innengerüste & Raumgerüste in Hamburg. Für Hallen, Kirchen, öffentliche Gebäude & große Innenräume. Aufbau in 24–72 Std."
+    seoDescription="Sichere Innengerüste & Raumgerüste in Hamburg. Für Hallen, Kirchen, Privatgebäude & große Innenräume. Aufbau in 24–72 Std."
     canonical="/leistungen/innengeruest"
     serviceName="Innengerüst"
     hero={{
@@ -21,7 +21,7 @@ const Page = () => (
       eyebrow: "Innenausbau",
       headline: "Professionelle Innengerüste für jeden Innenraum",
       paragraphs: [
-        "Decken streichen, Stuck restaurieren, Lüftungstechnik installieren oder Beleuchtung montieren – sobald in großen Innenräumen gearbeitet wird, braucht es ein verlässliches Innengerüst. Wietek Gerüstbau plant und montiert Raumgerüste für öffentliche Hallen, Kirchen, Theater, Treppenhäuser und Lagerhallen in Hamburg und ganz Norddeutschland.",
+        "Decken streichen, Stuck restaurieren, Lüftungstechnik installieren oder Beleuchtung montieren – sobald in großen Innenräumen gearbeitet wird, braucht es ein verlässliches Innengerüst. Wietek Gerüstbau plant und montiert Raumgerüste für private Hallen, Kirchen, Theater, Treppenhäuser und Lagerhallen in Hamburg und ganz Norddeutschland.",
         "Wir achten auf bodenschonende Aufbauten, kurze Rüstzeiten und freie Bewegungsflächen – auch bei laufendem Betrieb.",
       ],
       image: ASSETS.placeholder.innen,
@@ -31,7 +31,7 @@ const Page = () => (
       eyebrow: "Einsatzbereiche",
       headline: "Wo werden Innengerüste eingesetzt?",
       items: [
-        { icon: Factory, title: "Öffentliche Hallen", desc: "Wartung, Lüftung, Beleuchtung, Decken- und Hallenarbeiten." },
+        { icon: Factory, title: "Private Hallen", desc: "Wartung, Lüftung, Beleuchtung, Decken- und Hallenarbeiten." },
         { icon: Church, title: "Kirchen & Kulturbauten", desc: "Restaurierung von Decken, Stuck und Wandgemälden." },
         { icon: Building2, title: "Treppenhäuser", desc: "Sichere Plattformen über mehrere Stockwerke." },
         { icon: Warehouse, title: "Lager & Messebau", desc: "Hochregalbereiche, Aufbauten, Wartung an Decken." },
@@ -61,11 +61,11 @@ const Page = () => (
     faq={[
       {
         q: "Wie hoch kann ein Innengerüst sein?",
-        a: "Wir bauen Raumgerüste in praktisch jeder Höhe – vom 3 m hohen Wohnraum bis zur 25 m hohen öffentlichen Halle.",
+        a: "Wir bauen Raumgerüste in praktisch jeder Höhe – vom 3 m hohen Wohnraum bis zur 25 m hohen Privathalle.",
       },
       {
         q: "Werden Böden geschützt?",
-        a: "Ja. Wir verteilen die Last über Verteilbohlen und weiche Auflagen, sodass empfindliche Böden (Parkett, Stein, öffentliche Estriche) nicht beschädigt werden.",
+        a: "Ja. Wir verteilen die Last über Verteilbohlen und weiche Auflagen, sodass empfindliche Böden (Parkett, Stein, Estriche) nicht beschädigt werden.",
       },
       {
         q: "Können wir während der Bauarbeiten weiterarbeiten?",
