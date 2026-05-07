@@ -5,7 +5,7 @@
  * Anlegen unter: https://web3forms.com → Create Access Key →
  * E-Mail: info@wietek-geruestbau.de → Bestätigungs-Mail klicken → Key kopieren.
  */
-export const WEB3FORMS_KEY = "REPLACE_WITH_YOUR_WEB3FORMS_ACCESS_KEY";
+export const WEB3FORMS_KEY = "a3395abc-2a50-42e5-ae58-2662fbce8201";
 
 const ENDPOINT = "https://api.web3forms.com/submit";
 
