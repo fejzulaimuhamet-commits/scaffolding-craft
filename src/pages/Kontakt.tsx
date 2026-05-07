@@ -16,17 +16,42 @@ const contactSchema = {
   url: "https://wietek-geruestbau.de/kontakt",
   mainEntity: {
     "@type": "GeneralContractor",
+    "@id": "https://wietek-geruestbau.de/#organization",
     name: COMPANY.name,
     telephone: COMPANY.phonePrimary,
     email: COMPANY.email,
+    url: "https://wietek-geruestbau.de/",
+    image: ASSETS.hero,
+    logo: ASSETS.logoWhite,
+    priceRange: "€€",
     address: {
       "@type": "PostalAddress",
       streetAddress: COMPANY.street,
       postalCode: COMPANY.zip,
       addressLocality: `${COMPANY.city}-${COMPANY.district}`,
+      addressRegion: "HH",
       addressCountry: "DE",
     },
-    openingHours: "Mo-Fr 07:00-17:00",
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: 53.4936,
+      longitude: 10.2086,
+    },
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        opens: "07:00",
+        closes: "17:00",
+      },
+    ],
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: COMPANY.rating,
+      reviewCount: COMPANY.ratingCount,
+      bestRating: 5,
+      worstRating: 1,
+    },
   },
 };
 

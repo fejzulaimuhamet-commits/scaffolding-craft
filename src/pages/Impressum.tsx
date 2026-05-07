@@ -1,6 +1,6 @@
 import { PageLayout } from "@/components/PageLayout";
 import { PageSeo } from "@/components/PageSeo";
-import { COMPANY } from "@/lib/site";
+import { ASSETS, COMPANY } from "@/lib/site";
 
 const Impressum = () => {
   return (
@@ -18,15 +18,19 @@ const Impressum = () => {
           {
             "@context": "https://schema.org",
             "@type": "Organization",
+            "@id": "https://wietek-geruestbau.de/#organization",
             name: COMPANY.name,
             url: "https://wietek-geruestbau.de/",
             email: COMPANY.email,
             telephone: COMPANY.phonePrimary,
+            logo: ASSETS.logoWhite,
+            image: ASSETS.hero,
             address: {
               "@type": "PostalAddress",
               streetAddress: COMPANY.street,
               postalCode: COMPANY.zip,
               addressLocality: `${COMPANY.city}-${COMPANY.district}`,
+              addressRegion: "HH",
               addressCountry: "DE",
             },
           },
