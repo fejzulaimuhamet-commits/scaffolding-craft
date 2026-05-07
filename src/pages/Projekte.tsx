@@ -9,7 +9,7 @@ import { ASSETS } from "@/lib/site";
 import { useProjects } from "@/hooks/useSanity";
 import { imageUrl } from "@/lib/sanity";
 
-type Category = "Fassade" | "Innen" | "Privat" | "Sonderlösung";
+type Category = "Fassade" | "Innen" | "Gewerbe" | "Sonderlösung";
 
 interface ProjectItem {
   img: string;
@@ -22,35 +22,35 @@ const fallbackProjects: ProjectItem[] = [
   { img: ASSETS.slide(1), city: "Hamburg-Bergedorf", type: "Fassade", year: 2025 },
   { img: ASSETS.slide(2), city: "Hamburg-Altona", type: "Fassade", year: 2025 },
   { img: ASSETS.slide(3), city: "Reinbek", type: "Fassade", year: 2024 },
-  { img: ASSETS.slide(4), city: "Hamburg-Harburg", type: "Privat", year: 2024 },
+  { img: ASSETS.slide(4), city: "Hamburg-Harburg", type: "Gewerbe", year: 2024 },
   { img: ASSETS.slide(5), city: "Geesthacht", type: "Fassade", year: 2024 },
   { img: ASSETS.slide(6), city: "Hamburg-Bergedorf", type: "Innen", year: 2024 },
   { img: ASSETS.slide(7), city: "Lüneburg", type: "Fassade", year: 2024 },
   { img: ASSETS.slide(8), city: "Hamburg", type: "Innen", year: 2023 },
   { img: ASSETS.slide(9), city: "Norderstedt", type: "Innen", year: 2023 },
-  { img: ASSETS.slide(10), city: "Stade", type: "Privat", year: 2023 },
+  { img: ASSETS.slide(10), city: "Stade", type: "Gewerbe", year: 2023 },
   { img: ASSETS.slide(12), city: "Hamburg-Wandsbek", type: "Fassade", year: 2023 },
   { img: ASSETS.slide(14), city: "Pinneberg", type: "Sonderlösung", year: 2023 },
   { img: ASSETS.slide(15), city: "Hamburg-Bergedorf", type: "Sonderlösung", year: 2023 },
-  { img: ASSETS.slide(18), city: "Hamburg", type: "Privat", year: 2022 },
+  { img: ASSETS.slide(18), city: "Hamburg", type: "Gewerbe", year: 2022 },
   { img: ASSETS.slide(20), city: "Hamburg-Eimsbüttel", type: "Fassade", year: 2022 },
   { img: ASSETS.slide(22), city: "Hamburg", type: "Sonderlösung", year: 2022 },
-  { img: ASSETS.slide(25), city: "Lüneburg", type: "Privat", year: 2022 },
+  { img: ASSETS.slide(25), city: "Lüneburg", type: "Gewerbe", year: 2022 },
   { img: ASSETS.slide(28), city: "Hamburg-Bergedorf", type: "Sonderlösung", year: 2021 },
   { img: ASSETS.slide(30), city: "Hamburg", type: "Fassade", year: 2021 },
   { img: ASSETS.slide(35), city: "Stade", type: "Innen", year: 2021 },
   { img: ASSETS.slide(40), city: "Hamburg-Bergedorf", type: "Sonderlösung", year: 2020 },
-  { img: ASSETS.slide(45), city: "Hamburg", type: "Privat", year: 2020 },
+  { img: ASSETS.slide(45), city: "Hamburg", type: "Gewerbe", year: 2020 },
 ];
 
 const catMap = (c?: string): Category => {
   if (c === "fassade") return "Fassade";
   if (c === "innen") return "Innen";
-  if (c === "dach") return "Privat";
+  if (c === "dach") return "Gewerbe";
   return "Sonderlösung";
 };
 
-const filters: ("Alle" | Category)[] = ["Alle", "Fassade", "Innen", "Privat", "Sonderlösung"];
+const filters: ("Alle" | Category)[] = ["Alle", "Fassade", "Innen", "Gewerbe", "Sonderlösung"];
 
 const Page = () => {
   const { data: cms } = useProjects();
@@ -72,7 +72,7 @@ const Page = () => {
     <PageLayout>
       <PageSeo
         title="Referenzen Gerüstbau Hamburg | Projekte – Wietek Gerüstbau"
-        description="Über 500 abgeschlossene Gerüstbau-Projekte in Hamburg & Norddeutschland: Fassaden-, Innen-, Privat- und Sondergerüste. Alle Referenzen ansehen."
+        description="Über 500 abgeschlossene Gerüstbau-Projekte in Hamburg & Norddeutschland: Fassaden-, Innen-, Gewerbe- und Sondergerüste. Alle Referenzen ansehen."
         path="/projekte"
         keywords="Gerüstbau Referenzen Hamburg, Projekte Wietek, Gerüstbau Hamburg Projekte, Fassadengerüst Referenzen"
         breadcrumbs={[
@@ -97,7 +97,7 @@ const Page = () => {
               Unsere Referenzen sprechen für sich
             </h2>
             <p className="mt-5 text-concrete leading-relaxed">
-              Vom kleinen Einfamilienhaus in Bergedorf bis zum Privatprojekt in Lüneburg –
+              Vom kleinen Einfamilienhaus in Bergedorf bis zum Gewerbeprojekt in Lüneburg –
               jedes Projekt hat seine Geschichte. Filtern Sie nach Kategorie und entdecken Sie
               eine Auswahl aus über 500 abgeschlossenen Aufträgen.
             </p>
