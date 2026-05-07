@@ -32,7 +32,7 @@ const Page = () => (
       headline: "Treppenturm für Bau & Öffentliches Recht",
       items: [
         { icon: Building2, title: "Baustellen", desc: "Hauptzugang für Personal, Material und Bauleitung." },
-        { icon: HardHat, title: "Industrie", desc: "Wartungszugang an Anlagen, Tanks und Maschinen." },
+        { icon: HardHat, title: "Öffentliches Recht", desc: "Wartungszugang an Anlagen, Tanks und Maschinen." },
         { icon: ArrowUpDown, title: "Veranstaltungen", desc: "Bühnen, Tribünen, temporäre Aufgänge." },
         { icon: ShieldCheck, title: "Notausgang", desc: "Zugelassener Fluchtweg bei Sanierungen." },
       ],
