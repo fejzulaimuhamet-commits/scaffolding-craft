@@ -7,6 +7,14 @@ import { ArrowLeft, ArrowRight, Building2, CheckCircle2, ClipboardCheck, Home, L
 import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { submitToWeb3Forms } from "@/lib/web3forms";
+
+const TYPE_LABELS: Record<string, string> = {
+  fassade: "Fassadengerüst",
+  innen: "Innengerüst",
+  treppe: "Treppenturm",
+  sonstiges: "Sonstiges",
+};
 
 const schema = z.object({
   type: z.enum(["fassade", "innen", "treppe", "sonstiges"], {
