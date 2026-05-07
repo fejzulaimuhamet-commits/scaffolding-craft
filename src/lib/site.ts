@@ -1,5 +1,6 @@
 // Zentrale Daten & Helpers für die Wietek-Startseite
 import { cld } from "@/lib/cloudinary";
+import dachfanggeruestImg from "@/assets/dachfanggeruest.webp";
 
 export const COMPANY = {
   name: "Wietek Gerüstbau",
@@ -84,7 +85,7 @@ export const ASSETS = {
     fassade: cld(CLD.fassade1, 1600),
     innen: cld(CLD.innen1, 1600),
     treppe: cld(CLD.treppe, 1600),
-    dach: cld(CLD.schutz, 1600), // kein dediziertes Dachfang-Bild → Schutz/Geländer
+    dach: dachfanggeruestImg,
     schutz: cld(CLD.schutz, 1600),
     wetter: cld(CLD.innenBg, 1600), // kein dediziertes Wetterschutz-Bild → Innen-BG
   },
