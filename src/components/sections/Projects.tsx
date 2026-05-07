@@ -4,7 +4,7 @@ import { ASSETS } from "@/lib/site";
 import { useProjects } from "@/hooks/useSanity";
 import { imageUrl } from "@/lib/sanity";
 
-type Cat = "Alle" | "Gewerbe";
+type Cat = "Alle" | "Gewerbe" | "Privat";
 
 type Project = {
   title: string;
@@ -19,7 +19,7 @@ const fallbackProjects: Project[] = [
   { title: "Wohnhaus Sanierung", city: "Bergedorf", year: "2025", sqm: "", cat: "Gewerbe", img: ASSETS.slide(1) },
   { title: "Reihenhaus Neubau", city: "Hamburg", year: "2025", sqm: "", cat: "Gewerbe", img: ASSETS.slide(18) },
   { title: "Fassade Bürohaus", city: "Hamburg-City", year: "2024", sqm: "", cat: "Gewerbe", img: ASSETS.slide(4) },
-  { title: "Neubau ", city: "Hamburg", year: "2024", sqm: "", cat: "Gewerbe", img: ASSETS.slide(34) },
+  { title: "Neubau ", city: "Hamburg", year: "2024", sqm: "", cat: "Privat", img: ASSETS.slide(34) },
   { title: "Wohnhaus Fassade", city: "Harburg", year: "2024", sqm: "", cat: "Gewerbe", img: ASSETS.slide(22) },
   { title: "Neubau", city: "Lüneburg", year: "2024", sqm: "", cat: "Gewerbe", img: ASSETS.slide(28) },
   { title: "Fassade Altbau", city: "Eppendorf", year: "2024", sqm: "", cat: "Gewerbe", img: ASSETS.slide(15) },
@@ -34,7 +34,7 @@ const catFromSanity = (c?: string): Project["cat"] => {
   return "Gewerbe";
 };
 
-const cats: Cat[] = ["Alle", "Gewerbe"];
+const cats: Cat[] = ["Alle", "Gewerbe", "Privat"];
 
 export const Projects = () => {
   const { data: cms } = useProjects();
