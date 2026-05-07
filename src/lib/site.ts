@@ -88,7 +88,7 @@ export const ASSETS = {
     treppe: cld(CLD.treppe, 1600),
     dach: dachfanggeruestImg,
     schutz: cld(CLD.schutz, 1600),
-    wetter: cld(CLD.innenBg, 1600), // kein dediziertes Wetterschutz-Bild → Innen-BG
+    wetter: wetterschutzImg,
   },
   projects: [
     cld(CLD.project1, 1600),
