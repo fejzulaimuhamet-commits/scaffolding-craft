@@ -17,7 +17,7 @@ const fallback: Service[] = [
     slug: "fassadengeruest",
     tag: "Fassade",
     title: "Fassadengerüste",
-    desc: "Sichere und flexible Gerüste für Wohn-, Gewerbe- und Industriegebäude – individuell an Struktur und Höhe angepasst.",
+    desc: "Sichere und flexible Gerüste für Wohn-, Gewerbe- und öffentliche Gebäude – individuell an Struktur und Höhe angepasst.",
     img: ASSETS.placeholder.fassade,
   },
   {
