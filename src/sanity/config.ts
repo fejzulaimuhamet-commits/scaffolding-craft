@@ -16,7 +16,7 @@ const PREVIEW_ORIGIN =
 
 export const sanityConfig = defineConfig({
   name: "wietek",
-  title: "Wietek Gerüstbau CMS",
+  title: "Wietek Gerüstbau – Redaktion",
   projectId: SANITY_PROJECT_ID,
   dataset: SANITY_DATASET,
   basePath: "/studio",
@@ -25,6 +25,7 @@ export const sanityConfig = defineConfig({
       allowOrigins: [
         "https://id-preview--e106eeef-8ae8-469b-b64d-dae180e6aade.lovable.app",
         "https://scaffolding-craft.lovable.app",
+        "https://wietek-geruestbau.sanity.studio",
         PREVIEW_ORIGIN,
       ],
       previewUrl: {
