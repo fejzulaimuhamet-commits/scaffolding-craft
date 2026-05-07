@@ -24,13 +24,13 @@ const fallbackProjects: Project[] = [
   { title: "Neubau", city: "Lüneburg", year: "2024", sqm: "", cat: "Privat", img: ASSETS.slide(28) },
   { title: "Fassade Altbau", city: "Eppendorf", year: "2024", sqm: "", cat: "Privat", img: ASSETS.slide(15) },
   { title: "Fassade Einfamilienhaus", city: "St. Pauli", year: "2023", sqm: "", cat: "Gewerbe", img: ASSETS.slide(40) },
-  { title: "Kirche Sanierung", city: "Stade", year: "2023", sqm: "", cat: "Privat", img: ASSETS.slide(46) },
+  { title: "Kirche Sanierung", city: "Stade", year: "2023", sqm: "", cat: "Gewerbe", img: ASSETS.slide(46) },
 ];
 
 const catFromSanity = (c?: string): Project["cat"] => {
   if (c === "innen" || c === "fassade") return "Privat";
   if (c === "treppe" || c === "schutz" || c === "wetter") return "Gewerbe";
-  if (c === "dach") return "Privat";
+  if (c === "dach") return "Gewerbe";
   return "Privat";
 };
 
