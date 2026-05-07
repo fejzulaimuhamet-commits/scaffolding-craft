@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, CheckCircle2, Star } from "lucide-react";
 import { ASSETS } from "@/lib/site";
 
-const HERO_BADGE = "4.9 Google  ·  Familiengeführt seit 2014";
+const HERO_BADGE = "Familiengeführt seit 2014";
 const HERO_TITLE_LINE1 = "Gerüstbau in Hamburg –";
 const HERO_TITLE_LINE2 = "sicher, pünktlich,";
 const HERO_TITLE_LINE3 = "ab 24 Std. einsatzbereit.";
