@@ -1,6 +1,7 @@
 // Zentrale Daten & Helpers für die Wietek-Startseite
 import { cld } from "@/lib/cloudinary";
 import dachfanggeruestImg from "@/assets/dachfanggeruest.webp";
+import wetterschutzImg from "@/assets/wetterschutzdach.webp";
 
 export const COMPANY = {
   name: "Wietek Gerüstbau",
