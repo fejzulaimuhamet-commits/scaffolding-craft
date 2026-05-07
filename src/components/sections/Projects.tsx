@@ -4,7 +4,7 @@ import { ASSETS } from "@/lib/site";
 import { useProjects } from "@/hooks/useSanity";
 import { imageUrl } from "@/lib/sanity";
 
-type Cat = "Alle" | "Privat" | "Gewerbe" | "Öffentliches Recht";
+type Cat = "Alle" | "Privat" | "Gewerbe";
 
 type Project = {
   title: string;
@@ -20,21 +20,21 @@ const fallbackProjects: Project[] = [
   { title: "Reihenhaus Neubau", city: "Hamburg", year: "2025", sqm: "", cat: "Privat", img: ASSETS.slide(18) },
   { title: "Fassade Bürohaus", city: "Hamburg-City", year: "2024", sqm: "", cat: "Gewerbe", img: ASSETS.slide(4) },
   { title: "Neubau ", city: "Hamburg", year: "2024", sqm: "", cat: "Gewerbe", img: ASSETS.slide(34) },
-  { title: "Wohnhaus Fassade", city: "Harburg", year: "2024", sqm: "", cat: "Öffentliches Recht", img: ASSETS.slide(22) },
-  { title: "Neubau", city: "Lüneburg", year: "2024", sqm: "", cat: "Öffentliches Recht", img: ASSETS.slide(28) },
+  { title: "Wohnhaus Fassade", city: "Harburg", year: "2024", sqm: "", cat: "Privat", img: ASSETS.slide(22) },
+  { title: "Neubau", city: "Lüneburg", year: "2024", sqm: "", cat: "Privat", img: ASSETS.slide(28) },
   { title: "Fassade Altbau", city: "Eppendorf", year: "2024", sqm: "", cat: "Privat", img: ASSETS.slide(15) },
   { title: "Fassade Einfamilienhaus", city: "St. Pauli", year: "2023", sqm: "", cat: "Gewerbe", img: ASSETS.slide(40) },
-  { title: "Kirche Sanierung", city: "Stade", year: "2023", sqm: "", cat: "Öffentliches Recht", img: ASSETS.slide(46) },
+  { title: "Kirche Sanierung", city: "Stade", year: "2023", sqm: "", cat: "Privat", img: ASSETS.slide(46) },
 ];
 
 const catFromSanity = (c?: string): Project["cat"] => {
   if (c === "innen" || c === "fassade") return "Privat";
   if (c === "treppe" || c === "schutz" || c === "wetter") return "Gewerbe";
-  if (c === "dach") return "Öffentliches Recht";
+  if (c === "dach") return "Privat";
   return "Privat";
 };
 
-const cats: Cat[] = ["Alle", "Privat", "Gewerbe", "Öffentliches Recht"];
+const cats: Cat[] = ["Alle", "Privat", "Gewerbe"];
 
 export const Projects = () => {
   const { data: cms } = useProjects();
