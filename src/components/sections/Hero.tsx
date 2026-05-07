@@ -7,7 +7,7 @@ import { imageUrl } from "@/lib/sanity";
 export const Hero = () => {
   const { data: homepage } = useHomepage();
   const heroImg = imageUrl(homepage?.heroImage, 1920) ?? ASSETS.hero;
-  const heroBadge = homepage?.heroBadge ?? "5,0 ★ Google · Familiengeführt seit 2014";
+  const heroBadge = homepage?.heroBadge ?? "Familiengeführt seit 2014";
   const heroTitle = homepage?.heroTitle ?? "Gerüstbau in Hamburg – sicher, pünktlich, ab 24 Std. einsatzbereit.";
   const heroSubtitle =
     homepage?.heroSubtitle ??
