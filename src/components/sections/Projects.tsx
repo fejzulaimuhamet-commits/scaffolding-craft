@@ -4,7 +4,7 @@ import { ASSETS } from "@/lib/site";
 import { useProjects } from "@/hooks/useSanity";
 import { imageUrl } from "@/lib/sanity";
 
-type Cat = "Alle" | "Privat" | "Gewerbe" | "Industrie";
+type Cat = "Alle" | "Privat" | "Gewerbe" | "Öffentliches Recht";
 
 type Project = {
   title: string;
