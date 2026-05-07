@@ -4,7 +4,7 @@ import { ASSETS } from "@/lib/site";
 import { useProjects } from "@/hooks/useSanity";
 import { imageUrl } from "@/lib/sanity";
 
-type Cat = "Alle" | "Gewerbe";
+type Cat = "Alle" | "Gewerbe" | "Privat";
 
 type Project = {
   title: string;
@@ -34,7 +34,7 @@ const catFromSanity = (c?: string): Project["cat"] => {
   return "Gewerbe";
 };
 
-const cats: Cat[] = ["Alle", "Gewerbe"];
+const cats: Cat[] = ["Alle", "Gewerbe", "Privat"];
 
 export const Projects = () => {
   const { data: cms } = useProjects();
