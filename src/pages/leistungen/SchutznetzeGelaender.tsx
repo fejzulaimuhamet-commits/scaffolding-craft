@@ -45,7 +45,7 @@ const Page = () => (
       items: [
         { icon: Construction, title: "Hochbau", desc: "Decken-, Treppen- und Gerüstöffnungen sichern." },
         { icon: Umbrella, title: "Dacharbeiten", desc: "Randsicherung an Flach- und Steildächern." },
-        { icon: Layers, title: "Industrie", desc: "Hallen, Lichtkuppeln, Wartungszugänge." },
+        { icon: Layers, title: "Öffentliches Recht", desc: "Hallen, Lichtkuppeln, Wartungszugänge." },
         { icon: ShieldCheck, title: "Sanierung", desc: "Schutz für Passanten und Anwohner." },
       ],
     }}

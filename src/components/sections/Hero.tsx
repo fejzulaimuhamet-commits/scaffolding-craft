@@ -11,7 +11,7 @@ export const Hero = () => {
   const heroTitle = homepage?.heroTitle ?? "Gerüstbau in Hamburg – sicher, pünktlich, ab 24 Std. einsatzbereit.";
   const heroSubtitle =
     homepage?.heroSubtitle ??
-    "Familiengeführter Gerüstbau aus Hamburg-Bergedorf. Wir liefern, montieren und demontieren Gerüste für Privathaushalte, Handwerker und Industrie – schnell, sauber und mit echtem Wort.";
+    "Familiengeführter Gerüstbau aus Hamburg-Bergedorf. Wir liefern, montieren und demontieren Gerüste für Privathaushalte, Handwerker und das öffentliche Recht – schnell, sauber und mit echtem Wort.";
   const usps =
     homepage?.heroUsps && homepage.heroUsps.length > 0
       ? homepage.heroUsps

@@ -23,7 +23,7 @@ const fallbackServices: Service[] = [
     tag: "Fassade",
     title: "Fassadengerüste",
     intro:
-      "Sichere und flexible Arbeitsgerüste für Wohn-, Gewerbe- und Industriegebäude. Wir planen, liefern, montieren und demontieren – passgenau für Ihr Bauvorhaben.",
+      "Sichere und flexible Arbeitsgerüste für Wohn-, Gewerbe- und öffentliche Gebäude. Wir planen, liefern, montieren und demontieren – passgenau für Ihr Bauvorhaben.",
     bullets: [
       "Sanierung, Neubau und Malerarbeiten",
       "Belastungsklassen 3–6 nach DIN EN 12811",
@@ -302,7 +302,7 @@ const Leistungen = () => {
     <PageHero
       eyebrow="Unsere Leistungen"
       title="Gerüstlösungen für jeden Einsatz"
-      subtitle="Von der privaten Fassade bis zum Industrieprojekt – wir liefern das passende Gerüst für Ihr Vorhaben."
+      subtitle="Von der privaten Fassade bis zum öffentlichen Großprojekt – wir liefern das passende Gerüst für Ihr Vorhaben."
       backgroundImage={ASSETS.placeholder.fassade}
       breadcrumb="Leistungen"
     />
