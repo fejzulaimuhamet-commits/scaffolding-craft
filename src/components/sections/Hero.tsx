@@ -6,7 +6,7 @@ const HERO_BADGE = "Familiengeführt seit 2014";
 const HERO_TITLE_LINE1 = "Gerüstbau in Hamburg –";
 const HERO_TITLE_LINE2 = "sicher, pünktlich,";
 const HERO_TITLE_LINE3 = "ab 24 Std. einsatzbereit.";
-const HERO_SUBTITLE = "Familiengeführter Gerüstbau aus Hamburg-Bergedorf. Wir liefern, montieren und demontieren Gerüste für Privathaushalte, Handwerker und Industrie – schnell, sauber und mit echtem Wort.";
+const HERO_SUBTITLE = "Wir liefern, montieren und demontieren Gerüste für Privathaushalte, Handwerker und Industrie – schnell, sauber und mit echtem Wort.";
 const HERO_USPS = [
   "Aufbau in 24–72 Stunden",
   "Familienunternehmen seit 2014",
