@@ -30,7 +30,7 @@ const fallbackProjects: Project[] = [
 const catFromSanity = (c?: string): Project["cat"] => {
   if (c === "innen" || c === "fassade") return "Privat";
   if (c === "treppe" || c === "schutz" || c === "wetter") return "Privat";
-  if (c === "dach") return "Gewerbe";
+  if (c === "dach") return "Privat";
   return "Privat";
 };
 
