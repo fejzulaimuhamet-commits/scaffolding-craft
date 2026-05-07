@@ -72,7 +72,7 @@ const Page = () => {
     <PageLayout>
       <PageSeo
         title="Referenzen Gerüstbau Hamburg | Projekte – Wietek Gerüstbau"
-        description="Über 500 abgeschlossene Gerüstbau-Projekte in Hamburg & Norddeutschland: Fassaden-, Innen-, Industrie- und Sondergerüste. Alle Referenzen ansehen."
+        description="Über 500 abgeschlossene Gerüstbau-Projekte in Hamburg & Norddeutschland: Fassaden-, Innen-, Öffentliches Recht- und Sondergerüste. Alle Referenzen ansehen."
         path="/projekte"
         keywords="Gerüstbau Referenzen Hamburg, Projekte Wietek, Gerüstbau Hamburg Projekte, Fassadengerüst Referenzen"
         breadcrumbs={[
