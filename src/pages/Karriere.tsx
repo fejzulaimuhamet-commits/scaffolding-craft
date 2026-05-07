@@ -100,6 +100,34 @@ const Page = () => {
     console.info("Bewerbung (nicht versendet):", { ...data, file: fileName });
   };
 
+  const today = new Date().toISOString().slice(0, 10);
+  const jobPostings = jobs.map((j) => ({
+    "@context": "https://schema.org",
+    "@type": "JobPosting",
+    title: j.title,
+    description: `<p>${j.desc}</p><ul>${j.bullets.map((b) => `<li>${b}</li>`).join("")}</ul>`,
+    datePosted: today,
+    employmentType: (j.type || "").toLowerCase().includes("teilzeit") ? "PART_TIME" : "FULL_TIME",
+    hiringOrganization: {
+      "@type": "Organization",
+      name: COMPANY.name,
+      sameAs: "https://wietek-geruestbau.de/",
+      logo: ASSETS.logoWhite,
+    },
+    jobLocation: {
+      "@type": "Place",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: COMPANY.street,
+        postalCode: COMPANY.zip,
+        addressLocality: `${COMPANY.city}-${COMPANY.district}`,
+        addressCountry: "DE",
+      },
+    },
+    directApply: true,
+    url: "https://wietek-geruestbau.de/karriere",
+  }));
+
   return (
     <PageLayout>
       <PageSeo
@@ -111,6 +139,7 @@ const Page = () => {
           { name: "Startseite", path: "/" },
           { name: "Karriere", path: "/karriere" },
         ]}
+        jsonLd={jobPostings}
       />
 
       <PageHero

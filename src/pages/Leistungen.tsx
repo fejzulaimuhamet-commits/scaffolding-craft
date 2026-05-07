@@ -287,6 +287,17 @@ const Leistungen = () => {
       img: c?.image || s.img,
     };
   });
+  const itemListSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Gerüstbau-Leistungen Wietek Gerüstbau Hamburg",
+    itemListElement: services.map((s, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      url: `https://wietek-geruestbau.de${s.to}`,
+      name: `${s.title} Hamburg`,
+    })),
+  };
   return (
   <PageLayout>
     <PageSeo
@@ -298,6 +309,7 @@ const Leistungen = () => {
         { name: "Startseite", path: "/" },
         { name: "Leistungen", path: "/leistungen" },
       ]}
+      jsonLd={[itemListSchema]}
     />
     <PageHero
       eyebrow="Unsere Leistungen"
