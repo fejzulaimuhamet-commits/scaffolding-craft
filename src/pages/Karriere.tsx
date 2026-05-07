@@ -23,7 +23,7 @@ import { PageHero } from "@/components/shared/PageHero";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { ASSETS, COMPANY } from "@/lib/site";
-import { useJobs } from "@/hooks/useSanity";
+
 
 const benefits = [
   { icon: Euro, title: "Faire Bezahlung", desc: "Übertarifliche Vergütung, pünktlich, plus Bonus." },
@@ -63,15 +63,7 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 const Page = () => {
-  const { data: cmsJobs } = useJobs();
-  const jobs = cmsJobs && cmsJobs.length > 0
-    ? cmsJobs.map((j) => ({
-        title: j.jobTitle,
-        type: [j.jobType, j.location].filter(Boolean).join(" · ") || "Vollzeit · Hamburg",
-        desc: j.description || "",
-        bullets: j.requirements || [],
-      }))
-    : fallbackJobs;
+  const jobs = fallbackJobs;
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [fileName, setFileName] = useState<string | null>(null);
