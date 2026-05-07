@@ -5,6 +5,7 @@ import { PageLayout } from "@/components/PageLayout";
 import { PageHero } from "@/components/shared/PageHero";
 import { RequestWizard } from "@/components/sections/RequestWizard";
 import { ASSETS, COMPANY, waLink } from "@/lib/site";
+import contactHeroDark from "@/assets/contact-hero-dark.jpg";
 
 const mapQuery = encodeURIComponent(`${COMPANY.street}, ${COMPANY.zip} ${COMPANY.city}`);
 const mapEmbed = `https://maps.google.com/maps?q=${mapQuery}&output=embed`;
@@ -97,7 +98,7 @@ const Page = () => (
       eyebrow="Kontakt"
       title="Direkt mit dem Wietek-Team sprechen"
       subtitle="Anrufen, schreiben oder Anfrage stellen – wir antworten persönlich und schnell."
-      backgroundImage={ASSETS.contact}
+      backgroundImage={contactHeroDark}
       breadcrumb="Kontakt"
     />
 
