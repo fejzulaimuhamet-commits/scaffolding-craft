@@ -23,7 +23,7 @@ const fallbackServices: Service[] = [
     tag: "Fassade",
     title: "Fassadengerüste",
     intro:
-      "Sichere und flexible Arbeitsgerüste für Wohn- und Gewerbegebäude. Wir planen, liefern, montieren und demontieren – passgenau für Ihr Bauvorhaben.",
+      "Sichere und flexible Arbeitsgerüste für Gewerbe- und Industriegebäude. Wir planen, liefern, montieren und demontieren – passgenau für Ihr Bauvorhaben.",
     bullets: [
       "Sanierung, Neubau und Malerarbeiten",
       "Belastungsklassen 3–6 nach DIN EN 12811",
