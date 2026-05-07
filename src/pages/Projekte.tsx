@@ -97,7 +97,7 @@ const Page = () => {
               Unsere Referenzen sprechen für sich
             </h2>
             <p className="mt-5 text-concrete leading-relaxed">
-              Vom kleinen Einfamilienhaus in Bergedorf bis zur Industrieanlage in Lüneburg –
+              Vom kleinen Einfamilienhaus in Bergedorf bis zur Anlage des öffentlichen Rechts in Lüneburg –
               jedes Projekt hat seine Geschichte. Filtern Sie nach Kategorie und entdecken Sie
               eine Auswahl aus über 500 abgeschlossenen Aufträgen.
             </p>
