@@ -2,9 +2,8 @@ import { Link } from "react-router-dom";
 import { Facebook, Instagram, Mail, MapPin, Phone, ArrowRight } from "lucide-react";
 import { ASSETS } from "@/lib/site";
 import { useCompany } from "@/hooks/useCompany";
-import { useSettings } from "@/hooks/useSanity";
 
-const defaultServices = [
+const services = [
   { label: "Fassadengerüst Hamburg", to: "/leistungen/fassadengeruest" },
   { label: "Innengerüst Hamburg", to: "/leistungen/innengeruest" },
   { label: "Treppenturm Hamburg", to: "/leistungen/treppenturm" },
@@ -13,7 +12,7 @@ const defaultServices = [
   { label: "Wetterschutzdach", to: "/leistungen/wetterschutz" },
 ];
 
-const defaultLocations = [
+const locations = [
   { label: "Gerüstbau Hamburg", to: "/leistungen" },
   { label: "Gerüstbau Bergedorf", to: "/leistungen" },
   { label: "Gerüstbau Harburg", to: "/leistungen" },
@@ -22,7 +21,7 @@ const defaultLocations = [
   { label: "Gerüstbau Stade", to: "/leistungen" },
 ];
 
-const defaultLegal = [
+const legalLinksList = [
   { label: "Impressum", to: "/impressum" },
   { label: "Datenschutz", to: "/datenschutz" },
   { label: "AGB", to: "#agb" },
@@ -30,19 +29,18 @@ const defaultLegal = [
 
 export const Footer = () => {
   const COMPANY = useCompany();
-  const { data: settings } = useSettings();
 
-  const ctaEyebrow = settings?.footerCtaEyebrow ?? "Projekt anfragen?";
-  const ctaHeadline = settings?.footerCtaHeadline ?? "Wir bauen Ihr Gerüst – schnell, sicher und persönlich.";
-  const ctaButton = settings?.footerCtaButton ?? "Jetzt anfragen";
-  const tagline = settings?.footerTagline ?? `Familiengeführter Gerüstbau aus ${COMPANY.city}-${COMPANY.district}. Sicher, pünktlich und persönlich – seit ${COMPANY.founded}.`;
-  const colServicesTitle = settings?.footerColServicesTitle ?? "Leistungen";
-  const colServices = settings?.footerColServices && settings.footerColServices.length > 0 ? settings.footerColServices : defaultServices;
-  const colLocationsTitle = settings?.footerColLocationsTitle ?? "Standorte";
-  const colLocations = settings?.footerColLocations && settings.footerColLocations.length > 0 ? settings.footerColLocations : defaultLocations;
-  const contactTitle = settings?.footerContactTitle ?? "Kontakt";
-  const legalLinks = settings?.footerLegalLinks && settings.footerLegalLinks.length > 0 ? settings.footerLegalLinks : defaultLegal;
-  const legalLine = settings?.footerLegal ?? `© ${new Date().getFullYear()} ${COMPANY.name}. Alle Rechte vorbehalten.`;
+  const ctaEyebrow = "Projekt anfragen?";
+  const ctaHeadline = "Wir bauen Ihr Gerüst – schnell, sicher und persönlich.";
+  const ctaButton = "Jetzt anfragen";
+  const tagline = `Familiengeführter Gerüstbau aus ${COMPANY.city}-${COMPANY.district}. Sicher, pünktlich und persönlich – seit ${COMPANY.founded}.`;
+  const colServicesTitle = "Leistungen";
+  const colServices = services;
+  const colLocationsTitle = "Standorte";
+  const colLocations = locations;
+  const contactTitle = "Kontakt";
+  const legalLinks = legalLinksList;
+  const legalLine = `© ${new Date().getFullYear()} ${COMPANY.name}. Alle Rechte vorbehalten.`;
 
   return (
     <footer className="footer-grain text-white pt-0 pb-8 relative">
