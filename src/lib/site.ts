@@ -2,6 +2,7 @@
 import { cld } from "@/lib/cloudinary";
 import dachfanggeruestImg from "@/assets/dachfanggeruest.webp";
 import wetterschutzImg from "@/assets/wetterschutzdach.webp";
+import treppenturmImg from "@/assets/treppenturm.jpg";
 
 export const COMPANY = {
   name: "Wietek Gerüstbau",
@@ -85,7 +86,7 @@ export const ASSETS = {
   placeholder: {
     fassade: cld(CLD.fassade1, 1600),
     innen: cld(CLD.innen1, 1600),
-    treppe: cld(CLD.treppe, 1600),
+    treppe: treppenturmImg,
     dach: dachfanggeruestImg,
     schutz: cld(CLD.schutz, 1600),
     wetter: wetterschutzImg,
