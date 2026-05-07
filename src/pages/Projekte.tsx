@@ -9,7 +9,7 @@ import { ASSETS } from "@/lib/site";
 import { useProjects } from "@/hooks/useSanity";
 import { imageUrl } from "@/lib/sanity";
 
-type Category = "Fassade" | "Innen" | "Industrie" | "Sonderlösung";
+type Category = "Fassade" | "Innen" | "Öffentliches Recht" | "Sonderlösung";
 
 interface ProjectItem {
   img: string;
