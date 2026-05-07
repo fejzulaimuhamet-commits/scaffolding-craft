@@ -1,40 +1,39 @@
-## Warum vieles nicht editierbar ist
+## Problem
 
-Zwei zusammenhängende Probleme:
+Viele Texte auf der Live-Seite sind im Sanity Studio (Visual Editing / Presentation Mode) **nicht klickbar**, obwohl Stega aktiv ist. Grund: Im Code stehen überall `??`-Fallback-Strings (z. B. `hp?.heroTitle ?? "Gerüstbau in Hamburg…"`). Wenn das Sanity-Feld leer ist, rendert React den **hartkodierten String** — dieser hat keine Stega-Markierung und ist deshalb nicht editierbar. Auch das Anlegen der Felder im Studio ist mühsam, weil der Kunde nicht weiß, was reingehört.
 
-### 1. Falsche Studio-URL für Stega-Encoding
-In `src/lib/sanity.ts` zeigt die Studio-URL noch auf die alte Lovable-Adresse:
-```ts
-"https://scaffolding-craft.lovable.app/studio"  // ← falsch
-```
-Das Stega-Encoding bettet "klick zum editieren"-Links in die gerenderten Texte ein. Wenn die Studio-URL falsch ist, kann das Sanity-Dashboard die Klicks nicht zum richtigen Dokument zurückführen.
+## Lösung (zwei Schritte, gemeinsam umgesetzt)
 
-### 2. Hardcoded Fallbacks in 6 Sektionen
-`Industries`, `Projects`, `ServiceArea`, `Services`, `Stats`, `Testimonials` haben noch Fallback-Konstanten im Code. Wenn Sanity leere Felder hat, rendern sie den Fallback **ohne Stega-Marker** → nicht klickbar im Presentation-Modus. Editierbar werden sie nur, wenn die Texte tatsächlich aus Sanity kommen.
+### Schritt 1 – Sanity-Dokument mit allen aktuellen Texten befüllen
+Das `homepage`-Dokument (sowohl `published` als auch `drafts.homepage`) wird per MCP-Patch mit den exakten Default-Texten aus dem Code befüllt. Felder:
 
-## Fix
+- Hero: `heroBadge`, `heroTitle`, `heroCtaPrimary`, `heroCtaSecondary`
+- Industries: `industriesEyebrow`, `industriesTitle`, `industriesIntro`
+- Services: `servicesEyebrow`, `servicesTitle`, `servicesIntro`
+- ServiceArea: `serviceAreaEyebrow`, `serviceAreaTitle`, `serviceAreaIntro`
+- Testimonials: `testimonialsEyebrow` (Titel & Badge bereits gesetzt)
+- FAQ: `faqEyebrow`, `faqTitle`, `faqIntro`
+- Contact: `contactEyebrow`, `contactTitle`, `contactIntro`, `contactCtaWhatsapp`, `contactCtaCall`
 
-### Schritt 1 (mache ich): Studio-URL korrigieren
-`src/lib/sanity.ts`: `STUDIO_URL` auf `https://wietek-geruestbau.sanity.studio` umstellen. Damit funktionieren ab dem nächsten Vercel-Deploy alle Stega-Klicks korrekt.
+Ergebnis: Jedes Textelement hat einen echten Sanity-Wert → wird mit Stega-Marker gerendert → im Studio klickbar.
 
-### Schritt 2 (mache ich): Fallbacks aus 6 Sektionen entfernen
-- `Industries.tsx`
-- `Projects.tsx`
-- `ServiceArea.tsx`
-- `Services.tsx`
-- `Stats.tsx`
-- `Testimonials.tsx`
+### Schritt 2 – Code-Fallbacks in den Sektionen entfernen
+In den 7 Sektions-Dateien wird `hp?.feld ?? "…"` zu `hp?.feld` (bzw. `hp?.feld || ""`). Betroffen:
 
-Statt Fallback → wenn Sanity leer ist, Sektion ausblenden ODER leeren Editier-Slot rendern, sodass der Kunde den Inhalt im Studio anlegen muss. Damit ist alles, was sichtbar ist, auch editierbar.
+- `src/components/sections/Hero.tsx`
+- `src/components/sections/Industries.tsx`
+- `src/components/sections/Services.tsx`
+- `src/components/sections/ServiceArea.tsx`
+- `src/components/sections/Testimonials.tsx`
+- `src/components/sections/FAQ.tsx`
+- `src/components/sections/Contact.tsx`
 
-### Schritt 3: Studio neu deployen (machst du)
-Da das Studio-Bundle (`wietek-geruestbau.sanity.studio`) ein separater Build ist, musst du danach **einmal** im Projektordner laufen lassen:
-```
-npx sanity deploy
-```
-Damit nimmt das gehostete Studio die neue Config (Stega + korrekte previewUrl) auf. Vercel-Deploy alleine reicht nicht für das gehostete Studio.
+Damit gibt es keine "stillen" Hartkodierungen mehr — was im Studio steht, wird angezeigt; was leer ist, ist sichtbar leer (und der Kunde merkt sofort, dass er es füllen soll).
 
-## Was du danach hast
-- ✅ Alle Texte/Bilder im Presentation-Modus klickbar → öffnen direkt das richtige Sanity-Dokument
-- ✅ Keine "Geister-Texte" mehr, die im Code stehen aber nicht editierbar sind
-- ✅ Header & Footer bleiben unangetastet (im Code, wie gewünscht)
+### Schritt 3 – Verifikation
+- Studio öffnen (`wietek-geruestbau.sanity.studio`) → Presentation Mode → Homepage → mit der Maus über jedes Textelement fahren und prüfen, dass der blaue Edit-Rahmen erscheint.
+- Falls einzelne Items in Listen (Industries-Cards, Services-Cards, Testimonials, City-Tags) noch nicht editierbar sind: separat im nächsten Schritt angehen (das sind Array-Items mit eigener Schema-Struktur).
+
+## Hinweis
+
+Dieser Plan adressiert die **statischen Textfelder**. Falls auch Listen-Items (Karten, Cities, Testimonial-Zitate) editierbar sein sollen, sage mir Bescheid — dort braucht es eine zusätzliche Runde, weil der Code dort eigene Default-Arrays hat.
