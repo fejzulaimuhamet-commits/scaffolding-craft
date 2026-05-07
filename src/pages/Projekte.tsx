@@ -72,7 +72,7 @@ const Page = () => {
     <PageLayout>
       <PageSeo
         title="Referenzen Gerüstbau Hamburg | Projekte – Wietek Gerüstbau"
-        description="Über 500 abgeschlossene Gerüstbau-Projekte in Hamburg & Norddeutschland: Fassaden-, Innen-, Öffentliches Recht- und Sondergerüste. Alle Referenzen ansehen."
+        description="Über 500 abgeschlossene Gerüstbau-Projekte in Hamburg & Norddeutschland: Fassaden-, Innen-, Privat- und Sondergerüste. Alle Referenzen ansehen."
         path="/projekte"
         keywords="Gerüstbau Referenzen Hamburg, Projekte Wietek, Gerüstbau Hamburg Projekte, Fassadengerüst Referenzen"
         breadcrumbs={[
@@ -97,7 +97,7 @@ const Page = () => {
               Unsere Referenzen sprechen für sich
             </h2>
             <p className="mt-5 text-concrete leading-relaxed">
-              Vom kleinen Einfamilienhaus in Bergedorf bis zur Anlage des öffentlichen Rechts in Lüneburg –
+              Vom kleinen Einfamilienhaus in Bergedorf bis zum Privatprojekt in Lüneburg –
               jedes Projekt hat seine Geschichte. Filtern Sie nach Kategorie und entdecken Sie
               eine Auswahl aus über 500 abgeschlossenen Aufträgen.
             </p>

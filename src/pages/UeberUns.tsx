@@ -83,7 +83,7 @@ const values = [
 
 const stats = [
   { end: 11, suffix: "+", label: "Jahre Erfahrung", sub: "Familienbetrieb seit 2014" },
-  { end: 500, suffix: "+", label: "Abgeschlossene Projekte", sub: "Privat, Gewerbe & Öffentliches Recht" },
+  { end: 500, suffix: "+", label: "Abgeschlossene Projekte", sub: "Privat & Gewerbe" },
   { end: 50000, suffix: "+", label: "m² Gerüst aufgebaut", sub: "Hamburg & Norddeutschland", format: true },
   { end: 100, suffix: "%", label: "Familiengeführt", sub: "Eigentümergeführt seit Tag 1" },
 ];
