@@ -1,8 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { ASSETS } from "@/lib/site";
-import { useServiceMap } from "@/hooks/useServiceContent";
-import { useHomepage } from "@/hooks/useSanity";
 
 type Service = {
   slug: string;
@@ -128,20 +126,10 @@ const Card = ({
 };
 
 export const Services = () => {
-  const cms = useServiceMap();
-  const { data: hp } = useHomepage();
-  const services: Service[] = fallback.map((s) => {
-    const c = cms.get(s.slug);
-    return {
-      ...s,
-      title: c?.title ?? s.title,
-      desc: c?.description ?? s.desc,
-      img: c?.image ?? s.img,
-    };
-  });
-  const eyebrow = hp?.servicesEyebrow ?? "";
-  const title = hp?.servicesTitle ?? "";
-  const intro = hp?.servicesIntro ?? "";
+  const services: Service[] = fallback;
+  const eyebrow = "Unsere Leistungen";
+  const title = "Was wir für Sie aufbauen.";
+  const intro = "Vom Fassadengerüst bis zum Wetterschutzdach – sechs Kernleistungen für Hamburg und Umland.";
   return (
     <section id="leistungen" className="pt-24 lg:pt-32 pb-20 lg:pb-28 bg-white">
       <div className="container-w">

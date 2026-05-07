@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { Quote, Star } from "lucide-react";
-import { useTestimonials, useHomepage } from "@/hooks/useSanity";
 import { useCompany } from "@/hooks/useCompany";
 
 const fallbackReviews = [
@@ -31,21 +30,12 @@ const fallbackReviews = [
 ];
 
 export const Testimonials = () => {
-  const { data: cms, isLoading } = useTestimonials();
-  const { data: hp } = useHomepage();
   const COMPANY = useCompany();
-  const reviews =
-    cms && cms.length > 0
-      ? cms.map((t) => ({
-          name: t.name,
-          role: t.city ? `Kunde · ${t.city}` : "Kunde",
-          text: t.text,
-          rating: t.rating ?? 5,
-        }))
-      : fallbackReviews;
-  const eyebrow = hp?.testimonialsEyebrow ?? "";
-  const titleText = hp?.testimonialsTitle ?? "";
-  const badge = hp?.testimonialsBadgeText ?? "";
+  const isLoading = false;
+  const reviews = fallbackReviews;
+  const eyebrow = "Was Kunden sagen";
+  const titleText = `${COMPANY.rating}/5 Sterne aus ${COMPANY.ratingCount}+ Bewertungen.`;
+  const badge = "Top-bewertet auf Google & ProvenExpert";
   return (
     <section className="py-20 lg:py-28 bg-plaster">
       <div className="container-w">
