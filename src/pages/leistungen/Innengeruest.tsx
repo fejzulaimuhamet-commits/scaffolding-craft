@@ -21,7 +21,7 @@ const Page = () => (
       eyebrow: "Innenausbau",
       headline: "Professionelle Innengerüste für jeden Innenraum",
       paragraphs: [
-        "Decken streichen, Stuck restaurieren, Lüftungstechnik installieren oder Beleuchtung montieren – sobald in großen Innenräumen gearbeitet wird, braucht es ein verlässliches Innengerüst. Wietek Gerüstbau plant und montiert Raumgerüste für Industriehallen, Kirchen, Theater, Treppenhäuser und Lagerhallen in Hamburg und ganz Norddeutschland.",
+        "Decken streichen, Stuck restaurieren, Lüftungstechnik installieren oder Beleuchtung montieren – sobald in großen Innenräumen gearbeitet wird, braucht es ein verlässliches Innengerüst. Wietek Gerüstbau plant und montiert Raumgerüste für öffentliche Hallen, Kirchen, Theater, Treppenhäuser und Lagerhallen in Hamburg und ganz Norddeutschland.",
         "Wir achten auf bodenschonende Aufbauten, kurze Rüstzeiten und freie Bewegungsflächen – auch bei laufendem Betrieb.",
       ],
       image: ASSETS.placeholder.innen,
