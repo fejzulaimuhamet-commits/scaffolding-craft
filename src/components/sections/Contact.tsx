@@ -1,20 +1,18 @@
 import { Clock, ExternalLink, Mail, MapPin, Phone } from "lucide-react";
 import { waLink } from "@/lib/site";
 import { useCompany } from "@/hooks/useCompany";
-import { useHomepage } from "@/hooks/useSanity";
 
 export const Contact = () => {
   const COMPANY = useCompany();
-  const { data: hp } = useHomepage();
   const mapQuery = encodeURIComponent(`${COMPANY.street}, ${COMPANY.zip} ${COMPANY.city}`);
   const mapEmbed = `https://maps.google.com/maps?q=${mapQuery}&output=embed`;
   const mapOpen = `https://www.google.com/maps/search/?api=1&query=${mapQuery}`;
 
-  const eyebrow = hp?.contactEyebrow ?? "";
-  const title = hp?.contactTitle ?? "";
-  const intro = hp?.contactIntro ?? "";
-  const ctaWa = hp?.contactCtaWhatsapp ?? "";
-  const ctaCall = hp?.contactCtaCall ?? "";
+  const eyebrow = "Kontakt";
+  const title = "Reden wir über Ihr Projekt.";
+  const intro = "Schnellste Antwort per WhatsApp oder Telefon. Anruf, Nachricht oder vorbeikommen – wir freuen uns.";
+  const ctaWa = "WhatsApp schreiben";
+  const ctaCall = "Jetzt anrufen";
 
   return (
     <section id="kontakt" className="py-20 lg:py-28 bg-white">

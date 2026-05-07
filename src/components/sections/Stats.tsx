@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useInViewOnce } from "@/hooks/use-in-view";
-import { useHomepage } from "@/hooks/useSanity";
 
 const defaultStats = [
   { end: 11, suffix: "+", label: "Jahre Erfahrung" },
@@ -36,17 +35,7 @@ function Counter({ end, suffix, format }: { end: number; suffix: string; format?
 }
 
 export const Stats = () => {
-  const { data: hp } = useHomepage();
-
-  // Wenn Redakteur statsItems gepflegt hat → diese rendern (klickbar via Stega).
-  // Sonst Counter-Default mit den drei Number-Feldern.
-  const customItems = hp?.statsItems ?? [];
-
-  const fallbackStats = [
-    { end: hp?.counterYears ?? defaultStats[0].end, suffix: "+", label: "Jahre Erfahrung" },
-    { end: hp?.counterProjects ?? defaultStats[1].end, suffix: "+", label: "Abgeschlossene Projekte" },
-    { end: hp?.counterSquareMeters ?? defaultStats[2].end, suffix: "+", label: "m² Gerüst gebaut", format: true },
-  ];
+  const fallbackStats = defaultStats;
 
   return (
     <section className="relative bg-blueprint py-14 lg:py-20">
