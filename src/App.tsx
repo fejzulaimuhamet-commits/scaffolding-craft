@@ -5,7 +5,6 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { PageTransition } from "@/components/PageTransition";
-import { SanityVisualEditing } from "@/components/SanityVisualEditing";
 import { FloatingButtons } from "@/components/sections/FloatingButtons";
 import { StickyAskButton } from "@/components/StickyAskButton";
 import Index from "./pages/Index.tsx";
@@ -24,18 +23,6 @@ import Kontakt from "./pages/Kontakt.tsx";
 import Anfrage from "./pages/Anfrage.tsx";
 import Impressum from "./pages/Impressum.tsx";
 import Datenschutz from "./pages/Datenschutz.tsx";
-import Studio from "./pages/Studio.tsx";
-import { sanityClient } from "@/lib/sanity";
-
-// Sanity Verbindungstest – lädt alle Dokumente und loggt sie
-sanityClient
-  .fetch(`*[]{ _id, _type, _createdAt }`)
-  .then((docs) => {
-    console.log("[Sanity] ✅ Verbindung OK – Dokumente:", docs.length, docs);
-  })
-  .catch((err) => {
-    console.error("[Sanity] ❌ Verbindung fehlgeschlagen:", err);
-  });
 
 const queryClient = new QueryClient();
 
@@ -45,7 +32,6 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <SanityVisualEditing />
         <ScrollToTop />
         <PageTransition>
           <Routes>
@@ -64,7 +50,6 @@ const App = () => (
             <Route path="/anfrage" element={<Anfrage />} />
             <Route path="/impressum" element={<Impressum />} />
             <Route path="/datenschutz" element={<Datenschutz />} />
-            <Route path="/studio/*" element={<Studio />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
