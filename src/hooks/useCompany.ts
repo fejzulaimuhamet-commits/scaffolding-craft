@@ -9,15 +9,14 @@ import { COMPANY } from "@/lib/site";
 export const useCompany = () => {
   const { data } = useSettings();
 
-  const phone = data?.phone?.trim() || COMPANY.phonePrimary;
-  const phoneDisplay = data?.phone?.trim() || COMPANY.phonePrimaryDisplay;
-  const phoneMobile = data?.phoneMobile?.trim() || COMPANY.phoneMobile;
-  const phoneMobileDisplay = data?.phoneMobile?.trim() || COMPANY.phoneMobileDisplay;
+  // Telefon/WhatsApp NICHT aus Sanity übernehmen – immer Code-Werte benutzen,
+  // damit veraltete CMS-Einträge die echten Nummern nicht überschreiben.
+  const phone = COMPANY.phonePrimary;
+  const phoneDisplay = COMPANY.phonePrimaryDisplay;
+  const phoneMobile = COMPANY.phoneMobile;
+  const phoneMobileDisplay = COMPANY.phoneMobileDisplay;
   const email = data?.email?.trim() || COMPANY.email;
-  const whatsappRaw = data?.whatsapp?.trim();
-  const whatsappNumber = whatsappRaw
-    ? whatsappRaw.replace(/[^\d]/g, "")
-    : COMPANY.whatsappNumber;
+  const whatsappNumber = COMPANY.whatsappNumber;
   const address = data?.address?.trim();
   const hours = data?.openingHours?.trim() || COMPANY.hours;
   const rating = data?.googleRating ?? COMPANY.rating;
