@@ -13,7 +13,6 @@ import { ServiceArea } from "@/components/sections/ServiceArea";
 import { RequestWizard } from "@/components/sections/RequestWizard";
 import { Contact } from "@/components/sections/Contact";
 import { Footer } from "@/components/sections/Footer";
-import { FloatingButtons } from "@/components/sections/FloatingButtons";
 
 const Index = () => {
   return (
@@ -35,7 +34,6 @@ const Index = () => {
         <Contact />
       </main>
       <Footer />
-      <FloatingButtons />
     </div>
   );
 };

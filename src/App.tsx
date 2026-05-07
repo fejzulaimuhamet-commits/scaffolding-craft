@@ -6,6 +6,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { PageTransition } from "@/components/PageTransition";
 import { SanityVisualEditing } from "@/components/SanityVisualEditing";
+import { FloatingButtons } from "@/components/sections/FloatingButtons";
+import { StickyAskButton } from "@/components/StickyAskButton";
 import Index from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import Leistungen from "./pages/Leistungen.tsx";
@@ -67,6 +69,8 @@ const App = () => (
             <Route path="*" element={<NotFound />} />
           </Routes>
         </PageTransition>
+        <FloatingButtons />
+        <StickyAskButton />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
