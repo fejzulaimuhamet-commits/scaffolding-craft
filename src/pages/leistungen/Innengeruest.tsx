@@ -65,7 +65,7 @@ const Page = () => (
       },
       {
         q: "Werden Böden geschützt?",
-        a: "Ja. Wir verteilen die Last über Verteilbohlen und weiche Auflagen, sodass empfindliche Böden (Parkett, Stein, Industrie­estriche) nicht beschädigt werden.",
+        a: "Ja. Wir verteilen die Last über Verteilbohlen und weiche Auflagen, sodass empfindliche Böden (Parkett, Stein, öffentliche Estriche) nicht beschädigt werden.",
       },
       {
         q: "Können wir während der Bauarbeiten weiterarbeiten?",
