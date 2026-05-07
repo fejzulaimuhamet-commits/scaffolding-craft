@@ -302,7 +302,7 @@ const Leistungen = () => {
     <PageHero
       eyebrow="Unsere Leistungen"
       title="Gerüstlösungen für jeden Einsatz"
-      subtitle="Von der privaten Fassade bis zum Gewerbeprojekt – wir liefern das passende Gerüst für Ihr Vorhaben."
+      subtitle="Von der privaten Fassade bis zum großen Bauprojekt – wir liefern das passende Gerüst für Ihr Vorhaben."
       backgroundImage={ASSETS.placeholder.fassade}
       breadcrumb="Leistungen"
     />

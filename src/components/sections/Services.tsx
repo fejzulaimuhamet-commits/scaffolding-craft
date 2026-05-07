@@ -17,7 +17,7 @@ const fallback: Service[] = [
     slug: "fassadengeruest",
     tag: "Fassade",
     title: "Fassadengerüste",
-    desc: "Sichere und flexible Gerüste für Wohn- und Gewerbegebäude – individuell an Struktur und Höhe angepasst.",
+    desc: "Sichere und flexible Gerüste für Wohn- und Bestandsgebäude – individuell an Struktur und Höhe angepasst.",
     img: ASSETS.placeholder.fassade,
   },
   {
@@ -141,7 +141,7 @@ export const Services = () => {
   });
   const eyebrow = hp?.servicesEyebrow ?? "Unsere Leistungen";
   const title = hp?.servicesTitle ?? "Hochwertige Gerüstlösungen – für jedes Bauvorhaben.";
-  const intro = hp?.servicesIntro ?? "Von der Einfamilienhaus-Sanierung bis zum Gewerbeobjekt: Wir liefern, bauen und demontieren – komplett und termingerecht.";
+  const intro = hp?.servicesIntro ?? "Von der Einfamilienhaus-Sanierung bis zum großen Wohnobjekt: Wir liefern, bauen und demontieren – komplett und termingerecht.";
   return (
     <section id="leistungen" className="pt-24 lg:pt-32 pb-20 lg:pb-28 bg-white">
       <div className="container-w">
