@@ -5,8 +5,8 @@ import { ASSETS } from "@/lib/site";
 const Page = () => (
   <ServicePage
     slug="treppenturm"
-    seoTitle="Treppenturm Hamburg | Gerüstturm mieten – Wietek Gerüstbau"
-    seoDescription="Treppentürme & Gerüsttürme in Hamburg schnell aufgebaut. Sicherer Zugang für Baustellen bis 20 m Höhe. Jetzt Angebot einholen!"
+    seoTitle="Treppenturm Hamburg mieten | Gerüstturm bis 20 m – Wietek"
+    seoDescription="Treppentürme & Gerüsttürme in Hamburg – sicherer Zugang bis 20 m Höhe. Lastklasse 3–5, normgerecht, schneller Aufbau. Jetzt Angebot einholen!"
     canonical="/leistungen/treppenturm"
     serviceName="Treppenturm"
     hero={{

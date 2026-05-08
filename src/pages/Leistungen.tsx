@@ -216,7 +216,7 @@ const WarumWietek = () => (
       <div className="max-w-3xl">
         <span className="eyebrow">Warum Wietek</span>
         <h2 className="mt-4 font-display font-extrabold text-white text-3xl sm:text-4xl lg:text-5xl leading-tight">
-          Drei Versprechen, die wir halten.
+          Warum Wietek Gerüstbau in Hamburg? Drei Versprechen, die wir halten.
         </h2>
       </div>
 
@@ -256,7 +256,7 @@ const CTASection = () => (
         className="text-center max-w-3xl mx-auto"
       >
         <h2 className="font-display font-extrabold text-white text-3xl sm:text-4xl lg:text-5xl leading-tight">
-          Welches Gerüst brauchen Sie?
+          Welches Gerüst brauchen Sie in Hamburg?
         </h2>
         <p className="mt-5 text-white/85 text-lg">
           Wir beraten Sie unverbindlich und erstellen Ihr Festpreis-Angebot.
@@ -291,10 +291,10 @@ const Leistungen = () => {
   return (
   <PageLayout>
     <PageSeo
-      title="Leistungen Gerüstbau Hamburg | Wietek Gerüstbau"
-      description="Alle Gerüstbau-Leistungen aus Hamburg: Fassaden-, Innen- & Dachfanggerüste, Treppentürme, Schutznetze, Wetterschutzdach. Aufbau in 24–72 Std., Festpreis."
+      title="Gerüstbau-Leistungen Hamburg | Fassade, Innen, Dach – Wietek"
+      description="Alle Gerüstbau-Leistungen aus Hamburg: Fassaden-, Innen- & Dachfanggerüst, Treppenturm, Schutznetze, Wetterschutzdach. Festpreis & Aufbau in 24–72 h."
       path="/leistungen"
-      keywords="Gerüstbau Hamburg, Gerüst mieten Hamburg, Fassadengerüst Hamburg, Innengerüst Hamburg, Treppenturm Hamburg, Wietek Gerüstbau"
+      keywords="Gerüstbau Hamburg, Gerüst mieten Hamburg, Fassadengerüst Hamburg, Innengerüst Hamburg, Treppenturm Hamburg, Dachfanggerüst Hamburg, Schutznetze Hamburg, Wetterschutzdach Hamburg, Wietek Gerüstbau"
       breadcrumbs={[
         { name: "Startseite", path: "/" },
         { name: "Leistungen", path: "/leistungen" },
@@ -303,8 +303,8 @@ const Leistungen = () => {
     />
     <PageHero
       eyebrow="Unsere Leistungen"
-      title="Gerüstlösungen für jeden Einsatz"
-      subtitle="Von der Gewerbe-Fassade bis zum großen Bauprojekt – wir liefern das passende Gerüst für Ihr Vorhaben."
+      title="Gerüstbau Hamburg – Lösungen für jeden Einsatz"
+      subtitle="Von der Gewerbe-Fassade bis zum großen Bauprojekt – wir liefern das passende Gerüst für Ihr Vorhaben in Hamburg & Norddeutschland."
       backgroundImage={ASSETS.placeholder.fassade}
       breadcrumb="Leistungen"
     />
