@@ -216,7 +216,7 @@ const WarumWietek = () => (
       <div className="max-w-3xl">
         <span className="eyebrow">Warum Wietek</span>
         <h2 className="mt-4 font-display font-extrabold text-white text-3xl sm:text-4xl lg:text-5xl leading-tight">
-          Drei Versprechen, die wir halten.
+          Warum Wietek Gerüstbau in Hamburg? Drei Versprechen, die wir halten.
         </h2>
       </div>
 
