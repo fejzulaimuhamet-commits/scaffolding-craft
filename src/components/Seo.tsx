@@ -171,10 +171,10 @@ export const Seo = () => {
   return (
     <Helmet>
       <html lang="de" />
-      <title>Gerüstbau Hamburg | Fassadengerüst mieten – Wietek Gerüstbau</title>
+      <title>Gerüstbau Hamburg – Fassaden- & Dachgerüst mieten | Wietek</title>
       <meta
         name="description"
-        content="Gerüstbau Hamburg: Wietek baut Fassaden-, Innen- & Dachfanggerüste, Treppentürme und Schutznetze. Aufbau in 24–72 Std., Festpreis, vollversichert. Jetzt anfragen!"
+        content="Gerüstbau Hamburg vom Familienbetrieb: Fassaden-, Innen-, Dachfanggerüst & Treppentürme. Aufbau in 24–72 h, Festpreis, vollversichert. Jetzt anfragen!"
       />
       <meta
         name="keywords"
