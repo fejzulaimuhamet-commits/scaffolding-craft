@@ -256,7 +256,7 @@ const CTASection = () => (
         className="text-center max-w-3xl mx-auto"
       >
         <h2 className="font-display font-extrabold text-white text-3xl sm:text-4xl lg:text-5xl leading-tight">
-          Welches Gerüst brauchen Sie?
+          Welches Gerüst brauchen Sie in Hamburg?
         </h2>
         <p className="mt-5 text-white/85 text-lg">
           Wir beraten Sie unverbindlich und erstellen Ihr Festpreis-Angebot.
