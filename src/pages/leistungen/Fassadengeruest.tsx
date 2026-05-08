@@ -5,8 +5,8 @@ import { ASSETS } from "@/lib/site";
 const Page = () => (
   <ServicePage
     slug="fassadengeruest"
-    seoTitle="Fassadengerüst Hamburg | Mieten & Aufbau – Wietek Gerüstbau"
-    seoDescription="Professionelle Fassadengerüste in Hamburg & Norddeutschland. Schneller Aufbau in 24–72 Std., vollversichert, familiengeführt. Jetzt kostenlos anfragen!"
+    seoTitle="Fassadengerüst Hamburg mieten | Aufbau in 24–72 h – Wietek"
+    seoDescription="Fassadengerüst in Hamburg mieten: Aufbau in 24–72 h, Festpreis, vollversichert, DGUV-geprüft. Familienbetrieb aus Bergedorf. Jetzt kostenlos anfragen!"
     canonical="/leistungen/fassadengeruest"
     serviceName="Fassadengerüst"
     hero={{
