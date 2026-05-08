@@ -187,12 +187,12 @@ export const Seo = () => {
       <meta property="og:locale" content="de_DE" />
       <meta property="og:site_name" content="Wietek Gerüstbau" />
       <meta property="og:url" content={`${SITE_URL}/`} />
-      <meta property="og:title" content="Gerüstbau Hamburg | Fassadengerüst mieten – Wietek Gerüstbau" />
-      <meta property="og:description" content="Gerüstbau Hamburg: Wietek baut Fassaden-, Innen- & Dachfanggerüste. Aufbau in 24–72 Std., Festpreis, vollversichert." />
+      <meta property="og:title" content="Gerüstbau Hamburg – Fassaden- & Dachgerüst mieten | Wietek" />
+      <meta property="og:description" content="Familienbetrieb für Gerüstbau in Hamburg: Fassade, Innen, Dachfang, Treppenturm. Aufbau in 24–72 h, Festpreis, vollversichert." />
       <meta property="og:image" content={ASSETS.hero} />
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content="Gerüstbau Hamburg | Wietek Gerüstbau" />
-      <meta name="twitter:description" content="Fassaden-, Innen- & Dachfanggerüste in Hamburg. Aufbau in 24–72 Std." />
+      <meta name="twitter:title" content="Gerüstbau Hamburg – Fassaden- & Dachgerüst | Wietek" />
+      <meta name="twitter:description" content="Fassaden-, Innen-, Dachfanggerüste & Treppentürme in Hamburg. Aufbau in 24–72 h, Festpreis, vollversichert." />
       <meta name="twitter:image" content={ASSETS.hero} />
       {/* Geo */}
       <meta name="geo.region" content="DE-HH" />
