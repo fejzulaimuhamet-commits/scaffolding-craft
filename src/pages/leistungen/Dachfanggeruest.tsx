@@ -5,8 +5,8 @@ import { ASSETS } from "@/lib/site";
 const Page = () => (
   <ServicePage
     slug="dachfanggeruest"
-    seoTitle="Dachfanggerüst Hamburg | Absturzsicherung – Wietek Gerüstbau"
-    seoDescription="Dachfanggerüste in Hamburg für sicheres Arbeiten auf dem Dach. DGUV-konform, schneller Aufbau, faire Preise. Jetzt anfragen!"
+    seoTitle="Dachfanggerüst Hamburg | Absturzsicherung Dach – Wietek"
+    seoDescription="Dachfanggerüste in Hamburg für sicheres Arbeiten am Dachrand. DGUV-konform, EN 13374-geprüft, schneller Aufbau, faire Festpreise. Jetzt anfragen!"
     canonical="/leistungen/dachfanggeruest"
     serviceName="Dachfanggerüst"
     hero={{
