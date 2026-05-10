@@ -184,7 +184,7 @@ const Anfrage = () => {
           "Voraussichtliche Dauer": values.duration,
           "Projektdetails": values.notes || "—",
           "Anhänge": files.length
-            ? `${files.length} Datei(en): ${files.map((f) => f.name).join(", ")} – bitte separat per E-Mail an info@wietek-geruestbau.de senden.`
+            ? `${files.length} Datei(en): ${files.map((f) => f.name).join(", ")} – bitte separat per E-Mail an wietek-ltd@gmx.de senden.`
             : "keine",
           "Quelle": "Anfrage-Seite (ausführliches Formular)",
         },

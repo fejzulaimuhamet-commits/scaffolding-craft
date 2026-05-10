@@ -2,15 +2,21 @@
  * Web3Forms-Integration für die Anfrage-Formulare.
  *
  * Access Key (publishable, darf im Code stehen).
- * Der Key ist auf den Web3Forms-Account von wietek-ltd@gmx.de registriert.
+ *
+ * WICHTIG: Der Empfänger der Mails wird ausschließlich durch das
+ * Web3Forms-Konto hinter diesem Key bestimmt (Dashboard-Einstellung
+ * "Recipient Email"). Es gibt laut offizieller API-Referenz KEIN Feld,
+ * mit dem das Frontend den Empfänger überschreiben kann.
+ *
+ * Wenn Mails an die falsche Adresse gehen, ist der Key dem falschen
+ * Web3Forms-Konto zugeordnet → Empfänger im richtigen Konto setzen
+ * oder einen Key aus dem korrekten Konto verwenden.
  */
 export const WEB3FORMS_KEY = "a75961e5-db1d-44ad-947a-6e4596aef603";
 
 /**
- * Empfänger-Adresse für alle Anfrage-Mails.
- * Wird zusätzlich zum Account-Default als `to_email` an Web3Forms gesendet,
- * sodass Anfragen garantiert hier landen – auch wenn die Dashboard-
- * Einstellung mal abweicht.
+ * Dokumentierte Empfänger-Adresse (rein informativ – wird NICHT
+ * an Web3Forms gesendet, da die API kein Empfänger-Override unterstützt).
  */
 export const RECIPIENT_EMAIL = "wietek-ltd@gmx.de";
 
@@ -74,7 +80,6 @@ export async function submitToWeb3Forms({
     access_key: WEB3FORMS_KEY,
     subject,
     from_name: "Wietek Gerüstbau Website",
-    to_email: RECIPIENT_EMAIL,
     name: stdName,
     email: stdEmail,
     message: stdMessage,
