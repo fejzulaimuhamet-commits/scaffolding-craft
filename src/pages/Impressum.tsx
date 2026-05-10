@@ -62,7 +62,7 @@ const Impressum = () => {
             </div>
             <div className="text-foreground/85 leading-relaxed">
               <div className="font-semibold text-foreground">{COMPANY.name}</div>
-              <div>Avndi Bedzeti</div>
+              <div>Avni Bedzeti</div>
               <div className="text-muted-foreground text-sm">Inhaber</div>
               <div className="mt-2">Witold Kavper Prucnal</div>
               <div className="text-muted-foreground text-sm">Geschäftsführer</div>
