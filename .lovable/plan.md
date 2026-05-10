@@ -1,46 +1,28 @@
-
-## Ausgangslage
-
-- Der Web3Forms Access Key `a75961e5-db1d-44ad-947a-6e4596aef603` ist bereits in `src/lib/web3forms.ts` (Zeile 6) eingetragen — **am Code muss nichts ersetzt werden**.
-- Laut deiner Angabe ist dieser Key auf einen neuen Web3Forms-Account mit `wietek-ltd@gmx.de` registriert.
-- Test-Anfrage über das Formular ist bei `wietek-ltd@gmx.de` **nicht** angekommen.
-
-Web3Forms entscheidet die Empfänger-Adresse **serverseitig** anhand des Access-Key-Accounts — im Frontend-Code lässt sich der Empfänger nicht setzen. Wenn nichts ankommt, liegt es fast immer an einer dieser Ursachen:
-
-1. **Account noch nicht bestätigt** — Web3Forms versendet erst, wenn der Bestätigungslink in der Willkommens-Mail angeklickt wurde. Solange das nicht passiert ist, ist der Key zwar gültig (API antwortet `success: true`), aber es geht keine Mail raus.
-2. **GMX hat die Mail als Spam aussortiert** — Web3Forms-Mails landen bei GMX häufig im Spam-Ordner, vor allem in den ersten Wochen.
-3. **Empfänger-Adresse im Dashboard weicht vom Account ab** — bei Web3Forms gibt es pro Key noch ein Feld „Recipient / Notification Email", das den tatsächlichen Empfänger steuert. Ist es leer oder falsch, geht nichts raus.
-4. **Falscher Key** — der eingetragene Key gehört (versehentlich) doch noch zum alten `info@wietek-geruestbau.de`-Account.
+## Ziel
+Die Kontaktanfragen sollen zuverlässig nur noch an `wietek-ltd@gmx.de` zugestellt werden und keine alte Adresse mehr verwenden.
 
 ## Plan
+1. **Web3Forms-Integration technisch bereinigen**
+   - Die aktuelle Implementierung gegen die offizielle API angleichen.
+   - Die irreführende `to_email`-Logik entfernen bzw. nicht mehr als vermeintlichen Override behandeln.
+   - Fehlermeldungen so belassen/verbessern, dass klar erkennbar ist, wenn ein Key oder Konto falsch konfiguriert ist.
 
-### 1. Verifikation auf Web3Forms-Seite (du, ca. 2 Min.)
-Bitte einmal in deinem GMX-Postfach `wietek-ltd@gmx.de` prüfen:
+2. **Projekt auf alte E-Mail-Verweise prüfen und bereinigen**
+   - Alle Stellen mit der alten Adresse identifizieren.
+   - Sichtbare Texte anpassen, insbesondere den Hinweis im Anfrageformular zu Anhängen.
+   - Nur die tatsächlich veralteten Empfänger-/Kontaktverweise ändern, ohne andere Firmendaten unnötig umzubauen.
 
-- a) **Spam-/Werbung-Ordner** auf eine Mail von `noreply@web3forms.com` oder `Web3Forms` prüfen — sowohl die Account-Bestätigung als auch ggf. die Test-Anfrage.
-- b) Auf [web3forms.com](https://web3forms.com) mit `wietek-ltd@gmx.de` einloggen und prüfen:
-  - Steht beim Key `a75961e5-…` der Status **„Verified" / „Active"**? Falls nicht: Bestätigungslink (ggf. neu anfordern) anklicken.
-  - Ist im Feld **„Recipient Email" / „Notification Email"** wirklich `wietek-ltd@gmx.de` eingetragen? Falls leer/anders: dort eintragen und speichern.
-  - Im Reiter **„Submissions"**: Tauchen Test-Anfragen dort überhaupt auf? Wenn ja, ist das Frontend okay und es ist nur ein Zustell-/Spam-Problem.
+3. **Empfängerursache außerhalb des Frontends klar absichern**
+   - Festhalten, dass der aktive Web3Forms-Key serverseitig noch auf die alte Empfängeradresse zeigt.
+   - Als saubere Lösung den Key aus dem korrekt konfigurierten Konto neu einsetzen oder den Empfänger im bestehenden Konto umstellen.
+   - Danach einen echten Testlauf über `/anfrage` durchführen und das Ergebnis validieren.
 
-### 2. Code-seitige Härtung (ich, falls du grünes Licht gibst)
-Unabhängig davon nehme ich zwei kleine Verbesserungen in `src/lib/web3forms.ts` vor, damit künftige Probleme leichter auffallen und Mails seltener im Spam landen:
+## Technische Details
+- In `src/lib/web3forms.ts` wird aktuell ein nicht dokumentiertes Feld `to_email` gesendet; laut API-Referenz sind u. a. `access_key`, `email`, `subject`, `replyto`, `ccemail` dokumentiert, aber kein Empfänger-Override.
+- Das bedeutet: Der Empfänger wird sehr wahrscheinlich durch die Web3Forms-Kontokonfiguration hinter dem Key gesteuert, nicht durch das Frontend.
+- Im Projekt gibt es zusätzlich noch mindestens einen sichtbaren Alt-Verweis in `src/pages/Anfrage.tsx` (`info@wietek-geruestbau.de` bei Anhängen), der Nutzer verwirren kann.
 
-- **Fallback-Empfänger explizit setzen**: Web3Forms unterstützt das optionale Feld `to_email`. Ich trage `wietek-ltd@gmx.de` dort ein. Damit ist der Empfänger zusätzlich aus dem Code „angefragt" und unabhängig von einer evtl. fehlenden Dashboard-Einstellung.
-- **Bessere Fehlerausgabe** im Submit-Flow (Status-Code + Web3Forms-`message` werden im Frontend-Toast angezeigt), damit ein zukünftiger Test sofort zeigt, ob die API ablehnt oder ob es nur ein Zustell-Problem ist.
-- **Konfiguration zentralisieren**: Empfänger-Mail als Konstante `RECIPIENT_EMAIL` oben in der Datei, klar kommentiert — damit du sie zukünftig in einer Sekunde tauschen kannst.
-
-Am Key selbst wird **nichts** geändert (er ist bereits korrekt eingetragen).
-
-### 3. Verifikation nach der Code-Änderung
-- Du sendest eine Test-Anfrage über `/anfrage`.
-- Du prüfst Posteingang **und** Spam in `wietek-ltd@gmx.de`.
-- Falls weiterhin nichts ankommt: Web3Forms-Dashboard → Reiter **Submissions** zeigt, ob die Anfrage zumindest serverseitig angenommen wurde — daraus lässt sich klar ableiten, ob es an Web3Forms-Account-Setup oder an GMX-Filtern liegt.
-
-## Geänderte Dateien
-
-- `src/lib/web3forms.ts` — `RECIPIENT_EMAIL`-Konstante, `to_email`-Feld im Payload, verbesserte Fehlermeldung. Keine Logikänderung an `RequestWizard.tsx` oder `Anfrage.tsx` nötig.
-
-## Wichtig vorab
-
-Bitte führe **Schritt 1 (a + b)** zuerst durch — in 90 % der „Mail kommt nicht an"-Fälle ist es entweder der Spam-Ordner oder ein nicht bestätigter Account, und dann reicht der Code-Fix in Schritt 2 alleine nicht. Wenn du mir kurz das Ergebnis zurückmeldest (Bestätigung okay? Recipient gesetzt? Submission im Dashboard sichtbar?), kann ich Schritt 2 zielgerichtet umsetzen.
+## Ergebnis nach Umsetzung
+- Keine missverständliche Empfänger-Logik mehr im Code
+- Alte E-Mail-Verweise im Formular bereinigt
+- Web3Forms-Konfiguration und Frontend sind wieder konsistent, sodass Tests eindeutig auswertbar sind
