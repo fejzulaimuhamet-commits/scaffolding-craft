@@ -1,28 +1,33 @@
+## Ausgangslage
+
+- Im Code ist alles korrekt: `src/lib/web3forms.ts` nutzt Access Key `a75961e5-db1d-44ad-947a-6e4596aef603`, das Anfrageformular (`src/pages/Anfrage.tsx`) sendet darüber.
+- Web3Forms erlaubt **kein** Empfänger-Override aus dem Frontend – die Zieladresse wird ausschließlich im Web3Forms-Konto hinter dem Key gesetzt.
+- Mails landen weiterhin an der alten Adresse → Ursache liegt **nicht im Code**, sondern im Web3Forms-Konto oder beim Veröffentlichungsstand.
+
 ## Ziel
-Die Kontaktanfragen sollen zuverlässig nur noch an `wietek-ltd@gmx.de` zugestellt werden und keine alte Adresse mehr verwenden.
 
-## Plan
-1. **Web3Forms-Integration technisch bereinigen**
-   - Die aktuelle Implementierung gegen die offizielle API angleichen.
-   - Die irreführende `to_email`-Logik entfernen bzw. nicht mehr als vermeintlichen Override behandeln.
-   - Fehlermeldungen so belassen/verbessern, dass klar erkennbar ist, wenn ein Key oder Konto falsch konfiguriert ist.
+Anfragen aus dem Website-Formular kommen direkt bei `wietek-ltd@gmx.de` an, ohne Umweg über die alte Adresse.
 
-2. **Projekt auf alte E-Mail-Verweise prüfen und bereinigen**
-   - Alle Stellen mit der alten Adresse identifizieren.
-   - Sichtbare Texte anpassen, insbesondere den Hinweis im Anfrageformular zu Anhängen.
-   - Nur die tatsächlich veralteten Empfänger-/Kontaktverweise ändern, ohne andere Firmendaten unnötig umzubauen.
+## Schritte
 
-3. **Empfängerursache außerhalb des Frontends klar absichern**
-   - Festhalten, dass der aktive Web3Forms-Key serverseitig noch auf die alte Empfängeradresse zeigt.
-   - Als saubere Lösung den Key aus dem korrekt konfigurierten Konto neu einsetzen oder den Empfänger im bestehenden Konto umstellen.
-   - Danach einen echten Testlauf über `/anfrage` durchführen und das Ergebnis validieren.
+1. **Web3Forms-Konto prüfen (durch dich, nicht im Code)**
+   - Bei web3forms.com mit `wietek-ltd@gmx.de` einloggen.
+   - Den Key `a75961e5-…` öffnen → Feld **Recipient Email** muss exakt `wietek-ltd@gmx.de` lauten **und** als „Verified" (grün) markiert sein.
+   - Falls noch nicht verifiziert: Bestätigungsmail in `wietek-ltd@gmx.de` (auch Spam) öffnen und Link klicken. Solange unverifiziert, fällt Web3Forms auf die alte Adresse zurück.
+
+2. **Live-Stand absichern**
+   - Nach erfolgreicher Verifizierung das Projekt in Lovable über **Publish → Update** neu veröffentlichen, damit die Live-URL garantiert die aktuelle Konfiguration nutzt.
+
+3. **Test mit eindeutigem Marker**
+   - Eine Testanfrage über die Live-Seite senden, im Feld „Projektdetails" z. B. `TESTLAUF-001` eintragen.
+   - Prüfen, ob die Mail in `wietek-ltd@gmx.de` ankommt (Posteingang + Spam).
+
+4. **Ergebnisabhängige Folgeaktion**
+   - **Kommt an:** fertig.
+   - **Kommt nicht an / weiterhin alte Adresse:** Wahrscheinlich gehört der Key noch zum alten Web3Forms-Konto. Dann im neuen Konto (`wietek-ltd@gmx.de`) einen **frischen Access Key** erzeugen und mir mitteilen – ich tausche ihn anschließend in `src/lib/web3forms.ts` aus (einzige Code-Änderung in diesem Plan).
 
 ## Technische Details
-- In `src/lib/web3forms.ts` wird aktuell ein nicht dokumentiertes Feld `to_email` gesendet; laut API-Referenz sind u. a. `access_key`, `email`, `subject`, `replyto`, `ccemail` dokumentiert, aber kein Empfänger-Override.
-- Das bedeutet: Der Empfänger wird sehr wahrscheinlich durch die Web3Forms-Kontokonfiguration hinter dem Key gesteuert, nicht durch das Frontend.
-- Im Projekt gibt es zusätzlich noch mindestens einen sichtbaren Alt-Verweis in `src/pages/Anfrage.tsx` (`info@wietek-geruestbau.de` bei Anhängen), der Nutzer verwirren kann.
 
-## Ergebnis nach Umsetzung
-- Keine missverständliche Empfänger-Logik mehr im Code
-- Alte E-Mail-Verweise im Formular bereinigt
-- Web3Forms-Konfiguration und Frontend sind wieder konsistent, sodass Tests eindeutig auswertbar sind
+- Betroffene Datei bei evtl. Key-Tausch: `src/lib/web3forms.ts`, Konstante `WEB3FORMS_KEY`.
+- Keine weiteren Codeänderungen nötig; Empfänger lässt sich über die API nicht setzen.
+- Frontend-Änderungen werden erst nach **Publish → Update** live; Backend ist hier nicht beteiligt.
