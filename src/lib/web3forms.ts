@@ -2,8 +2,17 @@
  * Web3Forms-Integration für die Anfrage-Formulare.
  *
  * Access Key (publishable, darf im Code stehen).
+ * Der Key ist auf den Web3Forms-Account von wietek-ltd@gmx.de registriert.
  */
 export const WEB3FORMS_KEY = "a75961e5-db1d-44ad-947a-6e4596aef603";
+
+/**
+ * Empfänger-Adresse für alle Anfrage-Mails.
+ * Wird zusätzlich zum Account-Default als `to_email` an Web3Forms gesendet,
+ * sodass Anfragen garantiert hier landen – auch wenn die Dashboard-
+ * Einstellung mal abweicht.
+ */
+export const RECIPIENT_EMAIL = "wietek-ltd@gmx.de";
 
 const ENDPOINT = "https://api.web3forms.com/submit";
 
@@ -65,6 +74,7 @@ export async function submitToWeb3Forms({
     access_key: WEB3FORMS_KEY,
     subject,
     from_name: "Wietek Gerüstbau Website",
+    to_email: RECIPIENT_EMAIL,
     name: stdName,
     email: stdEmail,
     message: stdMessage,
@@ -90,6 +100,7 @@ export async function submitToWeb3Forms({
   }
 
   if (!res.ok || !data.success) {
-    throw new Error(data?.message || `Web3Forms-Fehler (${res.status})`);
+    const detail = data?.message ? `: ${data.message}` : "";
+    throw new Error(`Web3Forms-Fehler (HTTP ${res.status})${detail}`);
   }
 }
