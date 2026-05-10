@@ -3,7 +3,7 @@
  *
  * Access Key (publishable, darf im Code stehen).
  */
-export const WEB3FORMS_KEY = "a3395abc-2a50-42e5-ae58-2662fbce8201";
+export const WEB3FORMS_KEY = "a75961e5-db1d-44ad-947a-6e4596aef603";
 
 const ENDPOINT = "https://api.web3forms.com/submit";
 
