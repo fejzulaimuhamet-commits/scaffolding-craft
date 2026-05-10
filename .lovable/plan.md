@@ -1,30 +1,18 @@
-## Diagnose (durch Test belegt)
+## Ziel
 
-Direkter API-Test ergab: Aktuelle Submits enthalten **keine Standard-Felder** `name`, `email`, `message`, sondern nur deutsche Custom-Keys (`"Name"`, `"E-Mail"`, `"Telefon"` …). Web3Forms gibt zwar `success: true` zurück, **verwirft die Mail intern aber still** (Spam-Filter / Template-Rendering schlägt fehl).
+Den Web3Forms Access Key austauschen, damit Anfragen an das richtige Postfach (`info@wietek-geruestbau.de`) gehen.
 
-Der Test mit Standard-Feldnamen war erfolgreich – die API akzeptiert das Format.
+## Vorgehen
 
-## Fix in `src/lib/web3forms.ts`
+1. Du gibst mir den neuen Web3Forms Access Key (aus dem Web3Forms-Dashboard, eingeloggt mit `info@wietek-geruestbau.de`).
+2. Ich ersetze in `src/lib/web3forms.ts` die Konstante `WEB3FORMS_KEY` durch den neuen Wert.
+3. Kein weiterer Code muss angepasst werden – `RequestWizard.tsx` und `Anfrage.tsx` nutzen die Funktion `submitToWeb3Forms`, die intern den Key liest.
+4. Verifikation: Nach dem Austausch sende ich eine Test-Anfrage an die Web3Forms-API und bestätige `success: true`. Du prüfst den Posteingang von `info@wietek-geruestbau.de`.
 
-`submitToWeb3Forms` wird so erweitert, dass sie:
+## Hinweis
 
-1. **`name`** automatisch aus `fields["Name"]` ableitet
-2. **`email`** automatisch aus `fields["E-Mail"]` (oder `replyTo`) ableitet
-3. **`message`** als zusammengefassten lesbaren Block aus allen Feldern baut (`"Art: Treppenturm\nHöhe: 5 m\n…"`)
-4. Diese 3 Standard-Felder **zusätzlich** zu den deutschen Detail-Keys mitsendet
+Der Access Key ist ein **publishable** Key (für Web3Forms gedacht, im Frontend einsetzbar) – er darf direkt im Code stehen und braucht keinen Secret-Slot.
 
-Die E-Mail bei `info@wietek-geruestbau.de` enthält dann sowohl die saubere `message`-Übersicht als auch alle Einzelfelder.
+## Nächster Schritt
 
-## Keine Änderungen nötig an
-
-- `RequestWizard.tsx` (Aufruf bleibt gleich)
-- `Anfrage.tsx` (Aufruf bleibt gleich)
-- Access Key (bleibt)
-
-## Verifikation nach Fix
-
-Ich rufe nach der Code-Änderung die API erneut mit dem neuen Payload-Format auf und bestätige `success: true`. Du prüfst dann den Posteingang von `info@wietek-geruestbau.de` – die Mail sollte jetzt ankommen, weil das Web3Forms-Mail-Template korrekt rendert und der Spam-Filter nicht mehr triggert.
-
-## Falls auch das nicht reicht
-
-Web3Forms hat einen Hard-Limit-Filter gegen Test-Adressen wie `@example.com`. Beim echten Test sollten wir eine echte Adresse nutzen (z. B. deine private). Falls die Mail dann immer noch nicht kommt, ist die Ursache zu 99 % der **noch nicht aktivierte Access Key** – dann ist der nächste Schritt, den Aktivierungsklick im Web3Forms-Dashboard auszulösen (was du dort selbst sehen kannst, sobald du eingeloggt bist).
+Bitte poste mir den neuen Access Key, dann tausche ich ihn nach Plan-Bestätigung aus.
