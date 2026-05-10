@@ -10,7 +10,7 @@ const Impressum = () => {
     <PageLayout>
       <PageSeo
         title="Impressum – Wietek Gerüstbau Hamburg"
-        description="Impressum und Anbieterkennzeichnung der Wietek Gerüstbau, Inhaber Avndi Bedzeti, Randersweide 91, 21037 Hamburg-Bergedorf."
+        description="Impressum und Anbieterkennzeichnung der Wietek Gerüstbau, Inhaber Avni Bedzeti, Randersweide 91, 21037 Hamburg-Bergedorf."
         path="/impressum"
         breadcrumbs={[
           { name: "Startseite", path: "/" },
@@ -62,7 +62,7 @@ const Impressum = () => {
             </div>
             <div className="text-foreground/85 leading-relaxed">
               <div className="font-semibold text-foreground">{COMPANY.name}</div>
-              <div>Avndi Bedzeti</div>
+              <div>Avni Bedzeti</div>
               <div className="text-muted-foreground text-sm">Inhaber</div>
               <div className="mt-2">Witold Kavper Prucnal</div>
               <div className="text-muted-foreground text-sm">Geschäftsführer</div>
