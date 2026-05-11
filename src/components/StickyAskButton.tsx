@@ -1,5 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { Send } from "lucide-react";
+import { trackEvent } from "@/lib/analytics";
 
 /**
  * Round sticky "Jetzt anfragen" button — always visible, fixed bottom-right.
