@@ -5,7 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { PageTransition } from "@/components/PageTransition";
-import { FloatingButtons } from "@/components/sections/FloatingButtons";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import { StickyAskButton } from "@/components/StickyAskButton";
 import Index from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
@@ -57,7 +57,7 @@ const App = () => (
             <Route path="*" element={<NotFound />} />
           </Routes>
         </PageTransition>
-        <FloatingButtons />
+        <WhatsAppButton />
         <StickyAskButton />
       </BrowserRouter>
     </TooltipProvider>
