@@ -112,6 +112,8 @@
   [data-card],
   form.contact-form,
   .contact-form,
+  /* Jeder Container, der direkt ein Bild umschließt (Projekt-/Service-Kacheln) */
+  *:has(> img):not(body):not(html):not(header):not(footer):not(nav):not(picture):not(figure):not(a[class*="logo"]):not(.no-soft-shadow),
   /* Tailwind-Boxen mit hellem Hintergrund */
   [class*="bg-white"]:not(body):not(html):not(header):not(footer):not(nav):not(.no-soft-shadow),
   [class*="bg-card"]:not(.no-soft-shadow),
@@ -119,14 +121,16 @@
   [class*="bg-muted"]:not(.no-soft-shadow),
   [class*="bg-background"]:not(body):not(html):not(.no-soft-shadow),
   /* Abgerundete Container = Kästchen */
-  [class*="rounded-md"]:not(button):not(a):not(input):not([class*="bg-primary"]):not([class*="bg-steel"]):not([class*="bg-secondary"]):not([class*="bg-destructive"]):not(.no-soft-shadow),
-  [class*="rounded-lg"]:not(button):not(a):not(input):not([class*="bg-primary"]):not([class*="bg-steel"]):not([class*="bg-secondary"]):not([class*="bg-destructive"]):not(.no-soft-shadow),
-  [class*="rounded-xl"]:not(button):not(a):not(input):not([class*="bg-primary"]):not([class*="bg-steel"]):not([class*="bg-secondary"]):not([class*="bg-destructive"]):not(.no-soft-shadow),
-  [class*="rounded-2xl"]:not(button):not(a):not(input):not([class*="bg-primary"]):not([class*="bg-steel"]):not([class*="bg-secondary"]):not([class*="bg-destructive"]):not(.no-soft-shadow),
-  [class*="rounded-3xl"]:not(button):not(a):not(input):not([class*="bg-primary"]):not([class*="bg-steel"]):not([class*="bg-secondary"]):not([class*="bg-destructive"]):not(.no-soft-shadow) {
+  [class*="rounded-md"]:not(button):not(a):not(input):not(.no-soft-shadow),
+  [class*="rounded-lg"]:not(button):not(a):not(input):not(.no-soft-shadow),
+  [class*="rounded-xl"]:not(button):not(a):not(input):not(.no-soft-shadow),
+  [class*="rounded-2xl"]:not(button):not(a):not(input):not(.no-soft-shadow),
+  [class*="rounded-3xl"]:not(button):not(a):not(input):not(.no-soft-shadow),
+  /* Bild-Wrapper / Kacheln mit overflow-hidden */
+  [class*="overflow-hidden"]:not(body):not(html):not(header):not(footer):not(nav):not(.no-soft-shadow) {
     box-shadow:
-      0 14px 50px rgba(0, 0, 0, 0.14),
-      0 4px 16px rgba(0, 0, 0, 0.09);
+      0 14px 50px rgba(0, 0, 0, 0.18),
+      0 4px 16px rgba(0, 0, 0, 0.10);
   }
 
   input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not(.no-soft-shadow),
