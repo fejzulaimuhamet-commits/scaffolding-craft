@@ -33,7 +33,7 @@ export default function WhatsAppButton() {
             destination: "wa.me",
           })
         }
-        className="whatsapp-btn fixed bottom-8 right-8 z-50 flex items-center justify-center w-[60px] h-[60px] rounded-full transition-all duration-300"
+        className="whatsapp-btn fixed bottom-8 right-4 sm:right-8 z-50 flex items-center justify-center w-[60px] h-[60px] rounded-full transition-all duration-300"
         style={{ backgroundColor: "#25D366" }}
       >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="34" height="34">
