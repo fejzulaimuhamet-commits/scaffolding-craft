@@ -1,3 +1,5 @@
+import { trackEvent } from "@/lib/analytics";
+
 export default function WhatsAppButton() {
   const href =
     "https://wa.me/491726666297?text=Hallo%20Wietek-Team%2C%20ich%20interessiere%20mich%20f%C3%BCr%20ein%20Ger%C3%BCst.";
@@ -25,6 +27,12 @@ export default function WhatsAppButton() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Auf WhatsApp schreiben"
+        onClick={() =>
+          trackEvent("whatsapp_click", {
+            location: "floating_button",
+            destination: "wa.me",
+          })
+        }
         className="whatsapp-btn fixed bottom-8 right-8 z-50 flex items-center justify-center w-[60px] h-[60px] rounded-full transition-all duration-300"
         style={{ backgroundColor: "#25D366" }}
       >
