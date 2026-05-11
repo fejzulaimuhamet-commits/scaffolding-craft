@@ -92,11 +92,25 @@
      damit die Seite Tiefe ohne harte Kanten erhält.
      ---------------------------------------------------------------- */
   img:not(.logo):not([aria-hidden="true"]):not(.no-soft-shadow),
+  picture,
+  figure,
   .polaroid,
   .card,
   [data-card],
   form.contact-form,
-  .contact-form {
+  .contact-form,
+  /* Tailwind-Boxen mit hellem Hintergrund */
+  [class*="bg-white"]:not(body):not(html):not(header):not(footer):not(nav):not(.no-soft-shadow),
+  [class*="bg-card"]:not(.no-soft-shadow),
+  [class*="bg-plaster"]:not(.no-soft-shadow),
+  [class*="bg-muted"]:not(.no-soft-shadow),
+  [class*="bg-background"]:not(body):not(html):not(.no-soft-shadow),
+  /* Abgerundete Container = Kästchen */
+  [class*="rounded-md"]:not(button):not(a):not(input):not([class*="bg-primary"]):not([class*="bg-steel"]):not([class*="bg-secondary"]):not([class*="bg-destructive"]):not(.no-soft-shadow),
+  [class*="rounded-lg"]:not(button):not(a):not(input):not([class*="bg-primary"]):not([class*="bg-steel"]):not([class*="bg-secondary"]):not([class*="bg-destructive"]):not(.no-soft-shadow),
+  [class*="rounded-xl"]:not(button):not(a):not(input):not([class*="bg-primary"]):not([class*="bg-steel"]):not([class*="bg-secondary"]):not([class*="bg-destructive"]):not(.no-soft-shadow),
+  [class*="rounded-2xl"]:not(button):not(a):not(input):not([class*="bg-primary"]):not([class*="bg-steel"]):not([class*="bg-secondary"]):not([class*="bg-destructive"]):not(.no-soft-shadow),
+  [class*="rounded-3xl"]:not(button):not(a):not(input):not([class*="bg-primary"]):not([class*="bg-steel"]):not([class*="bg-secondary"]):not([class*="bg-destructive"]):not(.no-soft-shadow) {
     box-shadow:
       0 8px 40px rgba(0, 0, 0, 0.08),
       0 2px 12px rgba(0, 0, 0, 0.05);
