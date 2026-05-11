@@ -1,3 +1,5 @@
+import { trackEvent } from "@/lib/analytics";
+
 export default function WhatsAppButton() {
   const href =
     "https://wa.me/491726666297?text=Hallo%20Wietek-Team%2C%20ich%20interessiere%20mich%20f%C3%BCr%20ein%20Ger%C3%BCst.";
