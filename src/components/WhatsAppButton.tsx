@@ -27,6 +27,12 @@ export default function WhatsAppButton() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Auf WhatsApp schreiben"
+        onClick={() =>
+          trackEvent("whatsapp_click", {
+            location: "floating_button",
+            destination: "wa.me",
+          })
+        }
         className="whatsapp-btn fixed bottom-8 right-8 z-50 flex items-center justify-center w-[60px] h-[60px] rounded-full transition-all duration-300"
         style={{ backgroundColor: "#25D366" }}
       >
