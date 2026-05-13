@@ -1,0 +1,24 @@
+# Wietek Gerüstbau Hamburg
+
+> Gerüstbau-Unternehmen aus Hamburg: Fassaden-, Innen- und Dachfanggerüste, Treppentürme, Schutznetze und Wetterschutzdächer für Hamburg und Norddeutschland. Aufbau in 24–72 Stunden, Festpreis, vollversichert.
+
+## Pages
+
+- [Startseite](/): Wietek Gerüstbau – Überblick, Leistungen und Anfrage.
+- [Leistungen](/leistungen): Alle Gerüstbau-Leistungen im Überblick.
+- [Fassadengerüst](/leistungen/fassadengeruest): Fassaden- und Arbeitsgerüste mieten.
+- [Innengerüst](/leistungen/innengeruest): Innen-, Raum- und Hallengerüste.
+- [Treppenturm](/leistungen/treppenturm): Treppentürme und Gerüsttürme bis 20 m.
+- [Dachfanggerüst](/leistungen/dachfanggeruest): Dachfanggerüste für Dacharbeiten.
+- [Schutznetze & Geländer](/leistungen/schutznetze-gelaender): Auffangnetze nach EN 1263 und Sicherheitsgeländer.
+- [Wetterschutzdach](/leistungen/wetterschutz): Wetterschutzdächer und Einhausungen.
+- [Projekte](/projekte): Referenzen und ausgeführte Projekte in Hamburg.
+- [Über uns](/ueber-uns): Unternehmen, Team und Werte von Wietek Gerüstbau.
+- [Karriere](/karriere): Stellenangebote und Bewerbungen.
+- [Kontakt](/kontakt): Adresse, Telefon, E-Mail und Anfahrt.
+- [Anfrage](/anfrage): Online-Anfrageformular für ein unverbindliches Angebot.
+
+## Optional
+
+- [Impressum](/impressum): Anbieterkennzeichnung nach § 5 TMG.
+- [Datenschutz](/datenschutz): Datenschutzerklärung nach DSGVO.

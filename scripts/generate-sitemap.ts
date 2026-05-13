@@ -29,6 +29,8 @@ const ROUTES: Entry[] = [
   { path: "/karriere", changefreq: "weekly", priority: "0.7" },
   { path: "/kontakt", changefreq: "yearly", priority: "0.8" },
   { path: "/anfrage", changefreq: "yearly", priority: "0.7" },
+  { path: "/impressum", changefreq: "yearly", priority: "0.3" },
+  { path: "/datenschutz", changefreq: "yearly", priority: "0.3" },
 ];
 
 const today = new Date().toISOString().slice(0, 10);
