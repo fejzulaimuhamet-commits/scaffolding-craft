@@ -133,7 +133,7 @@ export const Seo = () => {
         availableLanguage: ["de", "German"],
       },
     ],
-    sameAs: [COMPANY.instagram, COMPANY.facebook],
+    sameAs: [COMPANY.instagram, COMPANY.facebook, COMPANY.mapsUrl],
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: COMPANY.rating,
@@ -161,7 +161,17 @@ export const Seo = () => {
       { name: "Wetterschutzdach Hamburg", url: `${SITE_URL}/leistungen/wetterschutz` },
     ].map((s) => ({
       "@type": "Offer",
-      itemOffered: { "@type": "Service", name: s.name, url: s.url },
+      itemOffered: {
+        "@type": "Service",
+        name: s.name,
+        url: s.url,
+        provider: { "@id": `${SITE_URL}/#organization` },
+        areaServed: {
+          "@type": "GeoCircle",
+          geoMidpoint: { "@type": "GeoCoordinates", latitude: 53.4936, longitude: 10.2086 },
+          geoRadius: 80000,
+        },
+      },
     })),
   };
 
