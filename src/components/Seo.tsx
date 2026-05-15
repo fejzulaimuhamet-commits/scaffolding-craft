@@ -78,11 +78,44 @@ export const Seo = () => {
       longitude: 10.2086,
     },
     hasMap: COMPANY.mapsUrl,
-    areaServed: AREA_CITIES.map((c) => ({
-      "@type": "City",
-      name: c.name,
-      geo: { "@type": "GeoCoordinates", latitude: c.lat, longitude: c.lng },
-    })),
+    serviceArea: {
+      "@type": "GeoCircle",
+      geoMidpoint: {
+        "@type": "GeoCoordinates",
+        latitude: 53.4936,
+        longitude: 10.2086,
+      },
+      geoRadius: 80000,
+      description: "Gerüstbau in der Nähe – Hamburg & 80 km Umland",
+    },
+    areaServed: [
+      {
+        "@type": "GeoCircle",
+        geoMidpoint: {
+          "@type": "GeoCoordinates",
+          latitude: 53.4936,
+          longitude: 10.2086,
+        },
+        geoRadius: 80000,
+      },
+      ...AREA_CITIES.map((c) => ({
+        "@type": "City",
+        name: c.name,
+        geo: { "@type": "GeoCoordinates", latitude: c.lat, longitude: c.lng },
+      })),
+      { "@type": "AdministrativeArea", name: "Hamburg" },
+      { "@type": "AdministrativeArea", name: "Schleswig-Holstein" },
+      { "@type": "AdministrativeArea", name: "Niedersachsen" },
+    ],
+    knowsAbout: [
+      "Gerüstbau in der Nähe",
+      "Gerüstbauer in der Nähe",
+      "Gerüst mieten in der Nähe",
+      "Fassadengerüst Hamburg",
+      "Dachfanggerüst Hamburg",
+      "Treppenturm mieten Hamburg",
+    ],
+    slogan: "Ihr Gerüstbauer in der Nähe – Hamburg & Norddeutschland",
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
@@ -100,7 +133,7 @@ export const Seo = () => {
         availableLanguage: ["de", "German"],
       },
     ],
-    sameAs: [COMPANY.instagram, COMPANY.facebook],
+    sameAs: [COMPANY.instagram, COMPANY.facebook, COMPANY.mapsUrl],
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: COMPANY.rating,
@@ -128,7 +161,17 @@ export const Seo = () => {
       { name: "Wetterschutzdach Hamburg", url: `${SITE_URL}/leistungen/wetterschutz` },
     ].map((s) => ({
       "@type": "Offer",
-      itemOffered: { "@type": "Service", name: s.name, url: s.url },
+      itemOffered: {
+        "@type": "Service",
+        name: s.name,
+        url: s.url,
+        provider: { "@id": `${SITE_URL}/#organization` },
+        areaServed: {
+          "@type": "GeoCircle",
+          geoMidpoint: { "@type": "GeoCoordinates", latitude: 53.4936, longitude: 10.2086 },
+          geoRadius: 80000,
+        },
+      },
     })),
   };
 
